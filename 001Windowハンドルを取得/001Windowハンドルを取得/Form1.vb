@@ -3,11 +3,23 @@
 Public Class Form1
 
 
+    ''' <summary>
+    ''' WindowFormPoint 指定された座標を含むウィンドウのハンドルを取得 の宣言
+    ''' </summary>
+    ''' <param name="lpPoint"></param>
+    ''' <returns></returns>
     <DllImport("user32.dll", CharSet:=CharSet.Auto)>
     Private Shared Function WindowFromPoint(ByVal lpPoint As Point) _
                                             As IntPtr
     End Function
 
+    ''' <summary>
+    ''' FindWindow 指定された文字列と一致するクラス名をウィンドウのタイトルを持つ
+    ''' トップレベルウィンドウを探す
+    ''' </summary>
+    ''' <param name="lpClassName"></param>
+    ''' <param name="lpWindowName"></param>
+    ''' <returns></returns>
     <DllImport("user32.dll", CharSet:=CharSet.Auto)>
     Private Shared Function FindWindow(
         lpClassName As String,
@@ -16,50 +28,35 @@ Public Class Form1
 
 
 
-
-
-
-
-
     Private Sub Label1_MouseDown(sender As Object, e As MouseEventArgs) Handles Label1.MouseDown
+        '' カーソルを手に変更
         Me.Cursor = Cursors.Hand
     End Sub
 
     Private Sub Label1_MouseUp(sender As Object, e As MouseEventArgs) Handles Label1.MouseUp
+        '' カーソルをデフォルトに戻す
         Me.Cursor = Cursors.Default
 
-        'MessageBox.Show(Cursor.Position.ToString)
-        'MessageBox.Show(String.Format("e.X={0},e.Y={1}", e.X, e.Y))
-        'Dim lpPoint As New Point(e.X, e.Y)
-
-        ''マウス座標よりハンドル取得
+        '' マウス座標よりハンドル取得
         Dim hwnd As IntPtr
-        'hwnd = WindowFromPoint(lpPoint)
-        'MessageBox.Show(hwnd.ToString)
-
-        'If hwnd.ToInt32() <= 0 Then
-        '    'ハンドル取得失敗
-        '    Me.Label2.Text = ""
-        '    Exit Sub
-        'End If
         hwnd = WindowFromPoint(Cursor.Position)
-        MessageBox.Show(hwnd.ToString)
 
+        '' ハンドルをメッセージボックスに表示
+        MessageBox.Show(hwnd.ToString)
     End Sub
 
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+        '' フォーム2を表示
         Dim form As New Form2
         form.Show()
     End Sub
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
-        ' Program Manager のハンドルを取得する
-        Dim hProgramManagerHandle As System.IntPtr = FindWindow(Nothing, "ハンドル表示フォーム")
-        MessageBox.Show(hProgramManagerHandle.ToString)
-
+        '' フォームのタイトルからハンドル取得
+        Dim hwnd As IntPtr = FindWindow(Nothing, "ハンドル表示フォーム")
+        '' ハンドルをメッセージボックスに表示
+        MessageBox.Show(hwnd.ToString)
     End Sub
 
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
-    End Sub
 End Class
