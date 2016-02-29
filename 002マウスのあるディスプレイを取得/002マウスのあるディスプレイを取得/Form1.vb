@@ -6,11 +6,8 @@
         '' 起動時の位置を手動に変更
         Me.StartPosition = FormStartPosition.Manual
 
-        '' マウスがあるスクリーンを取得
-        Dim screenIndex As Integer = ConvertMousePointToScreenIndex(Cursor.Position)
-
         '' スクリーンの中央に位置づける
-        Me.DesktopLocation = CenterPosition(screenIndex)
+        Me.DesktopLocation = CenterPosition()
 
     End Sub
 
@@ -38,11 +35,13 @@
     ''' <summary>
     ''' 中央の位置を返却する
     ''' </summary>
-    ''' <param name="screenIndex"></param>
     ''' <returns></returns>
-    Private Function CenterPosition(screenIndex As Integer) As Point
+    Private Function CenterPosition() As Point
+        '' マウスがあるスクリーンを取得
+        Dim screenIndex As Integer = ConvertMousePointToScreenIndex(Cursor.Position)
+
         '' マウスの位置のスクリーンを取得
-        Dim screen As Screen = Screen.AllScreens(ConvertMousePointToScreenIndex(Cursor.Position))
+        Dim screen As Screen = Screen.AllScreens(screenIndex)
 
         '' 自身のフォームのサイズとスクリーンのサイズから中央に位置するロケーションを計算
         Return New Point(screen.Bounds.X + (screen.Bounds.Width - Me.Width) \ 2, screen.Bounds.Y + (screen.Bounds.Height - Me.Height) \ 2)
