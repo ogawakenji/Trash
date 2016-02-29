@@ -37,7 +37,8 @@ Public Class Form1
     End Sub
 
     Private Sub Label1_MouseDown(sender As Object, e As MouseEventArgs) Handles Label1.MouseDown
-        '' カーソルを手に変更
+        '' カーソルを十字に変更
         Me.Cursor = Cursors.Cross
     End Sub
+
 End Class
