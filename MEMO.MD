@@ -7,4 +7,7 @@ http://codepanic.itigo.jp/win32.html
 
 https://developers.eure.jp/tech/private_development_fan/  
 
+https://social.msdn.microsoft.com/Forums/vstudio/ja-JP/42c2257a-f589-448d-9723-0dc2af95a038?forum=csharpgeneralja  
+
+
 
