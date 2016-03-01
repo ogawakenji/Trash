@@ -5,3 +5,6 @@ http://stackoverflow.com/questions/22340631/how-can-i-make-to-scroll-richtextbox
 
 http://codepanic.itigo.jp/win32.html  
 
+https://developers.eure.jp/tech/private_development_fan/  
+
+
