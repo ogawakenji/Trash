@@ -188,4 +188,8 @@ Public Class Form1
         Me.PictureBox1.Image = canvas
 
     End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+        MessageBox.Show("メッセージボックスはキャプチャできるか？")
+    End Sub
 End Class
