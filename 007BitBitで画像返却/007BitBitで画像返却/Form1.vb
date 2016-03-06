@@ -170,4 +170,22 @@ Public Class Form1
 
 
     End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+        Dim mixImage As System.Drawing.Bitmap = CType(Me.PictureBox1.Image, Bitmap)
+        Dim tmpGr As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(mixImage)
+        Dim foreimage As System.Drawing.Bitmap = CType(Me.PictureBox1.Image, Bitmap)
+        Dim canvas As New Bitmap(mixImage.Width + foreimage.Width, mixImage.Height + foreimage.Height)
+        Dim g As Graphics = Graphics.FromImage(canvas)
+
+        g.DrawImage(mixImage, 0, 0, mixImage.Width, mixImage.Height)
+        g.DrawImage(foreimage, 0, mixImage.Height, foreimage.Width, foreimage.Height)
+
+        g.Dispose()
+        tmpGr.Dispose()
+
+        Me.PictureBox1.Image = canvas
+
+    End Sub
 End Class
