@@ -112,6 +112,12 @@ Public Class Form1
         ByRef lpRect As RECT) As Integer
     End Function
 
+
+    <DllImport("gdi32.dll")>
+    Private Shared Function GetCurrentObject(ByVal hdc As IntPtr, objecType As Short) As IntPtr
+    End Function
+
+
     ''' <summary>
     ''' アクティブなウィンドウの画像を取得する
     ''' </summary>
@@ -163,8 +169,40 @@ Public Class Form1
         Return bmp
     End Function
 
+
+    Public Shared Function CaptureDCWnd(hWnd As IntPtr) As Bitmap
+        ' 指定ウィンドウハンドルの画像を取得
+        Dim winDC As IntPtr = GetWindowDC(hWnd)
+
+        '' デバイスコンテキストで選択されている、指定されたタイプのオブジェクトハンドルを取得
+        Dim bitmapIntPtr As IntPtr = GetCurrentObject(winDC, 7)
+
+        Dim image As Bitmap = System.Drawing.Image.FromHbitmap(bitmapIntPtr)
+
+
+
+
+        ''ウィンドウの大きさを取得
+        Dim winRect As New RECT
+        GetWindowRect(hWnd, winRect)
+        'Bitmapの作成
+        Dim bmp As New Bitmap(image.Size.Width, image.Size.Height)
+        'Graphicsの作成
+        Dim g As Graphics = Graphics.FromImage(bmp)
+        'Graphicsのデバイスコンテキストを取得
+        Dim hDC As IntPtr = g.GetHdc()
+        'Bitmapに画像をコピーする
+        BitBlt(hDC, 0, 0, bmp.Width, bmp.Height, winDC, 0, 0, SRCCOPY)
+        '解放
+        g.ReleaseHdc(hDC)
+        g.Dispose()
+        ReleaseDC(hWnd, winDC)
+
+        Return bmp
+    End Function
+
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
-        Dim bmp As Bitmap = CapturehWnd(CType(Me.TextBox1.Text, IntPtr))
+        Dim bmp As Bitmap = CaptureDCWnd(CType(Me.TextBox1.Text, IntPtr))
 
         Me.PictureBox1.Image = bmp
 
@@ -191,5 +229,11 @@ Public Class Form1
 
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
         MessageBox.Show("メッセージボックスはキャプチャできるか？")
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+        Dim bmp As Bitmap = CapturehWnd(CType(Me.TextBox1.Text, IntPtr))
+
+        Me.PictureBox1.Image = bmp
     End Sub
 End Class

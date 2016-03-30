@@ -29,6 +29,7 @@ Partial Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -86,7 +87,7 @@ Partial Class Form1
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 19.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(337, 9)
+        Me.Label3.Location = New System.Drawing.Point(577, 7)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(49, 33)
         Me.Label3.TabIndex = 2
@@ -96,17 +97,28 @@ Partial Class Form1
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 19.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(379, 9)
+        Me.Label4.Location = New System.Drawing.Point(619, 7)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(49, 33)
         Me.Label4.TabIndex = 5
         Me.Label4.Text = "✕"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("ＭＳ ゴシック", 19.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label5.Location = New System.Drawing.Point(337, 9)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(49, 33)
+        Me.Label5.TabIndex = 6
+        Me.Label5.Text = "▲"
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(681, 432)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.TextBox1)
@@ -129,4 +141,5 @@ Partial Class Form1
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
 End Class
