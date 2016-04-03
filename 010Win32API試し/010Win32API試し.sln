@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "010Win32API試し", "010Win32API試し\010Win32API試し.vbproj", "{FE87EA71-3C84-4223-8ADA-4F6B23468E20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE87EA71-3C84-4223-8ADA-4F6B23468E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE87EA71-3C84-4223-8ADA-4F6B23468E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE87EA71-3C84-4223-8ADA-4F6B23468E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE87EA71-3C84-4223-8ADA-4F6B23468E20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
