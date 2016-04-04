@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_002SendMessage.Designer.vb">
+      <DependentUpon>Form_002SendMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_002SendMessage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_001GetForeGroundWindow.Designer.vb">
       <DependentUpon>Form_001GetForeGroundWindow.vb</DependentUpon>
     </Compile>
@@ -103,6 +109,9 @@
     <Compile Include="User32.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_002SendMessage.resx">
+      <DependentUpon>Form_002SendMessage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_001GetForeGroundWindow.resx">
       <DependentUpon>Form_001GetForeGroundWindow.vb</DependentUpon>
     </EmbeddedResource>
