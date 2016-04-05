@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form_002SendMessage
+Partial Class Form_003SendInput
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -30,7 +30,6 @@ Partial Class Form_002SendMessage
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Timer1
@@ -44,9 +43,8 @@ Partial Class Form_002SendMessage
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.Size = New System.Drawing.Size(528, 82)
         Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "https://msdn.microsoft.com/ja-jp/library/cc411022.aspx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "1 つまたは複数のウィンドウへ、指定されたメッセー" &
-    "ジを送信します。" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "この関数は、指定されたウィンドウのウィンドウプロシージャを呼び出し、" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "そのウィンドウプロシージャがメッセージを処理し終わった後で、制御を返" &
-    "します。"
+        Me.TextBox1.Text = "https://msdn.microsoft.com/ja-jp/library/cc411004.aspx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "キーストローク、マウスの動き、ボタンのクリックなど" &
+    "を合成します。"
         '
         'Button1
         '
@@ -90,31 +88,21 @@ Partial Class Form_002SendMessage
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(127, 30)
         Me.Button3.TabIndex = 6
-        Me.Button3.Text = "WM_CLOSE"
+        Me.Button3.Text = "マウスイベント"
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(16, 242)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(152, 30)
-        Me.Button4.TabIndex = 7
-        Me.Button4.Text = "WM_MOUSEWHEEL"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Form_002SendMessage
+        'Form_003SendInput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(557, 302)
-        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TextBox1)
-        Me.Name = "Form_002SendMessage"
+        Me.Name = "Form_003SendInput"
         Me.Text = "_001GetForeGroundWindow"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -128,5 +116,4 @@ Partial Class Form_002SendMessage
     Friend WithEvents Label1 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
-    Friend WithEvents Button4 As Button
 End Class

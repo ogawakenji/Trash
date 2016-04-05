@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_003SendInput.Designer.vb">
+      <DependentUpon>Form_003SendInput.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_003SendInput.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_002SendMessage.Designer.vb">
       <DependentUpon>Form_002SendMessage.vb</DependentUpon>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="User32.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_003SendInput.resx">
+      <DependentUpon>Form_003SendInput.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_002SendMessage.resx">
       <DependentUpon>Form_002SendMessage.vb</DependentUpon>
     </EmbeddedResource>

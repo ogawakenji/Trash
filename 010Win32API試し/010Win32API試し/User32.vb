@@ -12,6 +12,82 @@ Public Class User32
 
     End Function
 
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function SetForegroundWindow(hWnd As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
+
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Sub SendInput(ByVal nInputs As Integer, ByRef pInputs As INPUT, ByVal cbsize As Integer)
+
+    End Sub
+
+
+    <Flags()>
+    Public Enum KEYEVENTF As Integer
+        KEYDOWN = 0
+        EXTENDEDKEY = 1
+        KEYUP = 2
+        [UNICODE] = 4
+        SCANCODE = 8
+    End Enum
+
+    Public Enum InputType As Integer
+        Mouse = 0
+        Keyboard = 1
+        Hardware = 2
+    End Enum
+
+    <StructLayout(LayoutKind.Sequential, Pack:=1)>
+    Public Structure KEYBDINPUT
+        Public wVk As Int16
+        Public wScan As Int16
+        Public dwFlags As KEYEVENTF
+        Public time As Int32
+        Public dwExtraInfo As IntPtr
+    End Structure
+
+    <StructLayout(LayoutKind.Sequential, Pack:=1)>
+    Public Structure HARDWAREINPUT
+        Public uMsg As Int32
+        Public wParamL As Int16
+        Public wParamH As Int16
+    End Structure
+
+    <StructLayout(LayoutKind.Explicit, Pack:=1)>
+    Public Structure INPUT
+        <FieldOffset(0)> Public dwType As InputType
+        <FieldOffset(4)> Public mi As MOUSEINPUT
+        <FieldOffset(4)> Public ki As KEYBDINPUT
+        <FieldOffset(4)> Public hi As HARDWAREINPUT
+    End Structure
+
+    <Flags()>
+    Public Enum MOUSEEVENTF As Integer
+        MOVE = &H1
+        LEFTDOWN = &H2
+        LEFTUP = &H4
+        RIGHTDOWN = &H8
+        RIGHTUP = &H10
+        MIDDLEDOWN = &H20
+        MIDDLEUP = &H40
+        XDOWN = &H80
+        XUP = &H100
+        VIRTUALDESK = &H400
+        WHEEL = &H800
+        ABSOLUTE = &H8000
+    End Enum
+
+    <StructLayout(LayoutKind.Sequential, Pack:=1)>
+    Public Structure MOUSEINPUT
+        Public dx As Int32
+        Public dy As Int32
+        Public mouseData As Int32
+        Public dwFlags As MOUSEEVENTF
+        Public time As Int32
+        Public dwExtraInfo As IntPtr
+    End Structure
+
 
     ''https://autohotkey.com/docs/misc/SendMessageList.htm
     Public Const WM_NULL As Int32 = &H00

@@ -8,4 +8,9 @@
         Dim frm As New Form_002SendMessage()
         frm.Show(Me)
     End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+        Dim frm As New Form_003SendInput()
+        frm.Show(Me)
+    End Sub
 End Class
