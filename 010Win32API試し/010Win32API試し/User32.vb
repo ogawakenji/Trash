@@ -22,6 +22,20 @@ Public Class User32
 
     End Sub
 
+    <DllImport("user32.dll")>
+    Public Shared Function GetScrollPos(hWnd As IntPtr, <MarshalAs(UnmanagedType.I4)> nBar As SBOrientation) As Int16
+
+    End Function
+
+
+    Public Enum SBOrientation As Integer
+        SB_HORZ = &H0
+        SB_VERT = &H1
+        SB_CTL = &H2
+        SB_BOTH = &H3
+    End Enum
+
+
 
     <Flags()>
     Public Enum KEYEVENTF As Integer

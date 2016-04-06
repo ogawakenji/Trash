@@ -43,4 +43,9 @@ Public Class Form_003SendInput
         User32.SetForegroundWindow(CType(Me.TextBox2.Text, IntPtr))
         User32.SendMessage(CType(Me.TextBox2.Text, IntPtr), User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
     End Sub
+
+    Private Sub Button4_Click_1(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim ret As Integer = User32.GetScrollPos(CType(Me.TextBox2.Text, IntPtr), User32.SBOrientation.SB_VERT)
+        Debug.WriteLine(ret.ToString())
+    End Sub
 End Class

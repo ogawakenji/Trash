@@ -13,4 +13,9 @@
         Dim frm As New Form_003SendInput()
         frm.Show(Me)
     End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+        Dim frm As New Form_004SetWindowsHookEx()
+        frm.Show(Me)
+    End Sub
 End Class

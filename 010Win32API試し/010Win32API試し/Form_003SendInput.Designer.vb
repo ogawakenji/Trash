@@ -30,6 +30,7 @@ Partial Class Form_003SendInput
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Timer1
@@ -91,11 +92,21 @@ Partial Class Form_003SendInput
         Me.Button3.Text = "マウスイベント"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(169, 206)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(127, 30)
+        Me.Button4.TabIndex = 7
+        Me.Button4.Text = "GetScrollPos"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
         'Form_003SendInput
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(557, 302)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label1)
@@ -116,4 +127,5 @@ Partial Class Form_003SendInput
     Friend WithEvents Label1 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents Button4 As Button
 End Class
