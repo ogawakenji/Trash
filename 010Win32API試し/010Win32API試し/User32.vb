@@ -27,6 +27,29 @@ Public Class User32
 
     End Function
 
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function EnumChildWindows(ByVal hWndParent As System.IntPtr, ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
+    End Function
+
+    Public Delegate Function EnumWindowsProc(ByVal hWnd As IntPtr, ByRef lParam As IntPtr) As Boolean
+
+
+    <DllImport("user32.dll", SetLastError:=True)>
+    Public Shared Function GetWindowLong(hWnd As IntPtr, <MarshalAs(UnmanagedType.I4)> nIndex As WindowLongFlags) As Integer
+    End Function
+
+    Public Enum WindowLongFlags As Integer
+        GWL_EXSTYLE = -20
+        GWLP_HINSTANCE = -6
+        GWLP_HWNDPARENT = -8
+        GWL_ID = -12
+        GWL_STYLE = -16
+        GWL_USERDATA = -21
+        GWL_WNDPROC = -4
+        DWLP_USER = &H8
+        DWLP_MSGRESULT = &H0
+        DWLP_DLGPROC = &H4
+    End Enum
 
     Public Enum SBOrientation As Integer
         SB_HORZ = &H0
@@ -35,6 +58,40 @@ Public Class User32
         SB_BOTH = &H3
     End Enum
 
+    Public Const WS_VSCROLL As Integer = &H200000
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function GetScrollInfo(ByVal hWnd As IntPtr,
+                                        ByVal nBar As Integer,
+        <MarshalAs(UnmanagedType.Struct)> ByRef lpScrollInfo As SCROLLINFO) As Integer
+    End Function
+
+    <StructLayout(LayoutKind.Sequential)> Public Structure SCROLLINFO
+
+        Public cbSize As Integer
+
+        Public fMask As Integer
+
+        Public nMin As Integer
+
+        Public nMax As Integer
+
+        Public nPage As Integer
+
+        Public nPos As Integer
+
+        Public nTrackPos As Integer
+
+    End Structure
+
+    Public Enum ScrollInfoMask As Integer
+        SIF_RANGE = &H1
+        SIF_PAGE = &H2
+        SIF_POS = &H4
+        SIF_DISABLENOSCROLL = &H8
+        SIF_TRACKPOS = &H10
+        SIF_ALL = (SIF_RANGE Or SIF_PAGE Or SIF_POS Or SIF_TRACKPOS)
+    End Enum
 
 
     <Flags()>

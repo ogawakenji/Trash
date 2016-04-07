@@ -18,4 +18,9 @@
         Dim frm As New Form_004SetWindowsHookEx()
         frm.Show(Me)
     End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+        Dim frm As New Form_005EnumChildWindows()
+        frm.Show(Me)
+    End Sub
 End Class
