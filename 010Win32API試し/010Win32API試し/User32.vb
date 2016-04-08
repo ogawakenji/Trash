@@ -94,6 +94,12 @@ Public Class User32
     End Enum
 
 
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function WindowFromPoint(ByVal lpPoint As Point) As IntPtr
+
+    End Function
+
+
     <Flags()>
     Public Enum KEYEVENTF As Integer
         KEYDOWN = 0
@@ -369,6 +375,24 @@ Public Class User32
     Public Const WM_USER As Int32 = &H400
     Public Const WM_APP As Int32 = &H8000
 
+
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure RECT
+        Public left As Integer
+        Public top As Integer
+        Public right As Integer
+        Public bottom As Integer
+    End Structure
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function GetWindowRect(ByVal hwnd As IntPtr, ByRef lpRect As RECT) As IntPtr
+
+    End Function
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function SetCursorPos(x As Integer, y As Integer) As Integer
+
+    End Function
 
 
 

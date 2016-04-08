@@ -33,6 +33,11 @@ Partial Class Form_005EnumChildWindows
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.lblScreen = New System.Windows.Forms.Label()
+        Me.Button8 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -119,14 +124,65 @@ Partial Class Form_005EnumChildWindows
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(218, 30)
         Me.Button5.TabIndex = 9
-        Me.Button5.Text = "GetWindowLong"
+        Me.Button5.Text = "明細SendMessage"
         Me.Button5.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label2.Location = New System.Drawing.Point(290, 101)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(34, 24)
+        Me.Label2.TabIndex = 10
+        Me.Label2.Text = "●"
+        '
+        'Button6
+        '
+        Me.Button6.Location = New System.Drawing.Point(339, 314)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(218, 30)
+        Me.Button6.TabIndex = 11
+        Me.Button6.Text = "TextSendMessage"
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button7
+        '
+        Me.Button7.Location = New System.Drawing.Point(339, 350)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(218, 30)
+        Me.Button7.TabIndex = 12
+        Me.Button7.Text = "GetWindowLong"
+        Me.Button7.UseVisualStyleBackColor = True
+        '
+        'lblScreen
+        '
+        Me.lblScreen.AutoSize = True
+        Me.lblScreen.Location = New System.Drawing.Point(380, 100)
+        Me.lblScreen.Name = "lblScreen"
+        Me.lblScreen.Size = New System.Drawing.Size(90, 15)
+        Me.lblScreen.TabIndex = 13
+        Me.lblScreen.Text = "スクリーン座標"
+        '
+        'Button8
+        '
+        Me.Button8.Location = New System.Drawing.Point(339, 386)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(218, 30)
+        Me.Button8.TabIndex = 14
+        Me.Button8.Text = "GetWindowRect"
+        Me.Button8.UseVisualStyleBackColor = True
         '
         'Form_005EnumChildWindows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(557, 450)
+        Me.Controls.Add(Me.Button8)
+        Me.Controls.Add(Me.lblScreen)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.DataGridView1)
@@ -154,4 +210,9 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents lblScreen As Label
+    Friend WithEvents Button8 As Button
 End Class

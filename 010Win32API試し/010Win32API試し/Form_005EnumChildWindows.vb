@@ -17,6 +17,9 @@ Public Class Form_005EnumChildWindows
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Me.TextBox2.Text = User32.GetForegroundWindow().ToString
+        lblScreen.Text = Cursor.Position.ToString()
+
+
 
     End Sub
 
@@ -76,9 +79,52 @@ Public Class Form_005EnumChildWindows
         'User32.SetForegroundWindow(hWnd)
 
         For Each r In hWndList.ToList
+            Threading.Thread.Sleep(1000)
             'User32.SetForegroundWindow(r.hWnd)
             User32.SendMessage(r.hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
         Next
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+
+    End Sub
+
+    Private Sub Label2_MouseDown(sender As Object, e As MouseEventArgs) Handles Label2.MouseDown
+        '' カーソルを十字に変更
+        Me.Cursor = Cursors.Cross
+    End Sub
+
+    Private Sub Label2_MouseUp(sender As Object, e As MouseEventArgs) Handles Label2.MouseUp
+        '' カーソルをデフォルトに戻す
+        Me.Cursor = Cursors.Default
+
+        '' マウス座標よりハンドル取得
+        Dim hwnd As IntPtr
+        hwnd = User32.WindowFromPoint(Cursor.Position)
+        Me.TextBox2.Text = CType(hwnd, String)
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+        User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim rect As User32.RECT
+
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+        User32.GetWindowRect(hWnd, rect)
+
+        Debug.WriteLine(String.Format("left={0} top={1} right={2} bottom={3}", rect.left, rect.top, rect.right, rect.bottom))
+
+        User32.SetCursorPos(rect.left, rect.top)
 
     End Sub
 End Class
