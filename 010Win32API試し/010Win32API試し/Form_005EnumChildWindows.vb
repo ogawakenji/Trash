@@ -219,7 +219,7 @@ Public Class Form_005EnumChildWindows
         Dim ret As Integer = 0
         ret = User32.GetScrollInfo(hWnd, 0, si)
         If si.nPos <> 0 Then
-            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo0={1} si.nPos={2}", hWnd, ret, si.nPos))
+            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo0={1} si.nPos={2} nMin={3} nMax={4} nPage={5} nTrackPos={6}", hWnd, ret, si.nPos, si.nMin, si.nMax, si.nPage, si.nTrackPos))
         End If
 
         si = New User32.SCROLLINFO
@@ -227,7 +227,7 @@ Public Class Form_005EnumChildWindows
         si.fMask = User32.ScrollInfoMask.SIF_ALL
         ret = User32.GetScrollInfo(hWnd, 1, si)
         If si.nPos <> 0 Then
-            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo1={1} si.nPos={2}", hWnd, ret, si.nPos))
+            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo1={1} si.nPos={2} nMin={3} nMax={4} nPage={5} nTrackPos={6}", hWnd, ret, si.nPos, si.nMin, si.nMax, si.nPage, si.nTrackPos))
         End If
 
         si = New User32.SCROLLINFO
@@ -235,11 +235,98 @@ Public Class Form_005EnumChildWindows
         si.fMask = User32.ScrollInfoMask.SIF_ALL
         ret = User32.GetScrollInfo(hWnd, 2, si)
         If si.nPos <> 0 Then
-            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo2={1} si.nPos={2}", hWnd, ret, si.nPos))
+            Debug.WriteLine(String.Format("hWnd={0} GetScrollInfo2={1} si.nPos={2} nMin={3} nMax={4} nPage={5} nTrackPos={6}", hWnd, ret, si.nPos, si.nMin, si.nMax, si.nPage, si.nTrackPos))
         End If
 
 
     End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+        PictureBox1.Image = CapturehWnd(hWnd)
+
+    End Sub
+
+    Private Function CapturehWnd(hWnd As IntPtr) As Bitmap
+        ' 指定ウィンドウハンドルの画像を取得
+        Dim winDC As IntPtr = User32.GetWindowDC(hWnd)
+        'ウィンドウの大きさを取得
+        Dim winRect As New User32.RECT
+        User32.GetWindowRect(hWnd, winRect)
+        'Bitmapの作成
+        Dim bmp As New Bitmap(winRect.right - winRect.left,
+            winRect.bottom - winRect.top)
+        'Graphicsの作成
+        Dim g As Graphics = Graphics.FromImage(bmp)
+        'Graphicsのデバイスコンテキストを取得
+        Dim hDC As IntPtr = g.GetHdc()
+        'Bitmapに画像をコピーする
+        User32.BitBlt(hDC, 0, 0, bmp.Width, bmp.Height, winDC, 0, 0, User32.SRCCOPY)
+        '解放
+        g.ReleaseHdc(hDC)
+        g.Dispose()
+        User32.ReleaseDC(hWnd, winDC)
+
+        Return bmp
+    End Function
+
+    Private Function CapturehWnd5pix(hWnd As IntPtr) As Bitmap
+        ' 指定ウィンドウハンドルの画像を取得
+        Dim winDC As IntPtr = User32.GetWindowDC(hWnd)
+        'ウィンドウの大きさを取得
+        Dim winRect As New User32.RECT
+        User32.GetWindowRect(hWnd, winRect)
+        'Bitmapの作成
+        Dim bmp As New Bitmap(winRect.right - winRect.left, 48)
+        'Graphicsの作成
+        Dim g As Graphics = Graphics.FromImage(bmp)
+        'Graphicsのデバイスコンテキストを取得
+        Dim hDC As IntPtr = g.GetHdc()
+        'Bitmapに画像をコピーする
+        User32.BitBlt(hDC, 0, 0, bmp.Width, 48, winDC, 0, winRect.bottom - winRect.top - 48, User32.SRCCOPY)
+        '解放
+        g.ReleaseHdc(hDC)
+        g.Dispose()
+        User32.ReleaseDC(hWnd, winDC)
+
+        Return bmp
+    End Function
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+
+        For i As Integer = 0 To 50
+            User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+            imageMix()
+
+        Next
+
+
+
+    End Sub
+
+    Private Sub imageMix()
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+
+
+        Dim mixImage As System.Drawing.Bitmap = CType(Me.PictureBox1.Image, Bitmap)
+        Dim tmpGr As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(mixImage)
+        Dim foreimage As System.Drawing.Bitmap = CType(CapturehWnd5pix(hWnd), Bitmap)
+        Dim canvas As New Bitmap(mixImage.Width, mixImage.Height + foreimage.Height)
+        Dim g As Graphics = Graphics.FromImage(canvas)
+
+        g.DrawImage(mixImage, 0, 0, mixImage.Width, mixImage.Height)
+        g.DrawImage(foreimage, 0, mixImage.Height, foreimage.Width, foreimage.Height)
+
+        g.Dispose()
+        tmpGr.Dispose()
+
+        Me.PictureBox1.Image = canvas
+
+
+
+    End Sub
+
 End Class
 
 

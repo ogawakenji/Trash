@@ -385,7 +385,7 @@ Public Class User32
     End Structure
 
     <DllImport("user32.dll", CharSet:=CharSet.Auto)>
-    Public Shared Function GetWindowRect(ByVal hwnd As IntPtr, ByRef lpRect As RECT) As IntPtr
+    Public Shared Function GetWindowRect(ByVal hWnd As IntPtr, ByRef lpRect As RECT) As IntPtr
 
     End Function
 
@@ -397,6 +397,33 @@ Public Class User32
     <DllImport("user32.dll")>
     Public Shared Function GetScrollRange(ByVal hWnd As IntPtr, ByVal nBar As Integer, ByRef lpMinPos As Integer, ByRef lpMaxPos As Integer) As Boolean
     End Function
+
+    Public Const SRCCOPY As Integer = 13369376
+    Public Const CAPTUREBLT As Integer = 1073741824
+
+    <DllImport("user32.dll")>
+    Public Shared Function GetDC(ByVal hWnd As IntPtr) As IntPtr
+    End Function
+
+    <DllImport("gdi32.dll")>
+    Public Shared Function BitBlt(ByVal hDestDC As IntPtr,
+        ByVal x As Integer, ByVal y As Integer,
+        ByVal nWidth As Integer, ByVal nHeight As Integer,
+        ByVal hSrcDC As IntPtr,
+        ByVal xSrc As Integer, ByVal ySrc As Integer,
+        ByVal dwRop As Integer) As Integer
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Function ReleaseDC(ByVal hWnd As IntPtr,
+        ByVal hdc As IntPtr) As IntPtr
+    End Function
+
+    <DllImport("user32.dll")>
+    Public Shared Function GetWindowDC(ByVal hWnd As IntPtr) As IntPtr
+    End Function
+
+
 
 
 End Class

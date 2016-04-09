@@ -41,7 +41,13 @@ Partial Class Form_005EnumChildWindows
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Button12 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -96,7 +102,7 @@ Partial Class Form_005EnumChildWindows
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(16, 206)
+        Me.Button3.Location = New System.Drawing.Point(712, 12)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(218, 30)
         Me.Button3.TabIndex = 6
@@ -106,7 +112,7 @@ Partial Class Form_005EnumChildWindows
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(16, 242)
+        Me.DataGridView1.Location = New System.Drawing.Point(712, 48)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowTemplate.Height = 24
         Me.DataGridView1.Size = New System.Drawing.Size(317, 196)
@@ -114,7 +120,8 @@ Partial Class Form_005EnumChildWindows
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(339, 242)
+        Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button4.Location = New System.Drawing.Point(712, 250)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(218, 30)
         Me.Button4.TabIndex = 8
@@ -123,7 +130,8 @@ Partial Class Form_005EnumChildWindows
         '
         'Button5
         '
-        Me.Button5.Location = New System.Drawing.Point(339, 278)
+        Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button5.Location = New System.Drawing.Point(712, 286)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(218, 30)
         Me.Button5.TabIndex = 9
@@ -142,7 +150,8 @@ Partial Class Form_005EnumChildWindows
         '
         'Button6
         '
-        Me.Button6.Location = New System.Drawing.Point(339, 314)
+        Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button6.Location = New System.Drawing.Point(712, 322)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(218, 30)
         Me.Button6.TabIndex = 11
@@ -151,7 +160,8 @@ Partial Class Form_005EnumChildWindows
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(339, 350)
+        Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button7.Location = New System.Drawing.Point(712, 358)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(218, 30)
         Me.Button7.TabIndex = 12
@@ -169,7 +179,8 @@ Partial Class Form_005EnumChildWindows
         '
         'Button8
         '
-        Me.Button8.Location = New System.Drawing.Point(339, 386)
+        Me.Button8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button8.Location = New System.Drawing.Point(712, 394)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(218, 30)
         Me.Button8.TabIndex = 14
@@ -186,27 +197,74 @@ Partial Class Form_005EnumChildWindows
         '
         'Button9
         '
-        Me.Button9.Location = New System.Drawing.Point(572, 242)
+        Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button9.Location = New System.Drawing.Point(955, 250)
         Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(218, 30)
+        Me.Button9.Size = New System.Drawing.Size(152, 30)
         Me.Button9.TabIndex = 16
         Me.Button9.Text = "GetScrollInfo"
         Me.Button9.UseVisualStyleBackColor = True
         '
         'Button10
         '
-        Me.Button10.Location = New System.Drawing.Point(572, 278)
+        Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button10.Location = New System.Drawing.Point(955, 286)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(218, 30)
+        Me.Button10.Size = New System.Drawing.Size(152, 30)
         Me.Button10.TabIndex = 17
         Me.Button10.Text = "SetCursorPos"
         Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button11
+        '
+        Me.Button11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button11.Location = New System.Drawing.Point(955, 321)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(69, 30)
+        Me.Button11.TabIndex = 19
+        Me.Button11.Text = "BitBlt"
+        Me.Button11.UseVisualStyleBackColor = True
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.AutoScroll = True
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.PictureBox1)
+        Me.Panel1.Location = New System.Drawing.Point(12, 211)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(694, 218)
+        Me.Panel1.TabIndex = 20
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(228, 146)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.PictureBox1.TabIndex = 19
+        Me.PictureBox1.TabStop = False
+        '
+        'Button12
+        '
+        Me.Button12.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button12.Location = New System.Drawing.Point(1030, 321)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(77, 30)
+        Me.Button12.TabIndex = 21
+        Me.Button12.Text = "BitBlt2"
+        Me.Button12.UseVisualStyleBackColor = True
         '
         'Form_005EnumChildWindows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(802, 450)
+        Me.ClientSize = New System.Drawing.Size(1114, 441)
+        Me.Controls.Add(Me.Button12)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.RichTextBox1)
@@ -227,6 +285,9 @@ Partial Class Form_005EnumChildWindows
         Me.Name = "Form_005EnumChildWindows"
         Me.Text = "_001GetForeGroundWindow"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -250,4 +311,8 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
+    Friend WithEvents Button11 As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Button12 As Button
 End Class
