@@ -38,6 +38,9 @@ Partial Class Form_005EnumChildWindows
         Me.Button7 = New System.Windows.Forms.Button()
         Me.lblScreen = New System.Windows.Forms.Label()
         Me.Button8 = New System.Windows.Forms.Button()
+        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -158,7 +161,7 @@ Partial Class Form_005EnumChildWindows
         'lblScreen
         '
         Me.lblScreen.AutoSize = True
-        Me.lblScreen.Location = New System.Drawing.Point(380, 100)
+        Me.lblScreen.Location = New System.Drawing.Point(336, 108)
         Me.lblScreen.Name = "lblScreen"
         Me.lblScreen.Size = New System.Drawing.Size(90, 15)
         Me.lblScreen.TabIndex = 13
@@ -173,11 +176,40 @@ Partial Class Form_005EnumChildWindows
         Me.Button8.Text = "GetWindowRect"
         Me.Button8.UseVisualStyleBackColor = True
         '
+        'RichTextBox1
+        '
+        Me.RichTextBox1.Location = New System.Drawing.Point(445, 100)
+        Me.RichTextBox1.Name = "RichTextBox1"
+        Me.RichTextBox1.Size = New System.Drawing.Size(100, 50)
+        Me.RichTextBox1.TabIndex = 15
+        Me.RichTextBox1.Text = "1" & Global.Microsoft.VisualBasic.ChrW(10) & "2" & Global.Microsoft.VisualBasic.ChrW(10) & "3" & Global.Microsoft.VisualBasic.ChrW(10) & "4" & Global.Microsoft.VisualBasic.ChrW(10) & "5" & Global.Microsoft.VisualBasic.ChrW(10) & "6"
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(572, 242)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(218, 30)
+        Me.Button9.TabIndex = 16
+        Me.Button9.Text = "GetScrollInfo"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(572, 278)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(218, 30)
+        Me.Button10.TabIndex = 17
+        Me.Button10.Text = "SetCursorPos"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
         'Form_005EnumChildWindows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(557, 450)
+        Me.ClientSize = New System.Drawing.Size(802, 450)
+        Me.Controls.Add(Me.Button10)
+        Me.Controls.Add(Me.Button9)
+        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.lblScreen)
         Me.Controls.Add(Me.Button7)
@@ -215,4 +247,7 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents Button7 As Button
     Friend WithEvents lblScreen As Label
     Friend WithEvents Button8 As Button
+    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents Button9 As Button
+    Friend WithEvents Button10 As Button
 End Class

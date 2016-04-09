@@ -394,6 +394,9 @@ Public Class User32
 
     End Function
 
+    <DllImport("user32.dll")>
+    Public Shared Function GetScrollRange(ByVal hWnd As IntPtr, ByVal nBar As Integer, ByRef lpMinPos As Integer, ByRef lpMaxPos As Integer) As Boolean
+    End Function
 
 
 End Class
