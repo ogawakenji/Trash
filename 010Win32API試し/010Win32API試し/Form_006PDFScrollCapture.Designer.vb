@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form_005EnumChildWindows
+Partial Class Form_006PDFScrollCapture
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
@@ -24,21 +24,14 @@ Partial Class Form_005EnumChildWindows
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lblDragAndDrop = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.lblScreen = New System.Windows.Forms.Label()
         Me.Button8 = New System.Windows.Forms.Button()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
@@ -47,33 +40,16 @@ Partial Class Form_005EnumChildWindows
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtCapturehWnd = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtRoothWnd = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
         '
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(12, 12)
-        Me.TextBox1.Multiline = True
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(528, 82)
-        Me.TextBox1.TabIndex = 1
-        Me.TextBox1.Text = "https://msdn.microsoft.com/ja-jp/library/cc411004.aspx" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "キーストローク、マウスの動き、ボタンのクリックなど" &
-    "を合成します。"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(12, 100)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(127, 30)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "タイマースタート"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'TextBox2
         '
@@ -93,37 +69,10 @@ Partial Class Form_005EnumChildWindows
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "作業しているウィンドウのハンドル"
         '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(145, 100)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(127, 30)
-        Me.Button2.TabIndex = 5
-        Me.Button2.Text = "タイマーストップ"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(712, 12)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(218, 30)
-        Me.Button3.TabIndex = 6
-        Me.Button3.Text = "EnumChildWindows"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(712, 48)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(317, 196)
-        Me.DataGridView1.TabIndex = 7
-        '
         'Button4
         '
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(712, 250)
+        Me.Button4.Location = New System.Drawing.Point(862, 250)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(218, 30)
         Me.Button4.TabIndex = 8
@@ -133,27 +82,27 @@ Partial Class Form_005EnumChildWindows
         'Button5
         '
         Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.Location = New System.Drawing.Point(712, 286)
+        Me.Button5.Location = New System.Drawing.Point(862, 286)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(218, 30)
         Me.Button5.TabIndex = 9
         Me.Button5.Text = "明細SendMessage"
         Me.Button5.UseVisualStyleBackColor = True
         '
-        'Label2
+        'lblDragAndDrop
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label2.Location = New System.Drawing.Point(290, 101)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(34, 24)
-        Me.Label2.TabIndex = 10
-        Me.Label2.Text = "●"
+        Me.lblDragAndDrop.AutoSize = True
+        Me.lblDragAndDrop.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.lblDragAndDrop.Location = New System.Drawing.Point(12, 15)
+        Me.lblDragAndDrop.Name = "lblDragAndDrop"
+        Me.lblDragAndDrop.Size = New System.Drawing.Size(34, 24)
+        Me.lblDragAndDrop.TabIndex = 10
+        Me.lblDragAndDrop.Text = "●"
         '
         'Button6
         '
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button6.Location = New System.Drawing.Point(712, 322)
+        Me.Button6.Location = New System.Drawing.Point(862, 322)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(218, 30)
         Me.Button6.TabIndex = 11
@@ -163,44 +112,27 @@ Partial Class Form_005EnumChildWindows
         'Button7
         '
         Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button7.Location = New System.Drawing.Point(712, 358)
+        Me.Button7.Location = New System.Drawing.Point(862, 358)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(218, 30)
         Me.Button7.TabIndex = 12
         Me.Button7.Text = "GetWindowLong"
         Me.Button7.UseVisualStyleBackColor = True
         '
-        'lblScreen
-        '
-        Me.lblScreen.AutoSize = True
-        Me.lblScreen.Location = New System.Drawing.Point(336, 108)
-        Me.lblScreen.Name = "lblScreen"
-        Me.lblScreen.Size = New System.Drawing.Size(90, 15)
-        Me.lblScreen.TabIndex = 13
-        Me.lblScreen.Text = "スクリーン座標"
-        '
         'Button8
         '
         Me.Button8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button8.Location = New System.Drawing.Point(712, 394)
+        Me.Button8.Location = New System.Drawing.Point(862, 394)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(218, 30)
         Me.Button8.TabIndex = 14
         Me.Button8.Text = "GetWindowRect"
         Me.Button8.UseVisualStyleBackColor = True
         '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Location = New System.Drawing.Point(445, 100)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(100, 50)
-        Me.RichTextBox1.TabIndex = 15
-        Me.RichTextBox1.Text = "1" & Global.Microsoft.VisualBasic.ChrW(10) & "2" & Global.Microsoft.VisualBasic.ChrW(10) & "3" & Global.Microsoft.VisualBasic.ChrW(10) & "4" & Global.Microsoft.VisualBasic.ChrW(10) & "5" & Global.Microsoft.VisualBasic.ChrW(10) & "6"
-        '
         'Button9
         '
         Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button9.Location = New System.Drawing.Point(955, 250)
+        Me.Button9.Location = New System.Drawing.Point(1105, 250)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(152, 30)
         Me.Button9.TabIndex = 16
@@ -210,7 +142,7 @@ Partial Class Form_005EnumChildWindows
         'Button10
         '
         Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button10.Location = New System.Drawing.Point(955, 286)
+        Me.Button10.Location = New System.Drawing.Point(1105, 286)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(152, 30)
         Me.Button10.TabIndex = 17
@@ -220,7 +152,7 @@ Partial Class Form_005EnumChildWindows
         'Button11
         '
         Me.Button11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button11.Location = New System.Drawing.Point(955, 321)
+        Me.Button11.Location = New System.Drawing.Point(1105, 321)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(69, 30)
         Me.Button11.TabIndex = 19
@@ -235,9 +167,9 @@ Partial Class Form_005EnumChildWindows
         Me.Panel1.AutoScroll = True
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 211)
+        Me.Panel1.Location = New System.Drawing.Point(545, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(694, 218)
+        Me.Panel1.Size = New System.Drawing.Size(712, 218)
         Me.Panel1.TabIndex = 20
         '
         'PictureBox1
@@ -252,7 +184,7 @@ Partial Class Form_005EnumChildWindows
         'Button12
         '
         Me.Button12.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button12.Location = New System.Drawing.Point(1030, 321)
+        Me.Button12.Location = New System.Drawing.Point(1180, 321)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(77, 30)
         Me.Button12.TabIndex = 21
@@ -262,7 +194,7 @@ Partial Class Form_005EnumChildWindows
         'Button13
         '
         Me.Button13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button13.Location = New System.Drawing.Point(955, 357)
+        Me.Button13.Location = New System.Drawing.Point(1105, 357)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(152, 30)
         Me.Button13.TabIndex = 22
@@ -272,18 +204,56 @@ Partial Class Form_005EnumChildWindows
         'Button14
         '
         Me.Button14.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button14.Location = New System.Drawing.Point(955, 393)
+        Me.Button14.Location = New System.Drawing.Point(1105, 393)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(152, 30)
         Me.Button14.TabIndex = 23
         Me.Button14.Text = "GetAncestor"
         Me.Button14.UseVisualStyleBackColor = True
         '
-        'Form_005EnumChildWindows
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label3.Location = New System.Drawing.Point(64, 15)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(274, 24)
+        Me.Label3.TabIndex = 24
+        Me.Label3.Text = "キャプチャするハンドル"
+        '
+        'txtCapturehWnd
+        '
+        Me.txtCapturehWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtCapturehWnd.Location = New System.Drawing.Point(381, 12)
+        Me.txtCapturehWnd.Name = "txtCapturehWnd"
+        Me.txtCapturehWnd.Size = New System.Drawing.Size(139, 30)
+        Me.txtCapturehWnd.TabIndex = 3
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label4.Location = New System.Drawing.Point(64, 51)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(298, 24)
+        Me.Label4.TabIndex = 25
+        Me.Label4.Text = "ルートウィンドウハンドル"
+        '
+        'txtRoothWnd
+        '
+        Me.txtRoothWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtRoothWnd.Location = New System.Drawing.Point(381, 48)
+        Me.txtRoothWnd.Name = "txtRoothWnd"
+        Me.txtRoothWnd.Size = New System.Drawing.Size(139, 30)
+        Me.txtRoothWnd.TabIndex = 3
+        '
+        'Form_006PDFScrollCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1114, 441)
+        Me.ClientSize = New System.Drawing.Size(1264, 441)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button12)
@@ -291,24 +261,18 @@ Partial Class Form_005EnumChildWindows
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button9)
-        Me.Controls.Add(Me.RichTextBox1)
         Me.Controls.Add(Me.Button8)
-        Me.Controls.Add(Me.lblScreen)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.lblDragAndDrop)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.txtRoothWnd)
+        Me.Controls.Add(Me.txtCapturehWnd)
         Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Name = "Form_005EnumChildWindows"
+        Me.Name = "Form_006PDFScrollCapture"
         Me.Text = "_001GetForeGroundWindow"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -318,21 +282,14 @@ Partial Class Form_005EnumChildWindows
     End Sub
 
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lblDragAndDrop As Label
     Friend WithEvents Button6 As Button
     Friend WithEvents Button7 As Button
-    Friend WithEvents lblScreen As Label
     Friend WithEvents Button8 As Button
-    Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
@@ -341,4 +298,8 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
     Friend WithEvents Button14 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtCapturehWnd As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtRoothWnd As TextBox
 End Class

@@ -2,41 +2,41 @@
 
 Imports System.Runtime.InteropServices
 
-Public Class Form_005EnumChildWindows
+Public Class Form_006PDFScrollCapture
 
     Private hWndList As New List(Of hWndEntity)
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Timer1.Interval = 5000
         Timer1.Start()
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         Timer1.Stop()
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Me.TextBox2.Text = User32.GetForegroundWindow().ToString
-        lblScreen.Text = Cursor.Position.ToString()
+        'lblScreen.Text = Cursor.Position.ToString()
 
 
 
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
 
 
         Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
 
         Dim lparam As Integer
 
-        Me.DataGridView1.DataSource = Nothing
+        'Me.DataGridView1.DataSource = Nothing
 
         hWndList.Clear()
 
         User32.EnumChildWindows(hWnd, AddressOf EnumChildProc, lparam)
 
-        Me.DataGridView1.DataSource = hWndList
+        'Me.DataGridView1.DataSource = hWndList
 
 
     End Sub
@@ -87,24 +87,28 @@ Public Class Form_005EnumChildWindows
 
     End Sub
 
-    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles lblDragAndDrop.Click
 
 
     End Sub
 
-    Private Sub Label2_MouseDown(sender As Object, e As MouseEventArgs) Handles Label2.MouseDown
+    Private Sub Label2_MouseDown(sender As Object, e As MouseEventArgs) Handles lblDragAndDrop.MouseDown
         '' カーソルを十字に変更
-        Me.Cursor = Cursors.Cross
+        Me.Cursor = Cursors.Hand
     End Sub
 
-    Private Sub Label2_MouseUp(sender As Object, e As MouseEventArgs) Handles Label2.MouseUp
+    Private Sub Label2_MouseUp(sender As Object, e As MouseEventArgs) Handles lblDragAndDrop.MouseUp
         '' カーソルをデフォルトに戻す
         Me.Cursor = Cursors.Default
 
         '' マウス座標よりハンドル取得
-        Dim hwnd As IntPtr
-        hwnd = User32.WindowFromPoint(Cursor.Position)
-        Me.TextBox2.Text = CType(hwnd, String)
+        Dim hWnd As IntPtr
+        hWnd = User32.WindowFromPoint(Cursor.Position)
+        Me.txtCapturehWnd.Text = CType(hWnd, String)
+
+        Dim roothWnd As IntPtr = User32.GetAncestor(hWnd, User32.GetAncestor_Flags.GetRoot)
+        Me.txtRoothWnd.Text = CType(roothWnd, String)
+
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click

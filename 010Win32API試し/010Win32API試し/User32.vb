@@ -423,6 +423,31 @@ Public Class User32
     Public Shared Function GetWindowDC(ByVal hWnd As IntPtr) As IntPtr
     End Function
 
+    <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
+    Public Shared Function GetWindow(ByVal hWnd As IntPtr, ByVal uCmd As UInt32) As IntPtr
+    End Function
+
+    Public Enum GetWindow_Cmd As UInt32
+        GW_HWNDFIRST = 0
+        GW_HWNDLAST = 1
+        GW_HWNDNEXT = 2
+        GW_HWNDPREV = 3
+        GW_OWNER = 4
+        GW_CHILD = 5
+        GW_ENABLEDPOPUP = 6
+    End Enum
+
+    <DllImport("user32.dll", ExactSpelling:=True)>
+    Public Shared Function GetAncestor(ByVal hwnd As IntPtr, ByVal gaFlags As GetAncestor_Flags) As IntPtr
+    End Function
+
+    <Flags()>
+    Public Enum GetAncestor_Flags As Integer
+        GetParent = 1
+        GetRoot = 2
+        GetRootOwner = 3
+    End Enum
+
 
 
 

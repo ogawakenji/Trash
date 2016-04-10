@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_006PDFScrollCapture.Designer.vb">
+      <DependentUpon>Form_006PDFScrollCapture.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_006PDFScrollCapture.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_005EnumChildWindows.Designer.vb">
       <DependentUpon>Form_005EnumChildWindows.vb</DependentUpon>
     </Compile>
@@ -127,6 +133,9 @@
     <Compile Include="User32.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_006PDFScrollCapture.resx">
+      <DependentUpon>Form_006PDFScrollCapture.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_005EnumChildWindows.resx">
       <DependentUpon>Form_005EnumChildWindows.vb</DependentUpon>
     </EmbeddedResource>
