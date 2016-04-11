@@ -5,6 +5,7 @@ Imports System.Runtime.InteropServices
 Public Class Form_005EnumChildWindows
 
     Private hWndList As New List(Of hWndEntity)
+    Private scrollhWndList As New List(Of scrollwHndList)
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Timer1.Interval = 5000
@@ -50,7 +51,13 @@ Public Class Form_005EnumChildWindows
 
     Private Class hWndEntity
         Public Property hWnd As IntPtr
+
         Public Property scrollbar As String
+    End Class
+
+    Private Class scrollwHndList
+        Public Property hWnd As IntPtr
+        Public Property scrollInfo As User32.SCROLLINFO
     End Class
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -211,6 +218,9 @@ Public Class Form_005EnumChildWindows
         User32.SetCursorPos(rect.left, rect.top)
 
     End Sub
+
+
+
 
     Private Sub DebugGetScrollInfo(hWnd As IntPtr)
         Dim si As New User32.SCROLLINFO
