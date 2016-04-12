@@ -47,6 +47,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,7 +126,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button4.Location = New System.Drawing.Point(712, 250)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(218, 30)
+        Me.Button4.Size = New System.Drawing.Size(152, 30)
         Me.Button4.TabIndex = 8
         Me.Button4.Text = "GetWindowLong"
         Me.Button4.UseVisualStyleBackColor = True
@@ -135,7 +136,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button5.Location = New System.Drawing.Point(712, 286)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(218, 30)
+        Me.Button5.Size = New System.Drawing.Size(152, 30)
         Me.Button5.TabIndex = 9
         Me.Button5.Text = "明細SendMessage"
         Me.Button5.UseVisualStyleBackColor = True
@@ -155,7 +156,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button6.Location = New System.Drawing.Point(712, 322)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(218, 30)
+        Me.Button6.Size = New System.Drawing.Size(152, 30)
         Me.Button6.TabIndex = 11
         Me.Button6.Text = "TextSendMessage"
         Me.Button6.UseVisualStyleBackColor = True
@@ -165,7 +166,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button7.Location = New System.Drawing.Point(712, 358)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(218, 30)
+        Me.Button7.Size = New System.Drawing.Size(152, 30)
         Me.Button7.TabIndex = 12
         Me.Button7.Text = "GetWindowLong"
         Me.Button7.UseVisualStyleBackColor = True
@@ -184,7 +185,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button8.Location = New System.Drawing.Point(712, 394)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(218, 30)
+        Me.Button8.Size = New System.Drawing.Size(152, 30)
         Me.Button8.TabIndex = 14
         Me.Button8.Text = "GetWindowRect"
         Me.Button8.UseVisualStyleBackColor = True
@@ -200,7 +201,7 @@ Partial Class Form_005EnumChildWindows
         'Button9
         '
         Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button9.Location = New System.Drawing.Point(955, 250)
+        Me.Button9.Location = New System.Drawing.Point(870, 250)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(152, 30)
         Me.Button9.TabIndex = 16
@@ -210,7 +211,7 @@ Partial Class Form_005EnumChildWindows
         'Button10
         '
         Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button10.Location = New System.Drawing.Point(955, 286)
+        Me.Button10.Location = New System.Drawing.Point(870, 286)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(152, 30)
         Me.Button10.TabIndex = 17
@@ -220,7 +221,7 @@ Partial Class Form_005EnumChildWindows
         'Button11
         '
         Me.Button11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button11.Location = New System.Drawing.Point(955, 321)
+        Me.Button11.Location = New System.Drawing.Point(870, 321)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(69, 30)
         Me.Button11.TabIndex = 19
@@ -252,7 +253,7 @@ Partial Class Form_005EnumChildWindows
         'Button12
         '
         Me.Button12.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button12.Location = New System.Drawing.Point(1030, 321)
+        Me.Button12.Location = New System.Drawing.Point(945, 321)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(77, 30)
         Me.Button12.TabIndex = 21
@@ -262,7 +263,7 @@ Partial Class Form_005EnumChildWindows
         'Button13
         '
         Me.Button13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button13.Location = New System.Drawing.Point(955, 357)
+        Me.Button13.Location = New System.Drawing.Point(870, 357)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(152, 30)
         Me.Button13.TabIndex = 22
@@ -272,18 +273,29 @@ Partial Class Form_005EnumChildWindows
         'Button14
         '
         Me.Button14.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button14.Location = New System.Drawing.Point(955, 393)
+        Me.Button14.Location = New System.Drawing.Point(870, 393)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(152, 30)
         Me.Button14.TabIndex = 23
         Me.Button14.Text = "GetAncestor"
         Me.Button14.UseVisualStyleBackColor = True
         '
+        'Button15
+        '
+        Me.Button15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button15.Location = New System.Drawing.Point(1028, 250)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(74, 66)
+        Me.Button15.TabIndex = 24
+        Me.Button15.Text = "GetWindowInfo"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
         'Form_005EnumChildWindows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1114, 441)
+        Me.Controls.Add(Me.Button15)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button12)
@@ -341,4 +353,5 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents Button12 As Button
     Friend WithEvents Button13 As Button
     Friend WithEvents Button14 As Button
+    Friend WithEvents Button15 As Button
 End Class

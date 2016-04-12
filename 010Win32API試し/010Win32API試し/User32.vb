@@ -448,7 +448,22 @@ Public Class User32
         GetRootOwner = 3
     End Enum
 
+    <DllImport("user32.dll", SetLastError:=True)>
+    Public Shared Function GetWindowInfo(ByVal hwnd As IntPtr, ByRef pwi As WINDOWINFO) As Boolean
+    End Function
 
-
+    <StructLayout(LayoutKind.Sequential)>
+    Public Structure WINDOWINFO
+        Dim cbSize As Integer
+        Dim rcWindow As RECT
+        Dim rcClient As RECT
+        Dim dwStyle As Integer
+        Dim dwExStyle As Integer
+        Dim dwWindowStatus As UInt32
+        Dim cxWindowBorders As UInt32
+        Dim cyWindowBorders As UInt32
+        Dim atomWindowType As UInt16
+        Dim wCreatorVersion As Short
+    End Structure
 
 End Class

@@ -73,6 +73,14 @@ Public Class Form_006PDFScrollCapture
             Return
         End If
 
+        Dim rect As User32.RECT
+
+        Dim hWnd As IntPtr = CType(Me.txtCapturehWnd.Text, IntPtr)
+        User32.SetForegroundWindow(hWnd)
+        User32.GetWindowRect(hWnd, rect)
+        User32.SetCursorPos(rect.left, rect.top)
+
+
         '' ============================================================
         '' ルートのウィンドウハンドルの子ウィンドウハンドルを取得する
         '' ============================================================
@@ -87,6 +95,7 @@ Public Class Form_006PDFScrollCapture
         '' ============================================================
         Dim scrollhWnd As IntPtr = Nothing
         scrollhWndList.Clear()
+        oneScrollList.Clear()
 
         '' ルートウィンドウからスクロールをもつウィンドウハンドルを探す
         AddScrollhWndList(roothWnd, scrollhWndList)
@@ -106,7 +115,6 @@ Public Class Form_006PDFScrollCapture
         '' ==============================
         '' キャプチャするウィンドウハンドルの画像を取得
         '' ==============================
-        Dim hWnd As IntPtr = CType(Me.txtCapturehWnd.Text, IntPtr)
 
         Dim baseImage As Image = CapturehWnd(hWnd)
 
@@ -164,28 +172,36 @@ Public Class Form_006PDFScrollCapture
                     tmpSi = osl.scrollInfo
                 End If
             Next
+            If scrollHeight = 0 Then
+                Me.PictureBox1.Image = baseImage
 
-            Dim mixImage As Image = CaptureScrollHeight(hWnd, scrollHeight)
+            Else
 
-            Dim newImage As Image = ImageMix(baseImage, mixImage)
+                'Dim mixImage As Image = CaptureScrollHeight(hWnd, scrollHeight)
+                Dim mixImage As Image = CaptureScrollHeight(hWnd, 48)
 
-
-            While tmpSi.nPos < (tmpSi.nMax - tmpSi.nMin + 1) - tmpSi.nPage
-                scrollHeight = tmpSi.nPos
-
-                User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
-
-                GetScrollInfo(scrollhWnd, tmpSi)
-                scrollHeight = tmpSi.nPos - scrollHeight
-
-                mixImage = CaptureScrollHeight(hWnd, scrollHeight)
-                newImage = ImageMix(newImage, mixImage)
-
-                Threading.Thread.Sleep(100)
-            End While
+                Dim newImage As Image = ImageMix(baseImage, mixImage)
 
 
-            Me.PictureBox1.Image = newImage
+                While tmpSi.nPos < (tmpSi.nMax - tmpSi.nMin + 1) - tmpSi.nPage
+                    scrollHeight = tmpSi.nPos
+
+                    User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+
+                    GetScrollInfo(scrollhWnd, tmpSi)
+                    scrollHeight = tmpSi.nPos - scrollHeight
+
+                    'mixImage = CaptureScrollHeight(hWnd, scrollHeight)
+                    mixImage = CaptureScrollHeight(hWnd, 48)
+                    newImage = ImageMix(newImage, mixImage)
+
+                    'Threading.Thread.Sleep(100)
+                End While
+
+
+                Me.PictureBox1.Image = newImage
+            End If
+
 
 
 

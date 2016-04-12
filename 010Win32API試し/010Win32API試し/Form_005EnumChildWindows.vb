@@ -365,6 +365,15 @@ Public Class Form_005EnumChildWindows
 
         Next
     End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+
+        Dim info As New User32.WINDOWINFO
+        info.cbSize = Marshal.SizeOf(info)
+        User32.GetWindowInfo(hWnd, info)
+
+    End Sub
 End Class
 
 
