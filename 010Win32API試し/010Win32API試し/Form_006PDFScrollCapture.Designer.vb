@@ -32,6 +32,8 @@ Partial Class Form_006PDFScrollCapture
         Me.txtCapturehWnd = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtRoothWnd = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtScrollhWnd = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -41,7 +43,7 @@ Partial Class Form_006PDFScrollCapture
         '
         'btnCapture
         '
-        Me.btnCapture.Location = New System.Drawing.Point(525, 12)
+        Me.btnCapture.Location = New System.Drawing.Point(655, 12)
         Me.btnCapture.Name = "btnCapture"
         Me.btnCapture.Size = New System.Drawing.Size(127, 63)
         Me.btnCapture.TabIndex = 8
@@ -66,9 +68,9 @@ Partial Class Form_006PDFScrollCapture
         Me.Panel1.AutoScroll = True
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Location = New System.Drawing.Point(12, 84)
+        Me.Panel1.Location = New System.Drawing.Point(12, 98)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(640, 345)
+        Me.Panel1.Size = New System.Drawing.Size(787, 331)
         Me.Panel1.TabIndex = 20
         '
         'PictureBox1
@@ -83,44 +85,70 @@ Partial Class Form_006PDFScrollCapture
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label3.Location = New System.Drawing.Point(64, 15)
+        Me.Label3.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label3.Location = New System.Drawing.Point(49, 9)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(274, 24)
+        Me.Label3.Size = New System.Drawing.Size(229, 19)
         Me.Label3.TabIndex = 24
         Me.Label3.Text = "キャプチャするハンドル"
         '
         'txtCapturehWnd
         '
-        Me.txtCapturehWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtCapturehWnd.Location = New System.Drawing.Point(381, 12)
+        Me.txtCapturehWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtCapturehWnd.Location = New System.Drawing.Point(301, 6)
+        Me.txtCapturehWnd.Margin = New System.Windows.Forms.Padding(0)
         Me.txtCapturehWnd.Name = "txtCapturehWnd"
-        Me.txtCapturehWnd.Size = New System.Drawing.Size(139, 30)
+        Me.txtCapturehWnd.Size = New System.Drawing.Size(139, 25)
         Me.txtCapturehWnd.TabIndex = 3
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Label4.Location = New System.Drawing.Point(64, 51)
+        Me.Label4.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label4.Location = New System.Drawing.Point(49, 34)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(298, 24)
+        Me.Label4.Size = New System.Drawing.Size(249, 19)
         Me.Label4.TabIndex = 25
         Me.Label4.Text = "ルートウィンドウハンドル"
         '
         'txtRoothWnd
         '
-        Me.txtRoothWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.txtRoothWnd.Location = New System.Drawing.Point(381, 48)
+        Me.txtRoothWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtRoothWnd.Location = New System.Drawing.Point(301, 34)
+        Me.txtRoothWnd.Margin = New System.Windows.Forms.Padding(0)
         Me.txtRoothWnd.Name = "txtRoothWnd"
-        Me.txtRoothWnd.Size = New System.Drawing.Size(139, 30)
+        Me.txtRoothWnd.Size = New System.Drawing.Size(139, 25)
         Me.txtRoothWnd.TabIndex = 3
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.Label1.Location = New System.Drawing.Point(58, 63)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(189, 19)
+        Me.Label1.TabIndex = 26
+        Me.Label1.Text = "スクロールハンドル"
+        '
+        'txtScrollhWnd
+        '
+        Me.txtScrollhWnd.Font = New System.Drawing.Font("ＭＳ ゴシック", 10.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.txtScrollhWnd.Location = New System.Drawing.Point(301, 60)
+        Me.txtScrollhWnd.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtScrollhWnd.Name = "txtScrollhWnd"
+        Me.txtScrollhWnd.Size = New System.Drawing.Size(139, 25)
+        Me.txtScrollhWnd.TabIndex = 27
         '
         'Form_006PDFScrollCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(664, 441)
+        Me.ClientSize = New System.Drawing.Size(811, 441)
+        Me.Controls.Add(Me.txtScrollhWnd)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
@@ -147,4 +175,6 @@ Partial Class Form_006PDFScrollCapture
     Friend WithEvents txtCapturehWnd As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents txtRoothWnd As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtScrollhWnd As TextBox
 End Class

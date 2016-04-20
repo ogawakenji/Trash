@@ -48,6 +48,7 @@ Partial Class Form_005EnumChildWindows
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button16 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,7 +125,7 @@ Partial Class Form_005EnumChildWindows
         'Button4
         '
         Me.Button4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button4.Location = New System.Drawing.Point(712, 250)
+        Me.Button4.Location = New System.Drawing.Point(691, 250)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(152, 30)
         Me.Button4.TabIndex = 8
@@ -134,7 +135,7 @@ Partial Class Form_005EnumChildWindows
         'Button5
         '
         Me.Button5.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button5.Location = New System.Drawing.Point(712, 286)
+        Me.Button5.Location = New System.Drawing.Point(691, 286)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(152, 30)
         Me.Button5.TabIndex = 9
@@ -154,7 +155,7 @@ Partial Class Form_005EnumChildWindows
         'Button6
         '
         Me.Button6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button6.Location = New System.Drawing.Point(712, 322)
+        Me.Button6.Location = New System.Drawing.Point(691, 322)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(152, 30)
         Me.Button6.TabIndex = 11
@@ -164,7 +165,7 @@ Partial Class Form_005EnumChildWindows
         'Button7
         '
         Me.Button7.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button7.Location = New System.Drawing.Point(712, 358)
+        Me.Button7.Location = New System.Drawing.Point(691, 358)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(152, 30)
         Me.Button7.TabIndex = 12
@@ -183,7 +184,7 @@ Partial Class Form_005EnumChildWindows
         'Button8
         '
         Me.Button8.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button8.Location = New System.Drawing.Point(712, 394)
+        Me.Button8.Location = New System.Drawing.Point(691, 394)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(152, 30)
         Me.Button8.TabIndex = 14
@@ -201,7 +202,7 @@ Partial Class Form_005EnumChildWindows
         'Button9
         '
         Me.Button9.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button9.Location = New System.Drawing.Point(870, 250)
+        Me.Button9.Location = New System.Drawing.Point(849, 250)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(152, 30)
         Me.Button9.TabIndex = 16
@@ -211,7 +212,7 @@ Partial Class Form_005EnumChildWindows
         'Button10
         '
         Me.Button10.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button10.Location = New System.Drawing.Point(870, 286)
+        Me.Button10.Location = New System.Drawing.Point(849, 286)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(152, 30)
         Me.Button10.TabIndex = 17
@@ -221,7 +222,7 @@ Partial Class Form_005EnumChildWindows
         'Button11
         '
         Me.Button11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button11.Location = New System.Drawing.Point(870, 321)
+        Me.Button11.Location = New System.Drawing.Point(849, 321)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(69, 30)
         Me.Button11.TabIndex = 19
@@ -238,7 +239,7 @@ Partial Class Form_005EnumChildWindows
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Location = New System.Drawing.Point(12, 211)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(694, 218)
+        Me.Panel1.Size = New System.Drawing.Size(673, 370)
         Me.Panel1.TabIndex = 20
         '
         'PictureBox1
@@ -253,7 +254,7 @@ Partial Class Form_005EnumChildWindows
         'Button12
         '
         Me.Button12.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button12.Location = New System.Drawing.Point(945, 321)
+        Me.Button12.Location = New System.Drawing.Point(924, 321)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(77, 30)
         Me.Button12.TabIndex = 21
@@ -263,7 +264,7 @@ Partial Class Form_005EnumChildWindows
         'Button13
         '
         Me.Button13.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button13.Location = New System.Drawing.Point(870, 357)
+        Me.Button13.Location = New System.Drawing.Point(849, 357)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(152, 30)
         Me.Button13.TabIndex = 22
@@ -273,7 +274,7 @@ Partial Class Form_005EnumChildWindows
         'Button14
         '
         Me.Button14.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button14.Location = New System.Drawing.Point(870, 393)
+        Me.Button14.Location = New System.Drawing.Point(849, 393)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(152, 30)
         Me.Button14.TabIndex = 23
@@ -283,18 +284,30 @@ Partial Class Form_005EnumChildWindows
         'Button15
         '
         Me.Button15.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button15.Location = New System.Drawing.Point(1028, 250)
+        Me.Button15.Location = New System.Drawing.Point(1007, 250)
         Me.Button15.Name = "Button15"
         Me.Button15.Size = New System.Drawing.Size(74, 66)
         Me.Button15.TabIndex = 24
         Me.Button15.Text = "GetWindowInfo"
         Me.Button15.UseVisualStyleBackColor = True
         '
+        'Button16
+        '
+        Me.Button16.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button16.Location = New System.Drawing.Point(1007, 321)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(74, 66)
+        Me.Button16.TabIndex = 25
+        Me.Button16.Text = "CallWindowProc"
+        Me.Button16.UseVisualStyleBackColor = True
+        '
         'Form_005EnumChildWindows
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1114, 441)
+        Me.AutoScroll = True
+        Me.ClientSize = New System.Drawing.Size(1135, 441)
+        Me.Controls.Add(Me.Button16)
         Me.Controls.Add(Me.Button15)
         Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Button13)
@@ -354,4 +367,5 @@ Partial Class Form_005EnumChildWindows
     Friend WithEvents Button13 As Button
     Friend WithEvents Button14 As Button
     Friend WithEvents Button15 As Button
+    Friend WithEvents Button16 As Button
 End Class

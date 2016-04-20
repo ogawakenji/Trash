@@ -28,4 +28,9 @@
         Dim frm As New Form_006PDFScrollCapture()
         frm.Show(Me)
     End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+        Dim frm As New Form_007WndProc()
+        frm.Show(Me)
+    End Sub
 End Class

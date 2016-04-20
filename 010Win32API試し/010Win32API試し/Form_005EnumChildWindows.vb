@@ -374,6 +374,56 @@ Public Class Form_005EnumChildWindows
         User32.GetWindowInfo(hWnd, info)
 
     End Sub
+
+    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RichTextBox1.TextChanged
+
+    End Sub
+
+    Protected Overrides Sub WndProc(ByRef m As Message)
+
+        Select Case m.Msg
+            Case User32.WM_MOUSEHWHEEL
+                Debug.WriteLine("MouseWheel")
+
+        End Select
+
+
+
+
+        MyBase.WndProc(m)
+    End Sub
+
+    Private Sub Form_005EnumChildWindows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Form_005EnumChildWindows_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+        Debug.WriteLine("MouseWheel")
+
+    End Sub
+
+    Private wpd As User32.WndProcDelegate
+    Private mPrevWindowProc As IntPtr
+
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        Dim hWnd As IntPtr = CType(Me.TextBox2.Text, IntPtr)
+
+        wpd = AddressOf WindowProc
+
+        mPrevWindowProc = CType(User32.SetWindowLong(hWnd, User32.WindowLongFlags.GWL_WNDPROC, Marshal.GetFunctionPointerForDelegate(wpd)), IntPtr)
+
+
+    End Sub
+
+    Private Function WindowProc(ByVal hWnd As IntPtr, ByVal msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+
+        Debug.WriteLine(String.Format("hWnd={0} msg={1} wParam={2} lParam={3}", hWnd, msg, wParam, lParam))
+
+        Return CType(User32.CallWindowProc(mPrevWindowProc, hWnd, CInt(msg), CInt(wParam), CInt(lParam)), IntPtr)
+
+    End Function
+
 End Class
 
 

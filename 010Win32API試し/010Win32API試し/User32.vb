@@ -466,4 +466,43 @@ Public Class User32
         Dim wCreatorVersion As Short
     End Structure
 
+
+    '<DllImport("user32.dll")>
+    'Public Shared Function CallWindowProc(lpPrevWndFunc As WndProcDelegate, hWnd As IntPtr, Msg As UInteger, wParam As IntPtr, lParam As IntPtr) As IntPtr
+    'End Function
+
+    Public Delegate Function WndProcDelegate(ByVal hWnd As IntPtr, ByVal msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+
+
+    <DllImport("user32.dll", CharSet:=CharSet.Auto)>
+    Public Shared Function GetClientRect(ByVal hWnd As System.IntPtr,
+   ByRef lpRECT As RECT) As Integer
+        ' Leave function empty     
+    End Function
+
+
+    ''' <summary>
+    ''' Changes an attribute of the specified window. The function also sets the 32-bit (long) value at the specified offset into the extra window memory.
+    ''' </summary>
+    ''' <param name="hWnd">A handle to the window and, indirectly, the class to which the window belongs..</param>
+    ''' <param name="nIndex">The zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size of an integer. To set any other value, specify one of the following values: GWL_EXSTYLE, GWL_HINSTANCE, GWL_ID, GWL_STYLE, GWL_USERDATA, GWL_WNDPROC </param>
+    ''' <param name="dwNewLong">The replacement value.</param>
+    ''' <returns>If the function succeeds, the return value is the previous value of the specified 32-bit integer. 
+    ''' If the function fails, the return value is zero. To get extended error information, call GetLastError. </returns>
+    <DllImport("user32.dll")>
+    Public Shared Function SetWindowLong(hWnd As IntPtr,
+         <MarshalAs(UnmanagedType.I4)> nIndex As WindowLongFlags,
+         dwNewLong As IntPtr) As Integer
+    End Function
+
+    Public Declare Function SetWindowLong _
+    Lib "user32.dll" Alias "SetWindowLongA" (
+        ByVal hWnd As IntPtr,
+        ByVal nIndex As Int32,
+        ByVal dwNewLong As IntPtr) As Int32
+
+    Public Declare Function CallWindowProc Lib "user32" Alias "CallWindowProcA" _
+    (ByVal lpPrevWndFunc As IntPtr, ByVal hWnd As IntPtr, ByVal msg As Integer,
+     ByVal wParam As Integer, ByVal lParam As Integer) As Integer
+
 End Class

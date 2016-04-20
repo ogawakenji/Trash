@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_007WndProc.Designer.vb">
+      <DependentUpon>Form_007WndProc.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form_007WndProc.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form_006PDFScrollCapture.Designer.vb">
       <DependentUpon>Form_006PDFScrollCapture.vb</DependentUpon>
     </Compile>
@@ -133,6 +139,9 @@
     <Compile Include="User32.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form_007WndProc.resx">
+      <DependentUpon>Form_007WndProc.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_006PDFScrollCapture.resx">
       <DependentUpon>Form_006PDFScrollCapture.vb</DependentUpon>
     </EmbeddedResource>

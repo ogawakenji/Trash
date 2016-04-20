@@ -152,6 +152,7 @@ Public Class Form_006PDFScrollCapture
                     End If
                 Next
                 If scrollhWnd <> CType(0, IntPtr) Then
+                    Me.txtScrollhWnd.Text = scrollhWnd.ToString()
                     Exit For
                 End If
             Next
@@ -482,7 +483,7 @@ Public Class Form_006PDFScrollCapture
         Dim winDC As IntPtr = User32.GetWindowDC(hWnd)
         'ウィンドウの大きさを取得
         Dim winRect As New User32.RECT
-        User32.GetWindowRect(hWnd, winRect)
+        User32.GetClientRect(hWnd, winRect)
         'Bitmapの作成
         Dim bmp As New Bitmap(winRect.right - winRect.left,
             winRect.bottom - winRect.top)
@@ -540,7 +541,7 @@ Public Class Form_006PDFScrollCapture
         Dim winDC As IntPtr = User32.GetWindowDC(hWnd)
         'ウィンドウの大きさを取得
         Dim winRect As New User32.RECT
-        User32.GetWindowRect(hWnd, winRect)
+        User32.GetClientRect(hWnd, winRect)
         'Bitmapの作成
         Dim bmp As New Bitmap(winRect.right - winRect.left, height)
         'Graphicsの作成
