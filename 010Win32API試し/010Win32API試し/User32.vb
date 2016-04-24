@@ -505,4 +505,49 @@ Public Class User32
     (ByVal lpPrevWndFunc As IntPtr, ByVal hWnd As IntPtr, ByVal msg As Integer,
      ByVal wParam As Integer, ByVal lParam As Integer) As Integer
 
+
+    <System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)>
+    Public Structure TEXTMETRIC
+        Public tmHeight As Integer
+        Public tmAscent As Integer
+        Public tmDescent As Integer
+        Public tmInternalLeading As Integer
+        Public tmExternalLeading As Integer
+        Public tmAveCharWidth As Integer
+        Public tmMaxCharWidth As Integer
+        Public tmWeight As Integer
+        Public tmOverhang As Integer
+        Public tmDigitizedAspectX As Integer
+        Public tmDigitizedAspectY As Integer
+        <System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)>
+        Public tmFirstChar As String
+        <System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)>
+        Public tmLastChar As String
+        <System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)>
+        Public tmDefaultChar As String
+        <System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst:=1)>
+        Public tmBreakChar As String
+        Public tmItalic As Byte
+        Public tmUnderlined As Byte
+        Public tmStruckOut As Byte
+        Public tmPitchAndFamily As Byte
+        Public tmCharSet As Byte
+    End Structure
+
+    <DllImport("gdi32.dll")>
+    Public Shared Function GetTextMetrics(ByVal hdc As IntPtr, ByRef lptm As TEXTMETRIC) As Integer
+
+    End Function
+
+    Public Declare Function GetOutlineTextMetricsA Lib "gdi32" (
+     ByVal hdc As IntPtr,
+     ByVal cbData As Integer,
+     ByVal lpOtm As IntPtr
+     ) As Integer
+
+    Public Declare Function SelectObject Lib "gdi32" (
+     ByVal hdc As IntPtr,
+     ByVal hObj As IntPtr
+     ) As IntPtr
+
 End Class

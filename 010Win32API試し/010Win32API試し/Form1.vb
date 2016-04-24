@@ -33,4 +33,9 @@
         Dim frm As New Form_007WndProc()
         frm.Show(Me)
     End Sub
+
+    Private Sub Label7_Click(sender As Object, e As EventArgs) Handles Label7.Click
+        Dim frm As New Form_008ScrollCaptureCompare()
+        frm.Show(Me)
+    End Sub
 End Class

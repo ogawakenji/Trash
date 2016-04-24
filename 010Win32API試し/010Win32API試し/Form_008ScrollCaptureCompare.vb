@@ -1,8 +1,9 @@
 ﻿
 
+Imports System.Drawing.Imaging
 Imports System.Runtime.InteropServices
 
-Public Class Form_006PDFScrollCapture
+Public Class Form_008ScrollCaptureCompare
 
     Private hWndList As New List(Of hWndEntity)
     Private childhWndList As New List(Of IntPtr)
@@ -633,6 +634,220 @@ Public Class Form_006PDFScrollCapture
 
         'Next
     End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        If String.IsNullOrEmpty(Me.txtCapturehWnd.Text) Then
+            Return
+        End If
+
+        If String.IsNullOrEmpty(Me.txtRoothWnd.Text) Then
+            Return
+        End If
+
+        Dim rect As User32.RECT
+
+        Dim hWnd As IntPtr = CType(Me.txtCapturehWnd.Text, IntPtr)
+        User32.SetForegroundWindow(hWnd)
+        User32.GetWindowRect(hWnd, rect)
+        User32.SetCursorPos(rect.left, rect.top)
+
+
+        PictureBox1.Image = CapturehWnd(hWnd)
+
+        '' ==================================================
+        '' キャプチャウィンドウハンドルにマウスホイールのメッセージを送る
+        '' ==================================================
+        User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+
+        Threading.Thread.Sleep(1000)
+        PictureBox2.Image = CapturehWnd(hWnd)
+
+
+        ''' ============================================================
+        ''' ルートのウィンドウハンドルの子ウィンドウハンドルを取得する
+        ''' ============================================================
+        'Dim roothWnd As IntPtr = CType(Me.txtRoothWnd.Text, IntPtr)
+        'Dim lparam As Integer
+        'childhWndList.Clear()
+        'User32.EnumChildWindows(roothWnd, AddressOf EnumChildProc, lparam)
+
+
+        ''' ============================================================
+        ''' スクロールをもつウィンドウハンドルを探す
+        ''' ============================================================
+        'Dim scrollhWnd As IntPtr = Nothing
+        'scrollhWndList.Clear()
+        'oneScrollList.Clear()
+
+        ''' ルートウィンドウからスクロールをもつウィンドウハンドルを探す
+        'AddScrollhWndList(roothWnd, scrollhWndList)
+
+        ''' 子ウィンドウハンドルからスクロールをもつウィンドウハンドルを探す
+        'For Each childhWnd In childhWndList
+        '    AddScrollhWndList(childhWnd, scrollhWndList)
+        'Next
+
+        'Dim hasScroll As Boolean = True
+        'If scrollhWndList.Count = 0 Then
+        '    '' スクロールをもつウィンドウハンドルが存在しない。
+        '    hasScroll = False
+        'End If
+
+
+        ''' ==============================
+        ''' キャプチャするウィンドウハンドルの画像を取得
+        ''' ==============================
+        'Dim baseImage As Image = CapturehWnd(hWnd)
+
+
+        ''' ==============================
+        ''' スクロールをもつウィンドウハンドルがある場合の処理
+        ''' ==============================
+        'If hasScroll = False Then
+        '    '' スクロールなければ次へ
+        'Else
+        '    '' スクロールがあれば以下処理する
+        '    Dim scrollSi As User32.SCROLLINFO
+
+        '    '' ==================================================
+        '    '' キャプチャウィンドウハンドルにマウスホイールのメッセージを送る
+        '    '' ==================================================
+        '    User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+
+        '    '' ルートウィンドウからスクロールをもつウィンドウハンドルを探す
+        '    AddScrollhWndList(roothWnd, oneScrollList)
+
+        '    '' 子ウィンドウハンドルからスクロールをもつウィンドウハンドルを探す
+        '    For Each childhWnd In childhWndList
+        '        AddScrollhWndList(childhWnd, oneScrollList)
+        '    Next
+
+        '    '' 変動があるウィンドウハンドルを探す
+        '    For Each sl In scrollhWndList
+        '        For Each osl In oneScrollList
+        '            If sl.hWnd = osl.hWnd Then
+        '                If sl.scrollInfo.nPos <> osl.scrollInfo.nPos Then
+        '                    scrollhWnd = sl.hWnd
+        '                    Exit For
+        '                End If
+        '            End If
+        '        Next
+        '        If scrollhWnd <> CType(0, IntPtr) Then
+        '            Me.txtScrollhWnd.Text = scrollhWnd.ToString()
+        '            Exit For
+        '        End If
+        '    Next
+
+        '    Dim tmpSi As User32.SCROLLINFO = Nothing
+
+
+        '    ' 移動量を取得
+        '    Dim scrollHeight As Integer = 0
+        '    For Each sl In scrollhWndList
+        '        If sl.hWnd = scrollhWnd Then
+        '            scrollHeight = sl.scrollInfo.nPos
+        '        End If
+        '    Next
+        '    For Each osl In oneScrollList
+        '        If osl.hWnd = scrollhWnd Then
+        '            scrollHeight = osl.scrollInfo.nPos - scrollHeight
+        '            tmpSi = osl.scrollInfo
+        '        End If
+        '    Next
+        '    If scrollHeight = 0 Then
+        '        Me.PictureBox1.Image = baseImage
+
+        '    Else
+
+        '        'Dim mixImage As Image = CaptureScrollHeight(hWnd, scrollHeight)
+        '        Dim mixImage As Image = CaptureScrollHeight(hWnd, 48)
+
+        '        Dim newImage As Image = ImageMix(baseImage, mixImage)
+
+
+        '        While tmpSi.nPos < (tmpSi.nMax - tmpSi.nMin + 1) - tmpSi.nPage
+        '            scrollHeight = tmpSi.nPos
+
+        '            User32.SendMessage(hWnd, User32.WM_MOUSEWHEEL, CType((120 * -1) << 16, IntPtr), IntPtr.Zero)
+
+        '            GetScrollInfo(scrollhWnd, tmpSi)
+        '            scrollHeight = tmpSi.nPos - scrollHeight
+
+        '            'mixImage = CaptureScrollHeight(hWnd, scrollHeight)
+        '            mixImage = CaptureScrollHeight(hWnd, 48)
+        '            newImage = ImageMix(newImage, mixImage)
+
+        '            'Threading.Thread.Sleep(100)
+        '        End While
+
+
+        '        Me.PictureBox1.Image = newImage
+        '    End If
+
+
+
+
+
+        'End If
+
+
+
+    End Sub
+
+    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
+
+        For i As Integer = 0 To PictureBox1.Image.Height - 1
+
+            Debug.WriteLine(String.Format("{0} {1}", ImageCompare(PictureBox1.Image, PictureBox2.Image, i), i))
+
+        Next
+
+
+    End Sub
+
+    Private Function ImageCompare(image1 As Image, image2 As Image, minusHeight As Integer) As Boolean
+
+        Dim img1 As Bitmap = CType(image1, Bitmap)
+        Dim img2 As Bitmap = CType(image2, Bitmap)
+
+        If img1.Width <> img2.Width OrElse img1.Height <> img2.Height Then
+            Return False
+        End If
+
+        Dim bd1 As BitmapData = img1.LockBits(New Rectangle(0, 0 + minusHeight, img1.Width, img1.Height - minusHeight), ImageLockMode.ReadOnly, img1.PixelFormat)
+        Dim bd2 As BitmapData = img2.LockBits(New Rectangle(0, 0, img2.Width, img2.Height - minusHeight), ImageLockMode.ReadOnly, img2.PixelFormat)
+
+        If bd1.Stride <> bd2.Stride Then
+            img1.UnlockBits(bd1)
+            img2.UnlockBits(bd2)
+            Return False
+        End If
+
+        Dim bsize As Integer = bd1.Stride * (img1.Height - minusHeight)
+        Dim byte1 As Byte() = New Byte(bsize) {}
+        Dim byte2 As Byte() = New Byte(bsize) {}
+
+        Marshal.Copy(bd1.Scan0, byte1, 0, bsize)
+        Marshal.Copy(bd2.Scan0, byte2, 0, bsize)
+
+        img1.UnlockBits(bd1)
+        img2.UnlockBits(bd2)
+
+        Dim md5 As System.Security.Cryptography.MD5CryptoServiceProvider = New System.Security.Cryptography.MD5CryptoServiceProvider()
+
+        Dim hash1 As Byte() = md5.ComputeHash(byte1)
+        Dim hash2 As Byte() = md5.ComputeHash(byte2)
+
+        Return hash1.SequenceEqual(hash2)
+
+    End Function
+
+
+
+
+
 End Class
 
 

@@ -260,6 +260,10 @@ Public Class Form_005EnumChildWindows
     Private Function CapturehWnd(hWnd As IntPtr) As Bitmap
         ' 指定ウィンドウハンドルの画像を取得
         Dim winDC As IntPtr = User32.GetWindowDC(hWnd)
+
+
+
+
         'ウィンドウの大きさを取得
         Dim winRect As New User32.RECT
         User32.GetWindowRect(hWnd, winRect)
@@ -270,6 +274,11 @@ Public Class Form_005EnumChildWindows
         Dim g As Graphics = Graphics.FromImage(bmp)
         'Graphicsのデバイスコンテキストを取得
         Dim hDC As IntPtr = g.GetHdc()
+
+        Dim textmetric As New User32.TEXTMETRIC
+        User32.GetTextMetrics(hDC, textmetric)
+
+
         'Bitmapに画像をコピーする
         User32.BitBlt(hDC, 0, 0, bmp.Width, bmp.Height, winDC, 0, 0, User32.SRCCOPY)
         '解放
