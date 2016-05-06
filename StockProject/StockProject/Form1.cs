@@ -149,6 +149,8 @@ namespace StockProject
             }
 
 
+            Utility.FinanceUtil finance = new Utility.FinanceUtil();
+            dividendEntityBindingSource.DataSource = finance.GetDividendEntityList();
 
 
 
