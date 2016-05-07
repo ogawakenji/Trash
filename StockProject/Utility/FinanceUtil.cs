@@ -13,7 +13,7 @@ namespace Utility
 {
     public class FinanceUtil
     {
-        public List<DividendEntity > GetDividendEntityList()
+        public List<DividendEntity> GetDividendEntityList()
         {
             List<DividendEntity> list = new List<DividendEntity>() ;
 
@@ -22,12 +22,6 @@ namespace Utility
 
             string url = "http://info.finance.yahoo.co.jp/ranking/?kd=8&tm=d&vl=a&mk=1&p=1";
             SetDividendEntityList(url, list);
-
-
-
-
-
-
             return list;
         }
 
@@ -87,6 +81,7 @@ namespace Utility
                             break;
                         case 2:
                             divEntity .StockCode = Convert.ToInt32(q2.Value);
+                            divEntity.DetailUrl = q2.Element("a").FirstAttribute.Value;
                             break;
                         case 3:
                             break;
@@ -114,6 +109,7 @@ namespace Utility
                             break;
 
                     }
+
                     i++;
 
                     if (exitFor)
@@ -121,11 +117,11 @@ namespace Utility
                         break;
                     }
 
-                    Console.WriteLine(q2.Value);
                 }
 
                 if (divEntity .Order != 0 )
                 {
+                    // 配当利回りの情報をリストに追加
                     list.Add(divEntity);
                 }
 
@@ -133,21 +129,20 @@ namespace Utility
 
             if (nextUrl == "")
             {
+                // 次のURLがなければ処理終了
                 return;
             }
             else
             {
+                // 次のURLがあれば再帰呼び出し
                 SetDividendEntityList(nextUrl, list);
             }
-
-
         }
-
-
-
-
     }
 
+    /// <summary>
+    /// 配当利回り
+    /// </summary>
     public class DividendEntity
     {
         public int Order { get; set; }
@@ -156,6 +151,7 @@ namespace Utility
         public string CompanyName { get; set; }
         public decimal Dividend { get; set; }
         public decimal DividendYield { get; set; }
+        public string DetailUrl { get; set; }
     }
 
 

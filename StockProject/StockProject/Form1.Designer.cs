@@ -42,6 +42,7 @@
             this.companyNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dividendDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dividendYieldDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.detailUrlDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dividendEntityBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -104,7 +105,8 @@
             this.marketDataGridViewTextBoxColumn,
             this.companyNameDataGridViewTextBoxColumn,
             this.dividendDataGridViewTextBoxColumn,
-            this.dividendYieldDataGridViewTextBoxColumn});
+            this.dividendYieldDataGridViewTextBoxColumn,
+            this.detailUrlDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.dividendEntityBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(394, 56);
             this.dataGridView1.Name = "dataGridView1";
@@ -152,6 +154,12 @@
             this.dividendYieldDataGridViewTextBoxColumn.HeaderText = "DividendYield";
             this.dividendYieldDataGridViewTextBoxColumn.Name = "dividendYieldDataGridViewTextBoxColumn";
             // 
+            // detailUrlDataGridViewTextBoxColumn
+            // 
+            this.detailUrlDataGridViewTextBoxColumn.DataPropertyName = "DetailUrl";
+            this.detailUrlDataGridViewTextBoxColumn.HeaderText = "DetailUrl";
+            this.detailUrlDataGridViewTextBoxColumn.Name = "detailUrlDataGridViewTextBoxColumn";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -181,13 +189,14 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource dividendEntityBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn orderDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stockCodeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn marketDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn companyNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dividendDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dividendYieldDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource dividendEntityBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn detailUrlDataGridViewTextBoxColumn;
     }
 }
 
