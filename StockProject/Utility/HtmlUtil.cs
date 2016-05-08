@@ -286,53 +286,6 @@ namespace Utility
             }
         }
 
-
-        public List<Test> GetListTest()
-        {
-            List<Test> list = new List<Test>() ;
-
-            XDocument xml;
-
-            xml = ParseHtml(GetHtml("http://info.finance.yahoo.co.jp/ranking/?kd=8&tm=d&vl=a&mk=1&p=1"));
-
-            var ns = xml.Root.Name.Namespace;
-
-            var q =
-                from s in xml.Descendants(ns + "td")
-                select s;
-
-            foreach (var s in q)
-            {
-                Console.WriteLine(s.Value);
-            }
-
-
-
-
-            return list;
-
-
-        }
-
-
-    }
-
-    public class Test
-    {
-        public Test()
-        {
-
-        }
-        string col1 { get; set; }
-        string col2 { get; set; }
-        string col3 { get; set; }
-        string col4 { get; set; }
-        string col5 { get; set; }
-        string col6 { get; set; }
-        string col7 { get; set; }
-        string col8 { get; set; }
-        string col9 { get; set; }
-        string col10 { get; set; }
     }
 
 }
