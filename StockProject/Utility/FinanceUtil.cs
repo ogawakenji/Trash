@@ -13,9 +13,12 @@ namespace Utility
 {
     public class FinanceUtil
     {
+
+        #region 配当利回り
+
         public List<DividendEntity> GetDividendEntityList()
         {
-            List<DividendEntity> list = new List<DividendEntity>() ;
+            List<DividendEntity> list = new List<DividendEntity>();
 
             // Yahooファイナンスの配当利回り(会社予想)から情報を取得する
             // http://info.finance.yahoo.co.jp/ranking/?kd=8&tm=d&vl=a&mk=1&p=1
@@ -35,7 +38,7 @@ namespace Utility
 
             // 次へのページが存在するか確認する
             string nextUrl = "";
-            var query1 = 
+            var query1 =
                 from q1 in xdoc.Descendants(ns + "ul")
                 where (string)q1.Attribute("class") == "ymuiPagingBottom clearFix"
                 select q1;
@@ -72,7 +75,7 @@ namespace Utility
                     switch (i)
                     {
                         case 1:
-                            if (q2.Value =="順位")
+                            if (q2.Value == "順位")
                             {
                                 exitFor = true;
                                 break;
@@ -80,7 +83,7 @@ namespace Utility
                             divEntity.Order = Convert.ToInt32(q2.Value);
                             break;
                         case 2:
-                            divEntity .StockCode = Convert.ToInt32(q2.Value);
+                            divEntity.StockCode = Convert.ToInt32(q2.Value);
                             divEntity.DetailUrl = q2.Element("a").FirstAttribute.Value;
                             break;
                         case 3:
@@ -119,7 +122,7 @@ namespace Utility
 
                 }
 
-                if (divEntity .Order != 0 )
+                if (divEntity.Order != 0)
                 {
                     // 配当利回りの情報をリストに追加
                     list.Add(divEntity);
@@ -138,6 +141,119 @@ namespace Utility
                 SetDividendEntityList(nextUrl, list);
             }
         }
+
+        #endregion
+
+        #region 株価
+        private string YAHOO_HISTORY = "http://info.finance.yahoo.co.jp/history/?code={0}&sy={1}&sm={2}&sd={3}&ey={4}&em={5}&ed={6}&tm=d";
+
+        public List<StockPriceEntity> GetStockPriceEntityList(int StockCode )
+        {
+            List<StockPriceEntity> list = new List<StockPriceEntity>();
+
+            // 3ヶ月分の株価
+            string url = "";
+            DateTime beginDate = DateTime.Now.AddMonths(-3);
+            DateTime endDate = DateTime.Now;
+            url = string.Format(YAHOO_HISTORY, StockCode, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetStockPriceEntityList(url, list);
+
+            return list;
+
+        }
+
+        private void SetStockPriceEntityList(string url,List<StockPriceEntity> list)
+        {
+            HtmlUtil htmlUtil = new HtmlUtil();
+
+            // urlからWebサイトに接続し情報を取得する
+            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            var ns = xdoc.Root.Name.Namespace;
+
+            // 次へのページが存在するか確認する
+            string nextUrl = "";
+            var query1 =
+                from q1 in xdoc.Descendants(ns + "ul")
+                where (string)q1.Attribute("class") == "ymuiPagingBottom clearFix"
+                select q1;
+
+            foreach (var q in query1.Descendants("a"))
+            {
+                if (q.Value == "次へ")
+                {
+                    nextUrl = q.Attribute("href").Value;
+                }
+            }
+
+            // 配当利回りを取得する
+            var query2 =
+                from q2 in xdoc.Descendants(ns + "table")
+                where (string)q2.Attribute("class") == "boardFin yjSt marB6"
+                select q2.Descendants(ns + "tr");
+
+            var company =
+                from c in xdoc.Descendants(ns + "h1")
+                select c;
+
+            var code =
+                from c in xdoc.Descendants(ns + "dt")
+                select c;
+
+
+            StockPriceEntity stockPrice;
+
+
+            foreach (var q1 in query2)
+            {
+                foreach (var q2 in q1)
+                {
+                    if (q2.Elements() == null)
+                    {
+                        continue;
+                    }
+                    if (q2.Elements().First().Value == "日付")
+                    {
+                        continue;
+                    }
+
+                    stockPrice = new StockPriceEntity();
+                    stockPrice.StockCode              = Convert.ToInt32(code.First().Value);
+                    stockPrice.CompanyName            = company.First().Value;
+                    stockPrice.StockDate              = Convert.ToDateTime(q2.Elements().ElementAt(0).Value);
+                    stockPrice.OpeningPrice           = Convert.ToDecimal(q2.Elements().ElementAt(1).Value);
+                    stockPrice.HighPrice              = Convert.ToDecimal(q2.Elements().ElementAt(2).Value);
+                    stockPrice.LowPrice               = Convert.ToDecimal(q2.Elements().ElementAt(3).Value);
+                    stockPrice.ClosingPrice           = Convert.ToDecimal(q2.Elements().ElementAt(4).Value);
+                    stockPrice.TradeVolume            = Convert.ToDecimal(q2.Elements().ElementAt(5).Value);
+                    stockPrice.AdjustmentClosingPrice = Convert.ToDecimal(q2.Elements().ElementAt(6).Value);
+
+
+
+                    list.Add(stockPrice);
+
+                }
+
+
+
+            }
+
+            if (nextUrl == "")
+            {
+                // 次のURLがなければ処理終了
+                return;
+            }
+            else
+            {
+                // 次のURLがあれば再帰呼び出し
+                SetStockPriceEntityList(nextUrl, list);
+            }
+        }
+
+
+        #endregion
+
     }
 
     /// <summary>
@@ -152,6 +268,20 @@ namespace Utility
         public decimal Dividend { get; set; }
         public decimal DividendYield { get; set; }
         public string DetailUrl { get; set; }
+    }
+
+    public class StockPriceEntity
+    {
+        public int StockCode { get; set; }
+        public string CompanyName { get; set; }
+        public DateTime  StockDate { get; set; }
+        public decimal OpeningPrice { get; set; }
+        public decimal HighPrice { get; set; }
+        public decimal LowPrice { get; set; }
+        public decimal ClosingPrice { get; set; }
+        public decimal TradeVolume { get; set; }
+        public decimal AdjustmentClosingPrice { get; set; }
+
     }
 
 

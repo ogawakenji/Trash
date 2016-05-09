@@ -171,7 +171,13 @@ namespace StockProject
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
 
+            Utility.FinanceUtil finance = new Utility.FinanceUtil();
+            stockPriceEntityBindingSource.DataSource = finance.GetStockPriceEntityList(Convert.ToInt32(txtStockCode.Text)) ;
+
+        }
     }
 
 
