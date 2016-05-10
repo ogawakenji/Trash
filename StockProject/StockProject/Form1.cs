@@ -177,6 +177,8 @@ namespace StockProject
             Utility.FinanceUtil finance = new Utility.FinanceUtil();
             stockPriceEntityBindingSource.DataSource = finance.GetStockPriceEntityList(Convert.ToInt32(txtStockCode.Text)) ;
 
+            finance.GetProfileEntityList(Convert.ToInt32(txtStockCode.Text));
+
         }
     }
 
