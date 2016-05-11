@@ -257,9 +257,9 @@ namespace Utility
         #region 株価
         private string YAHOO_PROFILE = "http://stocks.finance.yahoo.co.jp/stocks/profile/?code={0}";
 
-        public List<StockPriceEntity> GetProfileEntityList(int StockCode)
+        public List<ProfileEntity> GetProfileEntityList(int StockCode)
         {
-            List<StockPriceEntity> list = new List<StockPriceEntity>();
+            List<ProfileEntity> list = new List<ProfileEntity>();
 
             // 3ヶ月分の株価
             string url = "";
@@ -277,7 +277,19 @@ namespace Utility
                 from q1 in xdoc.Descendants(ns + "tr")
                 select q1;
 
+            var company =
+                from c in xdoc.Descendants(ns + "h1")
+                select c;
+
+            var code =
+                from c in xdoc.Descendants(ns + "dt")
+                select c;
+
+
             ProfileEntity profile = new ProfileEntity();
+
+            profile.StockCode = Convert.ToInt32(code.First().Value);
+            profile.CompanyName = company.First().Value;
 
 
             foreach (var q1 in query1)
@@ -291,52 +303,112 @@ namespace Utility
                         switch (elm.Value)
                         {
                             case "特色":
-                                profile.Feature = elm.Parent.Elements("td").ElementAt (0).Value;
+                                profile.Feature = elm.Parent.Elements("td").ElementAt(0).Value;
                                 break;
 
                             case "連結事業":
+                                profile.ConcatenationBusiness = elm.Parent.Elements("td").ElementAt(0).Value;
                                 break;
 
                             case "本社所在地":
+                                profile.HeadquartersLocation = elm.Parent.Elements("td").ElementAt(0).Value;
                                 break;
 
                             case "業種分類":
+                                profile.IndustriesCategory = elm.Parent.Elements("td").ElementAt(0).Value;
                                 break;
 
                             case "設立年月日":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value))
+                                {
+                                    profile.FoundationDate = null;
+                                }
+                                else
+                                {
+                                    profile.FoundationDate = Convert.ToDateTime(elm.Parent.Elements("td").ElementAt(0).Value);
+                                }
                                 break;
 
                             case "市場名":
+                                profile.MarketName = elm.Parent.Elements("td").ElementAt(0).Value;
                                 break;
 
                             case "上場年月日":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value))
+                                {
+                                    profile.ListedDate = null;
+                                }
+                                else
+                                {
+                                    profile.ListedDate = Convert.ToDateTime(elm.Parent.Elements("td").ElementAt(0).Value);
+                                }
                                 break;
 
                             case "決算":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value))
+                                {
+                                    profile.ClosingMonth = null;
+                                }
+                                else
+                                {
+                                    profile.ClosingMonth = Convert.ToDecimal(elm.Parent.Elements("td").ElementAt(0).Value.Substring(0,2).Replace("月",""));
+                                }
                                 break;
 
                             case "単元株数":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value.Replace("単元株制度なし", "")))
+                                {
+                                    profile.UnitShares = null;
+                                }
+                                else
+                                {
+                                    profile.UnitShares = Convert.ToDecimal(elm.Parent.Elements("td").ElementAt(0).Value.Replace("単元株制度なし", "").Replace("株",""));
+                                }
                                 break;
 
                             case "従業員数（単独）":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value.Replace("人", "").Replace("-", "")))
+                                {
+                                    profile.EmployeeNumberSingle = null;
+                                }
+                                else
+                                {
+                                    profile.EmployeeNumberSingle = Convert.ToDecimal(elm.Parent.Elements("td").ElementAt(0).Value.Replace("人", "").Replace("-", ""));
+                                }
                                 break;
 
-                            case "従業員数（連結)":
+                            case "従業員数（連結）":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(1).Value.Replace("人", "").Replace("-", "")))
+                                {
+                                    profile.EmployeeNumberConcatenation = null;
+                                }
+                                else
+                                {
+                                    profile.EmployeeNumberConcatenation = Convert.ToDecimal(elm.Parent.Elements("td").ElementAt(1).Value.Replace("人", "").Replace("-", ""));
+                                }
                                 break;
 
                             case "平均年収":
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(1).Value.Replace("千円", "").Replace("-", "")))
+                                {
+                                    profile.AvarageAnnualIncome = null;
+                                }
+                                else
+                                {
+                                    profile.AvarageAnnualIncome = Convert.ToDecimal(elm.Parent.Elements("td").ElementAt(1).Value.Replace("千円", "").Replace("-", "")) * 1000;
+                                }
                                 break;
-
 
                         }
 
-
-
-
-
-
                     }
                 }
+
+            }
+
+            if (string.IsNullOrEmpty(profile.Feature) == false)
+            {
+                list.Add(profile);
             }
 
             return list;
@@ -380,18 +452,20 @@ namespace Utility
 
     public class ProfileEntity
     {
+        public int StockCode { get; set; }
+        public string CompanyName { get; set; }
         public string Feature { get; set; }                        // 特色
         public string ConcatenationBusiness { get; set; }          // 連結事業
         public string HeadquartersLocation { get; set; }           // 本社所在地
         public string IndustriesCategory { get; set; }             // 業種分類
-        public DateTime FoundationDate { get; set; }               // 設立年月日
+        public DateTime? FoundationDate { get; set; }               // 設立年月日
         public string MarketName { get; set; }                     // 市場名
-        public DateTime ListedDate { get; set; }                   // 上場年月日
-        public decimal ClosingMonth { get; set; }                  // 決算
-        public decimal UnitShares { get; set; }                    // 単元株数
-        public decimal EmployeeNumberSingle { get; set; }          // 従業員数（単独）
-        public decimal EmployeeNumberConcatenation { get; set; }   // 従業員数（連結）
-        public decimal AvarageAnnualIncome { get; set; }           // 平均年収
+        public DateTime? ListedDate { get; set; }                   // 上場年月日
+        public decimal? ClosingMonth { get; set; }                  // 決算
+        public decimal? UnitShares { get; set; }                    // 単元株数
+        public decimal? EmployeeNumberSingle { get; set; }          // 従業員数（単独）
+        public decimal? EmployeeNumberConcatenation { get; set; }   // 従業員数（連結）
+        public decimal? AvarageAnnualIncome { get; set; }           // 平均年収
 
     }
 
