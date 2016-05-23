@@ -180,6 +180,16 @@ namespace StockProject
             profileEntityBindingSource .DataSource = finance.GetProfileEntityList(Convert.ToInt32(txtStockCode.Text));
 
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                db.DBUpdate("create table personal(id integer, name text);", null);
+
+
+            }
+        }
     }
 
 
