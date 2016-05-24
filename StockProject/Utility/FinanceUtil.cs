@@ -164,6 +164,21 @@ namespace Utility
 
         }
 
+        public List<StockPriceEntity> GetStockPriceEntityList(int StockCode ,DateTime beginDate,DateTime endDate)
+        {
+            List<StockPriceEntity> list = new List<StockPriceEntity>();
+
+            // 3ヶ月分の株価
+            string url = "";
+            url = string.Format(YAHOO_HISTORY, StockCode, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetStockPriceEntityList(url, list);
+
+            return list;
+
+        }
+
         private void SetStockPriceEntityList(string url,List<StockPriceEntity> list)
         {
             HtmlUtil htmlUtil = new HtmlUtil();

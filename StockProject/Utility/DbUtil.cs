@@ -75,6 +75,21 @@ namespace Utility
             }
         }
 
+        public void DBExecuteSQL(string SqlString)
+        {
+            try
+            {
+                _conn.Execute(SqlString);
+            }
+            catch (Exception e)
+            {
+                _tran.Rollback();
+                _tran.Dispose();
+                _tran = null;
+                throw e;
+            }
+        }
+
         private void DBCommit()
         {
             if (!_tran.IsEmpty())
