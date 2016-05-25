@@ -38,7 +38,7 @@
             // 
             this.txtStockCode.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txtStockCode.Location = new System.Drawing.Point(13, 13);
-            this.txtStockCode.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtStockCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtStockCode.MaxLength = 4;
             this.txtStockCode.Name = "txtStockCode";
             this.txtStockCode.Size = new System.Drawing.Size(82, 37);
@@ -49,7 +49,7 @@
             // 
             this.btnStockPrice.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnStockPrice.Location = new System.Drawing.Point(103, 10);
-            this.btnStockPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStockPrice.Margin = new System.Windows.Forms.Padding(4);
             this.btnStockPrice.Name = "btnStockPrice";
             this.btnStockPrice.Size = new System.Drawing.Size(102, 42);
             this.btnStockPrice.TabIndex = 1;
@@ -59,6 +59,9 @@
             // 
             // dgvStockPrice
             // 
+            this.dgvStockPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvStockPrice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStockPrice.Location = new System.Drawing.Point(13, 59);
             this.dgvStockPrice.Name = "dgvStockPrice";
@@ -75,7 +78,7 @@
             this.Controls.Add(this.btnStockPrice);
             this.Controls.Add(this.txtStockCode);
             this.Font = new System.Drawing.Font("ＭＳ ゴシック", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "StockPrice";
             this.Text = "StockPrice";
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockPrice)).EndInit();

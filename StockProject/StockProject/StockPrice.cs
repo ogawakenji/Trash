@@ -23,10 +23,13 @@ namespace StockProject
             using (Utility.DbUtil db = new Utility.DbUtil())
             {
                 // テーブルを作成
-                List<CntClass> tblLst = db.DBSelect<CntClass>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'stockprice'");
+                List<decimal> tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'stockprice'");
 
-                if (tblLst[0].CNT  ==  0)
+                if (tblLst[0]  >=  0)
                 {
+
+                    db.DBExecuteSQL("DROP TABLE stockprice ");
+
                     string sql = @"create table stockprice
                                   (
                                     StockCode               NUMERIC
@@ -40,11 +43,39 @@ namespace StockProject
                                     ,AdjustmentClosingPrice  NUMERIC
                                   ) ";
                     db.DBExecuteSQL(sql);
-         
+
                 }
 
-                db.DBExecuteSQL("DELETE FROM stockprice ");
 
+
+                List<Utility.StockPriceEntity> list = new List<Utility.StockPriceEntity>();
+
+                Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                list = finance.GetStockPriceEntityList(Convert.ToInt32(txtStockCode.Text),DateTime.Now.AddYears (-1),DateTime.Now );
+
+                string insertSql = @"INSERT INTO stockprice
+                                    ( 
+                                      StockCode             
+                                     ,CompanyName           
+                                     ,StockDate             
+                                     ,OpeningPrice          
+                                     ,HighPrice             
+                                     ,LowPrice              
+                                     ,ClosingPrice          
+                                     ,TradeVolume           
+                                     ,AdjustmentClosingPrice
+                                    ) VALUES (
+                                      :StockCode             
+                                     ,:CompanyName           
+                                     ,:StockDate             
+                                     ,:OpeningPrice          
+                                     ,:HighPrice             
+                                     ,:LowPrice              
+                                     ,:ClosingPrice          
+                                     ,:TradeVolume           
+                                     ,:AdjustmentClosingPrice
+                                    )";
+                db.DBInsert(insertSql, list);
 
                 List<Utility.StockPriceEntity> stockprice = db.DBSelect<Utility.StockPriceEntity>("SELECT * FROM stockprice ");
 
@@ -59,10 +90,6 @@ namespace StockProject
 
 
 
-            List<Utility.StockPriceEntity> list = new List<Utility.StockPriceEntity>();
-
-            Utility.FinanceUtil finance = new Utility.FinanceUtil();
-            list = finance.GetStockPriceEntityList(Convert.ToInt32(txtStockCode.Text));
 
 
 
@@ -70,8 +97,5 @@ namespace StockProject
         }
     }
 
-    public class CntClass
-    {
-        public decimal CNT { get; set; }
-    }
+   
 }
