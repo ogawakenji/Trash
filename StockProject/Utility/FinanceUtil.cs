@@ -80,7 +80,7 @@ namespace Utility
                                 exitFor = true;
                                 break;
                             }
-                            divEntity.Order = Convert.ToInt32(q2.Value);
+                            divEntity.OrderNo = Convert.ToInt32(q2.Value);
                             break;
                         case 2:
                             divEntity.StockCode = Convert.ToInt32(q2.Value);
@@ -122,7 +122,7 @@ namespace Utility
 
                 }
 
-                if (divEntity.Order != 0)
+                if (divEntity.OrderNo != 0)
                 {
                     // 配当利回りの情報をリストに追加
                     list.Add(divEntity);
@@ -202,7 +202,7 @@ namespace Utility
                 }
             }
 
-            // 配当利回りを取得する
+            // 時系列株価情報を取得する
             var query2 =
                 from q2 in xdoc.Descendants(ns + "table")
                 where (string)q2.Attribute("class") == "boardFin yjSt marB6"
@@ -269,7 +269,7 @@ namespace Utility
 
         #endregion
 
-        #region 株価
+        #region 企業情報
         private string YAHOO_PROFILE = "http://stocks.finance.yahoo.co.jp/stocks/profile/?code={0}";
 
         public List<ProfileEntity> GetProfileEntityList(int StockCode)
@@ -442,7 +442,7 @@ namespace Utility
     /// </summary>
     public class DividendEntity
     {
-        public int Order { get; set; }
+        public int OrderNo { get; set; }
         public int StockCode { get; set; }
         public string Market { get; set; }
         public string CompanyName { get; set; }
@@ -451,6 +451,9 @@ namespace Utility
         public string DetailUrl { get; set; }
     }
 
+    /// <summary>
+    /// 株価
+    /// </summary>
     public class StockPriceEntity
     {
         public int StockCode { get; set; }
@@ -465,6 +468,9 @@ namespace Utility
 
     }
 
+    /// <summary>
+    /// 企業情報
+    /// </summary>
     public class ProfileEntity
     {
         public int StockCode { get; set; }

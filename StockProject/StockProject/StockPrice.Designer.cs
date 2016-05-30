@@ -31,6 +31,7 @@
             this.txtStockCode = new System.Windows.Forms.TextBox();
             this.btnStockPrice = new System.Windows.Forms.Button();
             this.dgvStockPrice = new System.Windows.Forms.DataGridView();
+            this.btnDividend = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockPrice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,11 +70,24 @@
             this.dgvStockPrice.Size = new System.Drawing.Size(1038, 567);
             this.dgvStockPrice.TabIndex = 2;
             // 
+            // btnDividend
+            // 
+            this.btnDividend.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDividend.Location = new System.Drawing.Point(213, 10);
+            this.btnDividend.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDividend.Name = "btnDividend";
+            this.btnDividend.Size = new System.Drawing.Size(102, 42);
+            this.btnDividend.TabIndex = 3;
+            this.btnDividend.Text = "配当";
+            this.btnDividend.UseVisualStyleBackColor = true;
+            this.btnDividend.Click += new System.EventHandler(this.btnDividend_Click);
+            // 
             // StockPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1063, 638);
+            this.Controls.Add(this.btnDividend);
             this.Controls.Add(this.dgvStockPrice);
             this.Controls.Add(this.btnStockPrice);
             this.Controls.Add(this.txtStockCode);
@@ -92,5 +106,6 @@
         private System.Windows.Forms.TextBox txtStockCode;
         private System.Windows.Forms.Button btnStockPrice;
         private System.Windows.Forms.DataGridView dgvStockPrice;
+        private System.Windows.Forms.Button btnDividend;
     }
 }
