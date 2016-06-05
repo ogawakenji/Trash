@@ -32,6 +32,7 @@
             this.btnStockPrice = new System.Windows.Forms.Button();
             this.dgvStockPrice = new System.Windows.Forms.DataGridView();
             this.btnDividend = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockPrice)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,11 +83,24 @@
             this.btnDividend.UseVisualStyleBackColor = true;
             this.btnDividend.Click += new System.EventHandler(this.btnDividend_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(323, 10);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 42);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "ドル/円";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // StockPrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1063, 638);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDividend);
             this.Controls.Add(this.dgvStockPrice);
             this.Controls.Add(this.btnStockPrice);
@@ -107,5 +121,6 @@
         private System.Windows.Forms.Button btnStockPrice;
         private System.Windows.Forms.DataGridView dgvStockPrice;
         private System.Windows.Forms.Button btnDividend;
+        private System.Windows.Forms.Button button1;
     }
 }

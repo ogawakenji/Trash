@@ -430,7 +430,129 @@ namespace Utility
 
         }
 
-       
+
+
+        #endregion
+
+        #region 株価
+        private string YAHOO_EXCHANGE_HISTORY = "http://info.finance.yahoo.co.jp/history/?code=USDJPY%3DX&sy={0}&sm={1}&sd={2}&ey={3}&em={4}&ed={5}&tm=d&p=1";
+
+
+        public List<DollarYenEntity> GetDollarYenEntityList()
+        {
+            List<DollarYenEntity> list = new List<DollarYenEntity>();
+
+            // 3ヶ月分の株価
+            string url = "";
+            DateTime beginDate = DateTime.Now.AddMonths(-3);
+            DateTime endDate = DateTime.Now;
+            url = string.Format(YAHOO_EXCHANGE_HISTORY, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetDollarYenEntity(url, list);
+
+            return list;
+
+        }
+
+        public List<DollarYenEntity> GetDollarYenEntityList(DateTime beginDate, DateTime endDate)
+        {
+            List<DollarYenEntity> list = new List<DollarYenEntity>();
+
+            // 3ヶ月分の株価
+            string url = "";
+            url = string.Format(YAHOO_EXCHANGE_HISTORY, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetDollarYenEntity(url, list);
+
+            return list;
+
+        }
+
+        private void SetDollarYenEntity(string url, List<DollarYenEntity> list)
+        {
+            HtmlUtil htmlUtil = new HtmlUtil();
+
+            // urlからWebサイトに接続し情報を取得する
+            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            var ns = xdoc.Root.Name.Namespace;
+
+            // 次へのページが存在するか確認する
+            string nextUrl = "";
+            var query1 =
+                from q1 in xdoc.Descendants(ns + "ul")
+                where (string)q1.Attribute("class") == "ymuiPagingBottom clearFix"
+                select q1;
+
+            foreach (var q in query1.Descendants("a"))
+            {
+                if (q.Value == "次へ")
+                {
+                    nextUrl = q.Attribute("href").Value;
+                }
+            }
+
+            // 時系列株価情報を取得する
+            var query2 =
+                from q2 in xdoc.Descendants(ns + "table")
+                where (string)q2.Attribute("class") == "boardFin yjSt marB6"
+                select q2.Descendants(ns + "tr");
+
+            var company =
+                from c in xdoc.Descendants(ns + "h1")
+                select c;
+
+            var code =
+                from c in xdoc.Descendants(ns + "dt")
+                select c;
+
+
+            DollarYenEntity dollarYen;
+
+
+            foreach (var q1 in query2)
+            {
+                foreach (var q2 in q1)
+                {
+                    if (q2.Elements() == null)
+                    {
+                        continue;
+                    }
+                    if (q2.Elements().First().Value == "日付")
+                    {
+                        continue;
+                    }
+
+                    dollarYen = new DollarYenEntity();
+                    dollarYen.ExchangeDate = Convert.ToDateTime(q2.Elements().ElementAt(0).Value);
+                    dollarYen.OpeningPrice = Convert.ToDecimal(q2.Elements().ElementAt(1).Value);
+                    dollarYen.HighPrice    = Convert.ToDecimal(q2.Elements().ElementAt(2).Value);
+                    dollarYen.LowPrice     = Convert.ToDecimal(q2.Elements().ElementAt(3).Value);
+                    dollarYen.ClosingPrice = Convert.ToDecimal(q2.Elements().ElementAt(4).Value);
+
+
+
+                    list.Add(dollarYen);
+
+                }
+
+
+
+            }
+
+            if (nextUrl == "")
+            {
+                // 次のURLがなければ処理終了
+                return;
+            }
+            else
+            {
+                // 次のURLがあれば再帰呼び出し
+                SetDollarYenEntity(nextUrl, list);
+            }
+        }
+
 
         #endregion
 
@@ -487,6 +609,17 @@ namespace Utility
         public decimal? EmployeeNumberSingle { get; set; }          // 従業員数（単独）
         public decimal? EmployeeNumberConcatenation { get; set; }   // 従業員数（連結）
         public decimal? AvarageAnnualIncome { get; set; }           // 平均年収
+
+    }
+
+
+    public class DollarYenEntity
+    {
+        public DateTime ExchangeDate { get; set; }
+        public decimal OpeningPrice { get; set; }
+        public decimal HighPrice { get; set; }
+        public decimal LowPrice { get; set; }
+        public decimal ClosingPrice { get; set; }
 
     }
 

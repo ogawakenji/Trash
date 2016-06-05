@@ -152,6 +152,15 @@ namespace StockProject
             }
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Utility.DollarYenEntity> list = new List<Utility.DollarYenEntity>();
+
+            Utility.FinanceUtil finance = new Utility.FinanceUtil();
+
+            list = finance.GetDollarYenEntityList();
+
+        }
     }
 
 }
