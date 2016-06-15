@@ -161,5 +161,12 @@ namespace StockProject
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            using (DownLoadData frm = new DownLoadData() )
+            {
+                frm.ShowDialog();
+            }
+        }
     }
 }
