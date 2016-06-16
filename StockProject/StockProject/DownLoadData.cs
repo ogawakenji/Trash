@@ -62,11 +62,120 @@ namespace StockProject
 
             this.lblStatus.Text = "データ取得終了・・・";
 
+            // stockprice登録
+            registerStockPrice(listStockPrice);
+
+            // profile登録
+            registerProfile(listProfile);
+
             this.btnDownLoad.Enabled = true;
             this.btnDownLoad.Focus();
 
 
         }
+
+        #region 登録stockprice
+        private void registerStockPrice(List<Utility.StockPriceEntity> listStockPrice)
+        {
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+
+                string deleteSql = @"DELETE FROM stockprice 
+                                     WHERE StockCode = :StockCode 
+                                       AND StockDate BETWEEN :StockDateFrom AND :StockDateTo 
+                                    ";
+
+
+                DateTime StockDateFrom = listStockPrice.Min(stock => stock.StockDate);
+                DateTime StockDateTo = listStockPrice.Max(stock => stock.StockDate);
+
+
+                db.DBInsert(deleteSql, new { StockCode = listStockPrice.Min(stock => stock.StockCode), StockDateFrom = StockDateFrom, StockDateTo = StockDateTo });
+
+                string insertSql = @"INSERT INTO stockprice
+                                    ( 
+                                      StockCode             
+                                     ,CompanyName           
+                                     ,StockDate             
+                                     ,OpeningPrice          
+                                     ,HighPrice             
+                                     ,LowPrice              
+                                     ,ClosingPrice          
+                                     ,TradeVolume           
+                                     ,AdjustmentClosingPrice
+                                    ) VALUES (
+                                      :StockCode             
+                                     ,:CompanyName           
+                                     ,:StockDate             
+                                     ,:OpeningPrice          
+                                     ,:HighPrice             
+                                     ,:LowPrice              
+                                     ,:ClosingPrice          
+                                     ,:TradeVolume           
+                                     ,:AdjustmentClosingPrice
+                                    )";
+
+                db.DBInsert(insertSql, listStockPrice);
+
+            }
+
+        }
+        #endregion
+
+        #region 登録profile
+        private void registerProfile(List<Utility.ProfileEntity> listProfile)
+        {
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+
+                string deleteSql = @"DELETE FROM profile 
+                                     WHERE StockCode = :StockCode 
+                                    ";
+
+
+                db.DBInsert(deleteSql, new { StockCode = listProfile.Min(stock => stock.StockCode) });
+
+                string insertSql = @"INSERT INTO profile
+                                    ( 
+                                      StockCode
+                                     ,CompanyName
+                                     ,Feature
+                                     ,ConcatenationBusiness
+                                     ,HeadquartersLocation
+                                     ,IndustriesCategory
+                                     ,FoundationDate
+                                     ,MarketName
+                                     ,ListedDate
+                                     ,ClosingMonth
+                                     ,UnitShares 
+                                     ,EmployeeNumberSingle
+                                     ,EmployeeNumberConcatenation
+                                     ,AvarageAnnualIncome
+                                    ) VALUES (
+                                      :StockCode
+                                     ,:CompanyName
+                                     ,:Feature
+                                     ,:ConcatenationBusiness
+                                     ,:HeadquartersLocation
+                                     ,:IndustriesCategory
+                                     ,:FoundationDate
+                                     ,:MarketName
+                                     ,:ListedDate
+                                     ,:ClosingMonth
+                                     ,:UnitShares 
+                                     ,:EmployeeNumberSingle
+                                     ,:EmployeeNumberConcatenation
+                                     ,:AvarageAnnualIncome
+                                    )";
+
+                db.DBInsert(insertSql, listProfile);
+
+            }
+
+        }
+        #endregion
+
+
 
     }
 }
