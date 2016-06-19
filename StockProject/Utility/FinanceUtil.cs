@@ -233,6 +233,12 @@ namespace Utility
                         continue;
                     }
 
+                    decimal d;
+                    if (decimal.TryParse(q2.Elements().ElementAt(1).Value,out d) == false)
+                    {
+                        continue;
+                    }
+
                     stockPrice = new StockPriceEntity();
                     stockPrice.StockCode              = Convert.ToInt32(code.First().Value);
                     stockPrice.CompanyName            = company.First().Value;
@@ -334,7 +340,7 @@ namespace Utility
                                 break;
 
                             case "設立年月日":
-                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value))
+                                if (String.IsNullOrEmpty(elm.Parent.Elements("td").ElementAt(0).Value.Replace("-","")))
                                 {
                                     profile.FoundationDate = null;
                                 }
@@ -434,7 +440,7 @@ namespace Utility
 
         #endregion
 
-        #region 株価
+        #region ドル／円
         private string YAHOO_EXCHANGE_HISTORY = "http://info.finance.yahoo.co.jp/history/?code=USDJPY%3DX&sy={0}&sm={1}&sd={2}&ey={3}&em={4}&ed={5}&tm=d&p=1";
 
 
@@ -556,6 +562,124 @@ namespace Utility
 
         #endregion
 
+        #region 日経平均
+        private string YAHOO_NIKKEI_HISTORY = "http://info.finance.yahoo.co.jp/history/?code=998407.O&sy={0}&sm={1}&sd={2}&ey={3}&em={4}&ed={5}&tm=d";
+
+
+        public List<NikkeiAverageEntity> GetNikkeiAverageEntityList()
+        {
+            List<NikkeiAverageEntity> list = new List<NikkeiAverageEntity>();
+
+            // 3ヶ月分の日経平均
+            string url = "";
+            DateTime beginDate = DateTime.Now.AddMonths(-3);
+            DateTime endDate = DateTime.Now;
+            url = string.Format(YAHOO_NIKKEI_HISTORY, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetNikkeiAvarageEntity(url, list);
+
+            return list;
+
+        }
+
+        public List<NikkeiAverageEntity> SetNikkeiAvarageEntity(DateTime beginDate, DateTime endDate)
+        {
+            List<NikkeiAverageEntity> list = new List<NikkeiAverageEntity>();
+
+            // 3ヶ月分の株価
+            string url = "";
+            url = string.Format(YAHOO_EXCHANGE_HISTORY, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
+
+            // Yahooファイナンスの株価時系列から情報を取得する
+            SetNikkeiAvarageEntity(url, list);
+
+            return list;
+
+        }
+
+        private void SetNikkeiAvarageEntity(string url, List<NikkeiAverageEntity> list)
+        {
+            HtmlUtil htmlUtil = new HtmlUtil();
+
+            // urlからWebサイトに接続し情報を取得する
+            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            var ns = xdoc.Root.Name.Namespace;
+
+            // 次へのページが存在するか確認する
+            string nextUrl = "";
+            var query1 =
+                from q1 in xdoc.Descendants(ns + "ul")
+                where (string)q1.Attribute("class") == "ymuiPagingBottom clearFix"
+                select q1;
+
+            foreach (var q in query1.Descendants("a"))
+            {
+                if (q.Value == "次へ")
+                {
+                    nextUrl = q.Attribute("href").Value;
+                }
+            }
+
+            // 時系列株価情報を取得する
+            var query2 =
+                from q2 in xdoc.Descendants(ns + "table")
+                where (string)q2.Attribute("class") == "boardFin yjSt marB6"
+                select q2.Descendants(ns + "tr");
+
+            var company =
+                from c in xdoc.Descendants(ns + "h1")
+                select c;
+
+            var code =
+                from c in xdoc.Descendants(ns + "dt")
+                select c;
+
+
+            NikkeiAverageEntity nikkeiAverage;
+
+
+            foreach (var q1 in query2)
+            {
+                foreach (var q2 in q1)
+                {
+                    if (q2.Elements() == null)
+                    {
+                        continue;
+                    }
+                    if (q2.Elements().First().Value == "日付")
+                    {
+                        continue;
+                    }
+
+                    nikkeiAverage = new NikkeiAverageEntity();
+                    nikkeiAverage.StockDate  = Convert.ToDateTime(q2.Elements().ElementAt(0).Value);
+                    nikkeiAverage.OpeningPrice = Convert.ToDecimal(q2.Elements().ElementAt(1).Value);
+                    nikkeiAverage.HighPrice = Convert.ToDecimal(q2.Elements().ElementAt(2).Value);
+                    nikkeiAverage.LowPrice = Convert.ToDecimal(q2.Elements().ElementAt(3).Value);
+                    nikkeiAverage.ClosingPrice = Convert.ToDecimal(q2.Elements().ElementAt(4).Value);
+
+                    list.Add(nikkeiAverage);
+
+                }
+
+
+
+            }
+
+            if (nextUrl == "")
+            {
+                // 次のURLがなければ処理終了
+                return;
+            }
+            else
+            {
+                // 次のURLがあれば再帰呼び出し
+                SetNikkeiAvarageEntity(nextUrl, list);
+            }
+        }
+
+        #endregion
 
     }
 
@@ -613,6 +737,8 @@ namespace Utility
     }
 
 
+
+
     public class DollarYenEntity
     {
         public DateTime ExchangeDate { get; set; }
@@ -622,6 +748,17 @@ namespace Utility
         public decimal ClosingPrice { get; set; }
 
     }
+
+    public class NikkeiAverageEntity
+    {
+        public DateTime StockDate { get; set; }
+        public decimal OpeningPrice { get; set; }
+        public decimal HighPrice { get; set; }
+        public decimal LowPrice { get; set; }
+        public decimal ClosingPrice { get; set; }
+
+    }
+
 
 
 }

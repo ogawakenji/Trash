@@ -42,6 +42,7 @@ namespace StockProject
                                     ,ClosingPrice            NUMERIC
                                     ,TradeVolume             NUMERIC
                                     ,AdjustmentClosingPrice  NUMERIC
+                                    ,primary key(StockCode,StockDate)
                                   ) ";
 
                 db.DBExecuteSQL(sql);
@@ -64,6 +65,7 @@ namespace StockProject
                                     ,Dividend                NUMERIC
                                     ,DividendYield           NUMERIC
                                     ,DetailUrl               TEXT
+                                    ,primary key(StockCode)
                                   ) ";
 
                 db.DBExecuteSQL(sql);
@@ -93,11 +95,56 @@ namespace StockProject
                           ,EmployeeNumberSingle        NUMERIC
                           ,EmployeeNumberConcatenation NUMERIC
                           ,AvarageAnnualIncome         NUMERIC
+                          ,primary key(StockCode)
                         ) ";
 
                 db.DBExecuteSQL(sql);
 
                 #endregion
+
+                #region dollaryenテーブル
+
+                // テーブルを作成
+                tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'dollaryen'");
+
+                if (tblLst[0] > 0) { db.DBExecuteSQL("DROP TABLE dollaryen "); }
+
+                sql = @"CREATE TABLE dollaryen
+                        (
+                           ExchangeDate   TEXT
+                          ,OpeningPrice   NUMERIC
+                          ,HighPrice      NUMERIC
+                          ,LowPrice       NUMERIC
+                          ,ClosingPrice   NUMERIC
+                          ,primary key(ExchangeDate)
+                        ) ";
+
+                db.DBExecuteSQL(sql);
+
+                #endregion
+
+                #region nikkeiaverageテーブル
+
+                // テーブルを作成
+                tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'nikkeiaverage'");
+
+                if (tblLst[0] > 0) { db.DBExecuteSQL("DROP TABLE nikkeiaverage "); }
+
+                sql = @"CREATE TABLE nikkeiaverage
+                        (
+                           StockDate      TEXT
+                          ,OpeningPrice   NUMERIC
+                          ,HighPrice      NUMERIC
+                          ,LowPrice       NUMERIC
+                          ,ClosingPrice   NUMERIC
+                          ,primary key(StockDate)
+                        ) ";
+
+                db.DBExecuteSQL(sql);
+
+                #endregion
+
+
 
             }
 
@@ -164,6 +211,35 @@ namespace StockProject
         private void button3_Click(object sender, EventArgs e)
         {
             using (DownLoadData frm = new DownLoadData() )
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnDividend_Click(object sender, EventArgs e)
+        {
+            using (Dividend frm = new Dividend())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnChart_Click(object sender, EventArgs e)
+        {
+            using (ChartForm frm = new ChartForm())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void btnNikkeiDollarYen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDefaultUpdate_Click(object sender, EventArgs e)
+        {
+            using (DefaultUpdateForm frm = new DefaultUpdateForm())
             {
                 frm.ShowDialog();
             }

@@ -35,10 +35,10 @@
             this.btnCreateTable = new System.Windows.Forms.Button();
             this.btnTask = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
+            this.btnDividend = new System.Windows.Forms.Button();
+            this.btnChart = new System.Windows.Forms.Button();
+            this.btnNikkeiDollarYen = new System.Windows.Forms.Button();
+            this.btnDefaultUpdate = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
@@ -95,10 +95,10 @@
             this.flowLayoutPanel1.Controls.Add(this.btnCreateTable);
             this.flowLayoutPanel1.Controls.Add(this.btnTask);
             this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Controls.Add(this.button4);
-            this.flowLayoutPanel1.Controls.Add(this.button5);
-            this.flowLayoutPanel1.Controls.Add(this.button6);
-            this.flowLayoutPanel1.Controls.Add(this.button7);
+            this.flowLayoutPanel1.Controls.Add(this.btnDividend);
+            this.flowLayoutPanel1.Controls.Add(this.btnChart);
+            this.flowLayoutPanel1.Controls.Add(this.btnNikkeiDollarYen);
+            this.flowLayoutPanel1.Controls.Add(this.btnDefaultUpdate);
             this.flowLayoutPanel1.Controls.Add(this.button8);
             this.flowLayoutPanel1.Controls.Add(this.button9);
             this.flowLayoutPanel1.Controls.Add(this.button10);
@@ -146,41 +146,45 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // btnDividend
             // 
-            this.button4.Location = new System.Drawing.Point(3, 47);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(181, 38);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDividend.Location = new System.Drawing.Point(3, 47);
+            this.btnDividend.Name = "btnDividend";
+            this.btnDividend.Size = new System.Drawing.Size(181, 38);
+            this.btnDividend.TabIndex = 7;
+            this.btnDividend.Text = "配当";
+            this.btnDividend.UseVisualStyleBackColor = true;
+            this.btnDividend.Click += new System.EventHandler(this.btnDividend_Click);
             // 
-            // button5
+            // btnChart
             // 
-            this.button5.Location = new System.Drawing.Point(190, 47);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(181, 38);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btnChart.Location = new System.Drawing.Point(190, 47);
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(181, 38);
+            this.btnChart.TabIndex = 8;
+            this.btnChart.Text = "チャート";
+            this.btnChart.UseVisualStyleBackColor = true;
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
-            // button6
+            // btnNikkeiDollarYen
             // 
-            this.button6.Location = new System.Drawing.Point(377, 47);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(181, 38);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnNikkeiDollarYen.Location = new System.Drawing.Point(377, 47);
+            this.btnNikkeiDollarYen.Name = "btnNikkeiDollarYen";
+            this.btnNikkeiDollarYen.Size = new System.Drawing.Size(181, 38);
+            this.btnNikkeiDollarYen.TabIndex = 9;
+            this.btnNikkeiDollarYen.Text = "日経平均・ドル円";
+            this.btnNikkeiDollarYen.UseVisualStyleBackColor = true;
+            this.btnNikkeiDollarYen.Click += new System.EventHandler(this.btnNikkeiDollarYen_Click);
             // 
-            // button7
+            // btnDefaultUpdate
             // 
-            this.button7.Location = new System.Drawing.Point(3, 91);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(181, 38);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btnDefaultUpdate.Location = new System.Drawing.Point(3, 91);
+            this.btnDefaultUpdate.Name = "btnDefaultUpdate";
+            this.btnDefaultUpdate.Size = new System.Drawing.Size(181, 38);
+            this.btnDefaultUpdate.TabIndex = 10;
+            this.btnDefaultUpdate.Text = "初期データ";
+            this.btnDefaultUpdate.UseVisualStyleBackColor = true;
+            this.btnDefaultUpdate.Click += new System.EventHandler(this.btnDefaultUpdate_Click);
             // 
             // button8
             // 
@@ -318,10 +322,10 @@
         private System.Windows.Forms.Button btnCreateTable;
         private System.Windows.Forms.Button btnTask;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button btnDividend;
+        private System.Windows.Forms.Button btnChart;
+        private System.Windows.Forms.Button btnNikkeiDollarYen;
+        private System.Windows.Forms.Button btnDefaultUpdate;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;

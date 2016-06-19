@@ -78,6 +78,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartForm.Designer.cs">
+      <DependentUpon>ChartForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DefaultUpdateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DefaultUpdateForm.Designer.cs">
+      <DependentUpon>DefaultUpdateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dividend.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dividend.Designer.cs">
+      <DependentUpon>Dividend.cs</DependentUpon>
+    </Compile>
     <Compile Include="DownLoadData.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +122,15 @@
     <Compile Include="StockPrice.Designer.cs">
       <DependentUpon>StockPrice.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChartForm.resx">
+      <DependentUpon>ChartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DefaultUpdateForm.resx">
+      <DependentUpon>DefaultUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dividend.resx">
+      <DependentUpon>Dividend.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DownLoadData.resx">
       <DependentUpon>DownLoadData.cs</DependentUpon>
     </EmbeddedResource>

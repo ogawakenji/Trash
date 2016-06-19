@@ -48,6 +48,16 @@ namespace StockProject
 
             await Task.Delay(1000);
 
+
+            if (listStockPrice.Count == 0)
+            {
+                this.lblStatus.Text = "データが取得できません。中断しました。";
+                this.btnDownLoad.Enabled = true;
+                this.btnDownLoad.Focus();
+                return;
+            }
+
+
             this.lblStatus.Text = "企業情報開始・・・";
 
             await Task.Run(() =>
@@ -61,6 +71,7 @@ namespace StockProject
             await Task.Delay(1000);
 
             this.lblStatus.Text = "データ取得終了・・・";
+
 
             // stockprice登録
             registerStockPrice(listStockPrice);
