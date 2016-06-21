@@ -82,9 +82,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtStockCode);
             this.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DownLoadData";
-            this.Text = "データ取得";
+            this.Text = "個別データ更新";
             this.ResumeLayout(false);
             this.PerformLayout();
 

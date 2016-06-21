@@ -192,7 +192,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(181, 38);
             this.button8.TabIndex = 11;
-            this.button8.Text = "button8";
+            this.button8.Text = "株価更新";
             this.button8.UseVisualStyleBackColor = true;
             // 
             // button9

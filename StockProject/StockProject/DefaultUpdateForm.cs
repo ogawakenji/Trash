@@ -21,8 +21,16 @@ namespace StockProject
             InitializeComponent();
         }
 
+        // 初期データ更新ボタンクリック
         private async void btnDefaultUpdate_Click(object sender, EventArgs e)
         {
+
+            if (MessageBox.Show("初期データ更新を実行しますか？","更新確認",MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
@@ -35,6 +43,8 @@ namespace StockProject
             this.btnDefaultUpdate.Enabled = true;
 
             this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() +  Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
 
         }
 
@@ -215,7 +225,127 @@ namespace StockProject
 
         }
 
+        // 株価更新ボタンクリック
+        private async void btnStockPriceUpdate_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("株価を更新しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnStockPriceUpdate.Enabled = false;
+
+            // 株価更新
+            await UpdateStockPrice();
+
+            this.btnStockPriceUpdate.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
+
+        private async Task UpdateStockPrice()
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            this.txtUpdateStatus.Text += "株価更新開始" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
 
 
+            // 情報の取得
+            List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
+            List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
+
+            List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
+
+            List<Utility.DividendEntity> dividend;
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                listProfile = db.DBSelect<Utility.ProfileEntity>("SELECT * FROM profile ");
+
+                listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
+                                                                  StockCode
+                                                                 ,MAX(CompanyName) CompanyName 
+                                                                 ,datetime(MAX(StockDate),'+1 days') StockDate
+                                                            FROM StockPrice
+                                                            GROUP BY StockCode 
+                                                            ORDER BY StockCode ");
+
+
+            }
+
+
+            foreach (StockPriceEntity r in listStock)
+            {
+
+                sw.Restart();
+
+               
+                await Task.Run(() =>
+                {
+                    Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode);
+                });
+
+
+                await Task.Run(() =>
+                {
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        var query = from q in listStockPrice
+                                    where q.StockCode == r.StockCode
+                                    select q;
+
+                        db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
+                                    new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO stockprice
+                                    ( 
+                                      StockCode             
+                                     ,CompanyName           
+                                     ,StockDate             
+                                     ,OpeningPrice          
+                                     ,HighPrice             
+                                     ,LowPrice              
+                                     ,ClosingPrice          
+                                     ,TradeVolume           
+                                     ,AdjustmentClosingPrice
+                                    ) VALUES (
+                                      :StockCode             
+                                     ,:CompanyName           
+                                     ,:StockDate             
+                                     ,:OpeningPrice          
+                                     ,:HighPrice             
+                                     ,:LowPrice              
+                                     ,:ClosingPrice          
+                                     ,:TradeVolume           
+                                     ,:AdjustmentClosingPrice
+                                    )";
+
+                        db.DBInsert(insertSql, listStockPrice);
+
+                    }
+                });
+
+                sw.Stop();
+                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+                this.txtUpdateStatus.ScrollToCaret();
+
+            }
+
+            this.txtUpdateStatus.Text += "株価更新終了" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
     }
 }

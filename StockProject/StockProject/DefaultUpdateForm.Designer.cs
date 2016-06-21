@@ -30,13 +30,14 @@
         {
             this.btnDefaultUpdate = new System.Windows.Forms.Button();
             this.txtUpdateStatus = new System.Windows.Forms.TextBox();
+            this.btnStockPriceUpdate = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnDefaultUpdate
             // 
             this.btnDefaultUpdate.Location = new System.Drawing.Point(12, 12);
             this.btnDefaultUpdate.Name = "btnDefaultUpdate";
-            this.btnDefaultUpdate.Size = new System.Drawing.Size(246, 41);
+            this.btnDefaultUpdate.Size = new System.Drawing.Size(177, 41);
             this.btnDefaultUpdate.TabIndex = 0;
             this.btnDefaultUpdate.Text = "初期データ更新";
             this.btnDefaultUpdate.UseVisualStyleBackColor = true;
@@ -56,15 +57,26 @@
             this.txtUpdateStatus.Size = new System.Drawing.Size(690, 276);
             this.txtUpdateStatus.TabIndex = 1;
             // 
+            // btnStockPriceUpdate
+            // 
+            this.btnStockPriceUpdate.Location = new System.Drawing.Point(215, 12);
+            this.btnStockPriceUpdate.Name = "btnStockPriceUpdate";
+            this.btnStockPriceUpdate.Size = new System.Drawing.Size(136, 41);
+            this.btnStockPriceUpdate.TabIndex = 2;
+            this.btnStockPriceUpdate.Text = "株価更新";
+            this.btnStockPriceUpdate.UseVisualStyleBackColor = true;
+            this.btnStockPriceUpdate.Click += new System.EventHandler(this.btnStockPriceUpdate_Click);
+            // 
             // DefaultUpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 347);
+            this.Controls.Add(this.btnStockPriceUpdate);
             this.Controls.Add(this.txtUpdateStatus);
             this.Controls.Add(this.btnDefaultUpdate);
             this.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DefaultUpdateForm";
             this.Text = "初期データ更新画面";
             this.ResumeLayout(false);
@@ -76,5 +88,6 @@
 
         private System.Windows.Forms.Button btnDefaultUpdate;
         private System.Windows.Forms.TextBox txtUpdateStatus;
+        private System.Windows.Forms.Button btnStockPriceUpdate;
     }
 }

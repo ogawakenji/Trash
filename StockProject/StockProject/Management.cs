@@ -21,6 +21,11 @@ namespace StockProject
         private void btnCreateTable_Click(object sender, EventArgs e)
         {
 
+            if (MessageBox.Show("テーブルを作成しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
             using (Utility.DbUtil db = new Utility.DbUtil())
             {
 
