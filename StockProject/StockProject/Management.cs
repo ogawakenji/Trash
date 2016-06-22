@@ -215,26 +215,17 @@ namespace StockProject
 
         private void button3_Click(object sender, EventArgs e)
         {
-            using (DownLoadData frm = new DownLoadData() )
-            {
-                frm.ShowDialog();
-            }
+            ShowForm<DownLoadData>();
         }
 
         private void btnDividend_Click(object sender, EventArgs e)
         {
-            using (Dividend frm = new Dividend())
-            {
-                frm.ShowDialog();
-            }
+            ShowForm<Dividend>();
         }
 
         private void btnChart_Click(object sender, EventArgs e)
         {
-            using (ChartForm frm = new ChartForm())
-            {
-                frm.ShowDialog();
-            }
+            ShowForm<ChartForm>();
         }
 
         private void btnNikkeiDollarYen_Click(object sender, EventArgs e)
@@ -244,10 +235,24 @@ namespace StockProject
 
         private void btnDefaultUpdate_Click(object sender, EventArgs e)
         {
-            using (DefaultUpdateForm frm = new DefaultUpdateForm())
+            ShowForm<DefaultUpdateForm>();
+        }
+
+        private void ShowForm<T>() where T :new()  
+        {
+            // ジェネリックメソッド where T :new() new制約をつける
+            foreach (Form f in Application.OpenForms)
             {
-                frm.ShowDialog();
+                if (f is T)
+                {
+                    f.TopMost = true;
+                    f.TopMost = false;
+                    return;
+                }
             }
+            T t = new T();
+            Form frm = t as Form;
+            frm.Show();
         }
     }
 }
