@@ -163,6 +163,7 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Utility.DividendEntity.datasource" />
+    <None Include="Properties\DataSources\Utility.ListEntity.datasource" />
     <None Include="Properties\DataSources\Utility.ProfileEntity.datasource" />
     <None Include="Properties\DataSources\Utility.StockPriceEntity.datasource" />
     <None Include="Properties\Settings.settings">

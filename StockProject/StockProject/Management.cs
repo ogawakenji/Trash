@@ -254,5 +254,10 @@ namespace StockProject
             Form frm = t as Form;
             frm.Show();
         }
+
+        private void btnList_Click(object sender, EventArgs e)
+        {
+            ShowForm<ListForm>();
+        }
     }
 }

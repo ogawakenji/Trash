@@ -737,6 +737,30 @@ namespace Utility
     }
 
 
+    /// <summary>
+    /// 一覧
+    /// </summary>
+    public class ListEntity
+    {
+        public int StockCode { get; set; }                         // 証券コード
+        public string CompanyName { get; set; }                    // 企業名
+        public string Feature { get; set; }                        // 特色
+        public string ConcatenationBusiness { get; set; }          // 連結事業
+        public string HeadquartersLocation { get; set; }           // 本社所在地
+        public string IndustriesCategory { get; set; }             // 業種分類
+        public DateTime? FoundationDate { get; set; }              // 設立年月日
+        public string MarketName { get; set; }                     // 市場名
+        public DateTime? ListedDate { get; set; }                  // 上場年月日
+        public decimal? ClosingMonth { get; set; }                 // 決算
+        public decimal? UnitShares { get; set; }                   // 単元株数
+        public decimal? EmployeeNumberSingle { get; set; }         // 従業員数（単独）
+        public decimal? EmployeeNumberConcatenation { get; set; }  // 従業員数（連結）
+        public decimal? AvarageAnnualIncome { get; set; }          // 平均年収
+        public decimal Dividend { get; set; }                      // 配当金
+        public decimal DividendYield { get; set; }                 // 配当利回り
+        public decimal ClosingPrice { get; set; }                  // 終値
+        public decimal TradeVolume { get; set; }                   // 出来高
+    }
 
 
     public class DollarYenEntity

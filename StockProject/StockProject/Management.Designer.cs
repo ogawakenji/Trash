@@ -40,7 +40,7 @@
             this.btnNikkeiDollarYen = new System.Windows.Forms.Button();
             this.btnDefaultUpdate = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btnList = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -100,7 +100,7 @@
             this.flowLayoutPanel1.Controls.Add(this.btnNikkeiDollarYen);
             this.flowLayoutPanel1.Controls.Add(this.btnDefaultUpdate);
             this.flowLayoutPanel1.Controls.Add(this.button8);
-            this.flowLayoutPanel1.Controls.Add(this.button9);
+            this.flowLayoutPanel1.Controls.Add(this.btnList);
             this.flowLayoutPanel1.Controls.Add(this.button10);
             this.flowLayoutPanel1.Controls.Add(this.button11);
             this.flowLayoutPanel1.Controls.Add(this.button12);
@@ -195,14 +195,15 @@
             this.button8.Text = "株価更新";
             this.button8.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // btnList
             // 
-            this.button9.Location = new System.Drawing.Point(377, 91);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(181, 38);
-            this.button9.TabIndex = 12;
-            this.button9.Text = "button9";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btnList.Location = new System.Drawing.Point(377, 91);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(181, 38);
+            this.btnList.TabIndex = 12;
+            this.btnList.Text = "一覧";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
             // button10
             // 
@@ -327,7 +328,7 @@
         private System.Windows.Forms.Button btnNikkeiDollarYen;
         private System.Windows.Forms.Button btnDefaultUpdate;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btnList;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button12;
