@@ -296,43 +296,52 @@ namespace StockProject
 
                 await Task.Run(() =>
                 {
-                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    if (listStockPrice .Count == 0 )
                     {
-                        // 削除
-                        var query = from q in listStockPrice
-                                    where q.StockCode == r.StockCode
-                                    select q;
-
-                        db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
-                                    new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
-
-                        // 登録
-                        string insertSql = @"INSERT INTO stockprice
-                                    ( 
-                                      StockCode             
-                                     ,CompanyName           
-                                     ,StockDate             
-                                     ,OpeningPrice          
-                                     ,HighPrice             
-                                     ,LowPrice              
-                                     ,ClosingPrice          
-                                     ,TradeVolume           
-                                     ,AdjustmentClosingPrice
-                                    ) VALUES (
-                                      :StockCode             
-                                     ,:CompanyName           
-                                     ,:StockDate             
-                                     ,:OpeningPrice          
-                                     ,:HighPrice             
-                                     ,:LowPrice              
-                                     ,:ClosingPrice          
-                                     ,:TradeVolume           
-                                     ,:AdjustmentClosingPrice
-                                    )";
-
-                        db.DBInsert(insertSql, listStockPrice);
-
+                        // 株価取得できない場合はスルー
                     }
+                    else
+                    {
+
+                        using (Utility.DbUtil db = new Utility.DbUtil())
+                        {
+                            // 削除
+                            var query = from q in listStockPrice
+                                        where q.StockCode == r.StockCode
+                                        select q;
+
+                            db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
+                                        new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
+
+                            // 登録
+                            string insertSql = @"INSERT INTO stockprice
+                                        ( 
+                                          StockCode             
+                                         ,CompanyName           
+                                         ,StockDate             
+                                         ,OpeningPrice          
+                                         ,HighPrice             
+                                         ,LowPrice              
+                                         ,ClosingPrice          
+                                         ,TradeVolume           
+                                         ,AdjustmentClosingPrice
+                                        ) VALUES (
+                                          :StockCode             
+                                         ,:CompanyName           
+                                         ,:StockDate             
+                                         ,:OpeningPrice          
+                                         ,:HighPrice             
+                                         ,:LowPrice              
+                                         ,:ClosingPrice          
+                                         ,:TradeVolume           
+                                         ,:AdjustmentClosingPrice
+                                        )";
+
+                            db.DBInsert(insertSql, listStockPrice);
+
+                        }
+                    }
+
                 });
 
                 sw.Stop();
