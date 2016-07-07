@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "011Winium.Cruciatus試し",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestForm", "TestForm\TestForm.csproj", "{18D2CF80-4240-41EB-99E1-9369F1E9783F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{C5CB3FBE-6E0E-45AE-BE0E-8FFCBE370173}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{18D2CF80-4240-41EB-99E1-9369F1E9783F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18D2CF80-4240-41EB-99E1-9369F1E9783F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18D2CF80-4240-41EB-99E1-9369F1E9783F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5CB3FBE-6E0E-45AE-BE0E-8FFCBE370173}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CB3FBE-6E0E-45AE-BE0E-8FFCBE370173}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CB3FBE-6E0E-45AE-BE0E-8FFCBE370173}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CB3FBE-6E0E-45AE-BE0E-8FFCBE370173}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
