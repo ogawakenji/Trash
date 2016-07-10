@@ -1,0 +1,49 @@
+﻿--sqliteのSQL文
+---------------------------------------------------------------------
+--企業情報と配当利回り
+WITH PRICE AS ( 
+SELECT stockprice.*  
+FROM  
+    stockprice  
+INNER JOIN  ( 
+      SELECT 
+          StockCode 
+         ,MAX(StockDate) StockDate 
+      FROM 
+           stockprice 
+      GROUP BY  
+               StockCode 
+      ) stockmax  
+   ON stockmax.StockCode = stockprice.StockCode 
+  AND stockmax.StockDate = stockprice.StockDate 
+) 
+SELECT 
+     profile.StockCode                   AS 証券コード
+    ,profile.CompanyName                 AS 企業名
+    ,profile.Feature                     AS 特色
+    ,profile.ConcatenationBusiness       AS 連結事業
+    ,profile.HeadquartersLocation        AS 本社所在地
+    ,profile.IndustriesCategory          AS 業種分類
+    ,profile.FoundationDate              AS 設立年月日
+    ,profile.MarketName                  AS 市場名
+    ,profile.ListedDate                  AS 上場年月日
+    ,profile.ClosingMonth                AS 決算月
+    ,profile.UnitShares                  AS 単元株数
+    ,profile.EmployeeNumberSingle        AS 従業員数_単独
+    ,profile.EmployeeNumberConcatenation AS 従業員数_連結
+    ,profile.AvarageAnnualIncome         AS 平均年収
+    ,dividend.Dividend                   AS 配当金
+    ,round(cast(dividend.Dividend as real) / PRICE.ClosingPrice * 100,2) AS 配当利回り
+    ,PRICE.ClosingPrice                  AS 終値
+    ,PRICE.TradeVolume                   AS 出来高
+FROM  
+      profile 
+LEFT JOIN PRICE  
+  ON PRICE.StockCode = profile.StockCode 
+LEFT JOIN dividend 
+  ON dividend.StockCode = profile.StockCode 
+
+
+
+
+---------------------------------------------------------------------
