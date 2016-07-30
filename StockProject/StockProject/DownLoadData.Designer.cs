@@ -59,9 +59,9 @@
             this.btnDownLoad.Font = new System.Drawing.Font("ＭＳ ゴシック", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDownLoad.Location = new System.Drawing.Point(276, 10);
             this.btnDownLoad.Name = "btnDownLoad";
-            this.btnDownLoad.Size = new System.Drawing.Size(185, 41);
+            this.btnDownLoad.Size = new System.Drawing.Size(221, 41);
             this.btnDownLoad.TabIndex = 2;
-            this.btnDownLoad.Text = "データ取得";
+            this.btnDownLoad.Text = "過去1年更新";
             this.btnDownLoad.UseVisualStyleBackColor = true;
             this.btnDownLoad.Click += new System.EventHandler(this.btnDownLoad_Click);
             // 
@@ -76,7 +76,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 128);
+            this.ClientSize = new System.Drawing.Size(549, 128);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnDownLoad);
             this.Controls.Add(this.label1);

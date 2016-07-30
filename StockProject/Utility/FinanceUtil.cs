@@ -153,7 +153,7 @@ namespace Utility
 
             // 3ヶ月分の株価
             string url = "";
-            DateTime beginDate = DateTime.Now.AddMonths(-3);
+            DateTime beginDate = DateTime.Now.AddMonths(-12);
             DateTime endDate = DateTime.Now;
             url = string.Format(YAHOO_HISTORY, StockCode, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
 
@@ -783,6 +783,16 @@ namespace Utility
 
     }
 
+    public class PriceUpDownEntity
+    {
+        public int StockCode { get; set; }                         // 証券コード
+        public decimal UpCnt3M { get; set; }
+        public decimal DownCnt3M { get; set; }
+        public decimal UpCnt2M { get; set; }
+        public decimal DownCnt2M { get; set; }
+        public decimal UpCnt1M { get; set; }
+        public decimal DownCnt1M { get; set; }
 
+    }
 
 }
