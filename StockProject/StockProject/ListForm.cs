@@ -305,11 +305,6 @@ namespace StockProject
                         if (list.ClosingPrice >= previousPrice.ClosingPrice * 1.05m)
                         {
                             // 5%上昇(前後データ追加)
-                            var query = (from q in listUp
-                                         where q.StockCode == previousPrice.StockCode
-                                          && q.StockDate == previousPrice.StockDate
-                                        select q).Count();
-
                             var priceup = from up in listUpDown
                                           where up.StockCode == previousPrice.StockCode
                                           select up;
@@ -317,28 +312,42 @@ namespace StockProject
                             foreach(PriceUpDownEntity up in priceup)
                             {
                                 up.UpCnt3M = up.UpCnt3M + 1;
-                            }
 
-                            if (query == 0)
-                            {
-                                listUp.Add(previousPrice);
-                            }
-                            listUp.Add(list);
+                                if (DateTime.Now.AddMonths(-2) <  previousPrice.StockDate)
+                                {
+                                    up.UpCnt2M = up.UpCnt2M + 1;
+                                }
 
+                                if (DateTime.Now.AddMonths(-1) < previousPrice.StockDate)
+                                {
+                                    up.UpCnt1M = up.UpCnt1M + 1;
+                                }
+
+                            }
                         }
                         else if (list.ClosingPrice <= previousPrice.ClosingPrice * 0.95m)
                         {
                             // 5%下落(前後データ追加)
-                            var query = (from q in listDown
-                                         where q.StockCode == previousPrice.StockCode
-                                           && q.StockDate == previousPrice.StockDate
-                                         select q).Count();
+                            var pricedown = from down in listUpDown
+                                          where down.StockCode == previousPrice.StockCode
+                                          select down;
 
-                            if (query == 0)
+                            foreach (PriceUpDownEntity down in pricedown)
                             {
-                                listDown.Add(previousPrice);
+                                down.DownCnt3M  = down.DownCnt3M + 1;
+
+                                if (DateTime.Now.AddMonths(-2) < previousPrice.StockDate)
+                                {
+                                    down.DownCnt2M = down.DownCnt2M + 1;
+                                }
+
+                                if (DateTime.Now.AddMonths(-1) < previousPrice.StockDate)
+                                {
+                                    down.DownCnt1M = down.DownCnt1M + 1;
+                                }
+
                             }
-                            listDown.Add(list);
+
                         }
 
 
@@ -356,8 +365,8 @@ namespace StockProject
 
                 }
 
-                this.dataGridView2.DataSource = listUp;
-                this.dataGridView3.DataSource = listDown;
+                this.dataGridView2.DataSource = listUpDown;
+                //this.dataGridView3.DataSource = listDown;
 
 
             }
