@@ -34,13 +34,10 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnCreateTable = new System.Windows.Forms.Button();
             this.btnTask = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.btnDividend = new System.Windows.Forms.Button();
             this.btnChart = new System.Windows.Forms.Button();
             this.btnNikkeiDollarYen = new System.Windows.Forms.Button();
-            this.btnDefaultUpdate = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.btnList = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -51,6 +48,9 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnDefaultUpdate = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.btnList = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -136,16 +136,6 @@
             this.btnTask.UseVisualStyleBackColor = true;
             this.btnTask.Click += new System.EventHandler(this.btnTask_Click);
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(209, 12);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(181, 38);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "データ取得";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // btnDividend
             // 
             this.btnDividend.Location = new System.Drawing.Point(377, 3);
@@ -176,16 +166,6 @@
             this.btnNikkeiDollarYen.UseVisualStyleBackColor = true;
             this.btnNikkeiDollarYen.Click += new System.EventHandler(this.btnNikkeiDollarYen_Click);
             // 
-            // btnDefaultUpdate
-            // 
-            this.btnDefaultUpdate.Location = new System.Drawing.Point(22, 12);
-            this.btnDefaultUpdate.Name = "btnDefaultUpdate";
-            this.btnDefaultUpdate.Size = new System.Drawing.Size(181, 38);
-            this.btnDefaultUpdate.TabIndex = 10;
-            this.btnDefaultUpdate.Text = "初期データ";
-            this.btnDefaultUpdate.UseVisualStyleBackColor = true;
-            this.btnDefaultUpdate.Click += new System.EventHandler(this.btnDefaultUpdate_Click);
-            // 
             // button8
             // 
             this.button8.Location = new System.Drawing.Point(377, 47);
@@ -194,16 +174,7 @@
             this.button8.TabIndex = 11;
             this.button8.Text = "株価更新";
             this.button8.UseVisualStyleBackColor = true;
-            // 
-            // btnList
-            // 
-            this.btnList.Location = new System.Drawing.Point(22, 56);
-            this.btnList.Name = "btnList";
-            this.btnList.Size = new System.Drawing.Size(181, 38);
-            this.btnList.TabIndex = 12;
-            this.btnList.Text = "一覧";
-            this.btnList.UseVisualStyleBackColor = true;
-            this.btnList.Click += new System.EventHandler(this.btnList_Click);
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button10
             // 
@@ -213,6 +184,7 @@
             this.button10.TabIndex = 13;
             this.button10.Text = "button10";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -295,6 +267,36 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnDefaultUpdate
+            // 
+            this.btnDefaultUpdate.Location = new System.Drawing.Point(22, 12);
+            this.btnDefaultUpdate.Name = "btnDefaultUpdate";
+            this.btnDefaultUpdate.Size = new System.Drawing.Size(181, 38);
+            this.btnDefaultUpdate.TabIndex = 10;
+            this.btnDefaultUpdate.Text = "初期データ";
+            this.btnDefaultUpdate.UseVisualStyleBackColor = true;
+            this.btnDefaultUpdate.Click += new System.EventHandler(this.btnDefaultUpdate_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(209, 12);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(181, 38);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "データ取得";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // btnList
+            // 
+            this.btnList.Location = new System.Drawing.Point(22, 56);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(181, 38);
+            this.btnList.TabIndex = 12;
+            this.btnList.Text = "一覧";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.btnList_Click);
             // 
             // Management
             // 

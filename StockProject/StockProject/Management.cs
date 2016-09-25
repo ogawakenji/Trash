@@ -259,5 +259,39 @@ namespace StockProject
         {
             ShowForm<ListForm>();
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(" SELECT  ");
+            sb.AppendLine("       p.StockCode ");
+            sb.AppendLine("     , p.CompanyName ");
+            sb.AppendLine("     , p.IndustriesCategory ");
+            sb.AppendLine("     , p.MarketName ");
+            sb.AppendLine("     , p.ClosingMonth ");
+            sb.AppendLine("     , s.StockDate ");
+            sb.AppendLine("     , s.ClosingPrice ");
+            sb.AppendLine("  FROM  ");
+            sb.AppendLine("       stockprice s ");
+            sb.AppendLine(" INNER JOIN profile p ");
+            sb.AppendLine("    ON s.StockCode = p.StockCode ");
+            sb.AppendLine(" ORDER BY  ");
+            sb.AppendLine("       s.StockCode ");
+            sb.AppendLine("     , s.StockDate ");
+
+            List<Utility.StockPriceProfile> listSp = new List<Utility.StockPriceProfile>();
+
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                listSp =  db.DBSelect<Utility.StockPriceProfile>(sb.ToString());
+            }
+
+
+        }
     }
 }
