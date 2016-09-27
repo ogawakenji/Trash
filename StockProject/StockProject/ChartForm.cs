@@ -17,7 +17,9 @@ namespace StockProject
     {
 
         private List<Utility.StockPriceProfile> _listStockData;
-         
+
+        private decimal _displayFirstStockCode;
+        private decimal _displayLastStockCode;
 
 
         public ChartForm()
@@ -186,8 +188,17 @@ namespace StockProject
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
+
+            var query = (from q in _listStockData
+                        select q.StockCode).Distinct();
+
+            decimal cnt = 1;
+
+            if (query.Count() == 0) return;
+
             Chart chart;
-            for (int i = 1;i>20;i++)
+            for (int i = 1; i < 21; i++)
             {
                 chart = (Chart)this.Controls.Find("chartStock" + i, true)[0];
                 chart.Series.Clear();
@@ -196,19 +207,22 @@ namespace StockProject
                 chart.Titles.Clear();
             }
 
-            var query = (from q in _listStockData
-                        select q.StockCode).Distinct();
-
-            decimal cnt = 1;
-
             foreach (decimal code in query)
             {
+                if (cnt==1)
+                {
+                    _displayFirstStockCode = code;
+                }
+
+
                 if (cnt == 21)
                 {
                     break ;
                 }
                 this.CreateChart((Chart)this.Controls.Find("chartStock" + cnt, true)[0], code);
                 cnt++;
+                _displayLastStockCode = code;
+
             }
 
 
@@ -216,8 +230,18 @@ namespace StockProject
 
         private void button2_Click(object sender, EventArgs e)
         {
+           
+
+            var query = (from q in _listStockData
+                         where q.StockCode > _displayLastStockCode
+                         select q.StockCode).Distinct();
+
+            decimal cnt = 1;
+
+            if (query.Count() == 0) return;
+
             Chart chart;
-            for (int i = 1; i > 20; i++)
+            for (int i = 1; i < 21; i++)
             {
                 chart = (Chart)this.Controls.Find("chartStock" + i, true)[0];
                 chart.Series.Clear();
@@ -226,26 +250,65 @@ namespace StockProject
                 chart.Titles.Clear();
             }
 
-            decimal stockCode = 0;
-            if (decimal.TryParse(chartStock20.Titles[0].Text.PadLeft(4,'0').Substring(0,4), out stockCode))     
-            {
-
-            }
-
-            var query = (from q in _listStockData
-                         where q.StockCode > stockCode
-                         select q.StockCode).Distinct();
-
-            decimal cnt = 1;
 
             foreach (decimal code in query)
             {
+                if (cnt == 1)
+                {
+                    _displayFirstStockCode = code;
+                }
+
                 if (cnt == 21)
                 {
                     break;
                 }
                 this.CreateChart((Chart)this.Controls.Find("chartStock" + cnt, true)[0], code);
                 cnt++;
+                _displayLastStockCode = code;
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+            var query = (from q in _listStockData
+                         where q.StockCode < _displayFirstStockCode
+                         orderby q.StockCode descending
+                         select q.StockCode).Distinct().Take(20).OrderBy(t=>t.ToString());
+
+            decimal cnt = 1;
+
+            if (query.Count() == 0) return;
+
+            Chart chart;
+            for (int i = 1; i < 21; i++)
+            {
+                chart = (Chart)this.Controls.Find("chartStock" + i, true)[0];
+                chart.Series.Clear();
+                chart.Legends.Clear();
+                chart.ChartAreas.Clear();
+                chart.Titles.Clear();
+            }
+
+
+            foreach (decimal code in query)
+            {
+                if (cnt == 1)
+                {
+                    _displayFirstStockCode = code;
+                }
+
+
+                if (cnt == 21)
+                {
+                    break;
+                }
+                this.CreateChart((Chart)this.Controls.Find("chartStock" + cnt, true)[0], code);
+                cnt++;
+                _displayLastStockCode = code;
+
             }
         }
 
@@ -293,6 +356,11 @@ namespace StockProject
                             select q.LowPrice).Min();
 
             area.AxisY.Minimum = (double)minPrice;
+            area.InnerPlotPosition.Auto = false;
+            area.InnerPlotPosition.Width = 100;
+            area.InnerPlotPosition.Height = 80;
+            area.InnerPlotPosition.X = 15;
+            area.InnerPlotPosition.Y = 0;
 
 
             ch.Series.Add(series);
@@ -310,6 +378,7 @@ namespace StockProject
                 dp = new DataPoint();
                 dp.SetValueXY(r.StockDate, r.HighPrice, r.LowPrice, r.OpeningPrice, r.ClosingPrice);
                 dp.IsValueShownAsLabel = false;
+                
                 sb = new StringBuilder();
                 sb.AppendLine(string.Format("日付：{0}", r.StockDate.ToString("yyyy/MM/dd")));
                 sb.AppendLine(string.Format("始値：{0:N0}", r.OpeningPrice));
@@ -367,6 +436,6 @@ namespace StockProject
             //chartStock1.ChartAreas["ChartArea2"].AlignWithChartArea = "ChartArea1";
         }
 
-        
+      
     }
 }
