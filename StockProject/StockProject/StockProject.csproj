@@ -90,6 +90,12 @@
     <Compile Include="DefaultUpdateForm.Designer.cs">
       <DependentUpon>DefaultUpdateForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DisplayChartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayChartForm.Designer.cs">
+      <DependentUpon>DisplayChartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Dividend.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DefaultUpdateForm.resx">
       <DependentUpon>DefaultUpdateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayChartForm.resx">
+      <DependentUpon>DisplayChartForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Dividend.resx">
       <DependentUpon>Dividend.cs</DependentUpon>
