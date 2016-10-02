@@ -230,6 +230,10 @@ namespace StockProject
 
         private void btnNikkeiDollarYen_Click(object sender, EventArgs e)
         {
+            List<Utility.NikkeiAverageEntity> list = new Utility.FinanceUtil().GetNikkeiAverageEntityList();
+
+            List<Utility.DollarYenEntity> listDY = new Utility.FinanceUtil().GetDollarYenEntityList();
+
 
         }
 

@@ -261,7 +261,6 @@ namespace StockProject
             // 情報の取得
             List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
             List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
-
             List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
 
             List<Utility.DividendEntity> dividend;
@@ -354,6 +353,106 @@ namespace StockProject
             this.txtUpdateStatus.Text += "株価更新終了" + Environment.NewLine;
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
             this.txtUpdateStatus.ScrollToCaret();
+
+
+            // 日経平均、ドル円
+            sw.Restart();
+
+            List<DollarYenEntity> listDY = new List<DollarYenEntity>();
+            List<NikkeiAverageEntity> listN = new List<NikkeiAverageEntity>();
+
+
+            await Task.Run(() =>
+            {
+                Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                listDY = finance.GetDollarYenEntityList();
+                listN = finance.GetNikkeiAverageEntityList();
+            });
+
+
+            await Task.Run(() =>
+            {
+                if (listDY.Count == 0)
+                {
+                    // ドル円が取得できない場合はスルー
+                }
+                else
+                {
+
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        var query = from q in listDY
+                                    select q;
+
+                        db.DBUpdate("DELETE FROM dollaryen WHERE ExchangeDate BETWEEN :BeginDate AND :EndDate ",
+                                    new { BeginDate = query.Min(dollerYen => dollerYen.ExchangeDate), EndDate = query.Max(dollerYen => dollerYen.ExchangeDate) });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO dollaryen
+                                        ( 
+                                          ExchangeDate             
+                                         ,OpeningPrice           
+                                         ,HighPrice             
+                                         ,LowPrice          
+                                         ,ClosingPrice             
+                                        ) VALUES (
+                                          :ExchangeDate             
+                                         ,:OpeningPrice           
+                                         ,:HighPrice             
+                                         ,:LowPrice          
+                                         ,:ClosingPrice             
+                                        )";
+
+                        db.DBInsert(insertSql, listDY);
+
+                    }
+                }
+
+                if (listN.Count == 0)
+                {
+                    // 日経平均が取得できない場合はスルー
+                }
+                else
+                {
+
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        var query = from q in listN
+                                    select q;
+
+                        db.DBUpdate("DELETE FROM nikkeiaverage WHERE StockDate BETWEEN :BeginDate AND :EndDate ",
+                                    new { BeginDate = query.Min(nikkei => nikkei.StockDate), EndDate = query.Max(nikkei => nikkei.StockDate) });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO nikkeiaverage
+                                        ( 
+                                          StockDate             
+                                         ,OpeningPrice           
+                                         ,HighPrice             
+                                         ,LowPrice          
+                                         ,ClosingPrice             
+                                        ) VALUES (
+                                          :StockDate             
+                                         ,:OpeningPrice           
+                                         ,:HighPrice             
+                                         ,:LowPrice          
+                                         ,:ClosingPrice             
+                                        )";
+
+                        db.DBInsert(insertSql, listN);
+
+                    }
+                }
+
+            });
+
+
+            this.txtUpdateStatus.Text += "日経平均・ドル／円更新終了"  + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
 
         }
     }
