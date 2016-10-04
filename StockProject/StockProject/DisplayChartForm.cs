@@ -14,6 +14,9 @@ namespace StockProject
     public partial class DisplayChartForm : Form
     {
         private List<Utility.StockPriceProfile> _ListData;
+        private List<Utility.NikkeiAverageEntity> _ListNikkei;
+        private List<Utility.DollarYenEntity> _ListDY;
+
         private int _currentPageNum;
 
         public DisplayChartForm()
@@ -24,15 +27,25 @@ namespace StockProject
         private void DisplayChartForm_Load(object sender, EventArgs e)
         {
             _ListData = new List<Utility.StockPriceProfile>();
+            _ListNikkei = new List<Utility.NikkeiAverageEntity>();
+            _ListDY = new List<Utility.DollarYenEntity>();
+
         }
 
         private void btnDisplay_Click(object sender, EventArgs e)
         {
             Utility.StockPriceUtil util = new Utility.StockPriceUtil();
             _ListData = util.GetListStockPriceProfile(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+            _ListNikkei = util.GetListNikkeiAverage(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+            _ListDY = util.GetListDollarYenEntity(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+
             _currentPageNum = 1;
             // 1ページ目を表示
             this.Paging(_currentPageNum);
+
+            this.CreateNikkeiChart(this.chartNikkei);
+            this.CreateDollarYenChart (this.chartDollarYen);
+
 
         }
 
@@ -81,6 +94,9 @@ namespace StockProject
             ch.Legends.Clear();
             ch.ChartAreas.Clear();
             ch.Titles.Clear();
+            //ch.MinimumSize = new Size(250, 190);
+            //ch.Width = 250;
+            //ch.Height = 190;
 
             string company = "";
             // データ無い場合は処理終了
@@ -121,9 +137,12 @@ namespace StockProject
             area.AxisY.Minimum = (double)minPrice;
             area.InnerPlotPosition.Auto = false;
             area.InnerPlotPosition.Width = 100;
-            area.InnerPlotPosition.Height = 80;
-            area.InnerPlotPosition.X = 15;
-            area.InnerPlotPosition.Y = 0;
+            area.InnerPlotPosition.Height = 82;
+            area.InnerPlotPosition.X = 10;
+            area.InnerPlotPosition.Y = 1;
+            area.AxisX.LabelStyle.Format = "MM/dd";
+            //area.AxisX.LabelStyle.Font = new Font("MSゴシック", 8);
+
 
 
             ch.Series.Add(series);
@@ -157,7 +176,7 @@ namespace StockProject
             }
 
             ch.Titles.Add(stockCode.ToString() + company);
-
+            
 
 
             //// 出来高チャート追加
@@ -197,6 +216,166 @@ namespace StockProject
             ////chartStock.ChartAreas["ChartArea1"].AlignWithChartArea = "ChartArea2";
 
             //chartStock1.ChartAreas["ChartArea2"].AlignWithChartArea = "ChartArea1";
+        }
+
+        private void CreateNikkeiChart(Chart ch)
+        {
+            ch.Series.Clear();
+            ch.Legends.Clear();
+            ch.ChartAreas.Clear();
+            ch.Titles.Clear();
+
+            string company = "";
+            // データ無い場合は処理終了
+            var query = from q in _ListNikkei
+                        select q;
+
+
+            if (query.Count() == 0) return;
+
+            // ----------------------------------------------------------------------
+            Series series = new Series();
+            series.Name = "日経平均";
+
+            Legend legend = new Legend();
+            //legend.Name = stockCode.ToString() ;
+            legend.Alignment = StringAlignment.Near;
+            //legend.Title = stockCode.ToString();
+
+            // Seriesの設定
+            series.ChartType = SeriesChartType.Candlestick;     //ローソク足チャート
+            series.XValueType = ChartValueType.Date;
+            series.YValueType = ChartValueType.Int64;
+            series.IsVisibleInLegend = false;
+            series.SetCustomProperty("PriceUpColor", "Orange");
+            series.SetCustomProperty("PriceDownColor", "SkyBlue");
+
+
+
+            // ----------------------------------------------------------------------
+            ChartArea area = new ChartArea();
+            area.Name = "ChartArea1";
+            area.Visible = true;
+            var minPrice = (from q in _ListNikkei
+                            select q.LowPrice).Min();
+
+            area.AxisY.Minimum = (double)minPrice;
+            area.InnerPlotPosition.Auto = false;
+            area.InnerPlotPosition.Width = 100;
+            area.InnerPlotPosition.Height = 80;
+            area.InnerPlotPosition.X = 15;
+            area.InnerPlotPosition.Y = 0;
+
+
+            ch.Series.Add(series);
+            ch.ChartAreas.Add(area);
+            ch.Legends.Add(legend);
+
+            var price = from q in _ListNikkei
+                        select q;
+
+            DataPoint dp;
+            StringBuilder sb;
+            foreach (var r in price)
+            {
+                dp = new DataPoint();
+                dp.SetValueXY(r.StockDate, r.HighPrice, r.LowPrice, r.OpeningPrice, r.ClosingPrice);
+                dp.IsValueShownAsLabel = false;
+
+                sb = new StringBuilder();
+                sb.AppendLine(string.Format("日付：{0}", r.StockDate.ToString("yyyy/MM/dd")));
+                sb.AppendLine(string.Format("始値：{0:N0}", r.OpeningPrice));
+                sb.AppendLine(string.Format("安値：{0:N0}", r.LowPrice));
+                sb.AppendLine(string.Format("高値：{0:N0}", r.HighPrice));
+                sb.AppendLine(string.Format("終値：{0:N0}", r.ClosingPrice));
+
+                dp.LabelToolTip = sb.ToString();
+                dp.ToolTip = sb.ToString();
+
+                ch.Series[0].Points.Add(dp);
+            }
+
+            ch.Titles.Add("日経平均");
+        }
+
+        private void CreateDollarYenChart(Chart ch)
+        {
+            ch.Series.Clear();
+            ch.Legends.Clear();
+            ch.ChartAreas.Clear();
+            ch.Titles.Clear();
+
+            string company = "";
+            // データ無い場合は処理終了
+            var query = from q in _ListDY
+                        select q;
+
+
+            if (query.Count() == 0) return;
+
+            // ----------------------------------------------------------------------
+            Series series = new Series();
+            series.Name = "ドル／円";
+
+            Legend legend = new Legend();
+            //legend.Name = stockCode.ToString() ;
+            legend.Alignment = StringAlignment.Near;
+            //legend.Title = stockCode.ToString();
+
+            // Seriesの設定
+            series.ChartType = SeriesChartType.Candlestick;     //ローソク足チャート
+            series.XValueType = ChartValueType.Date;
+            series.YValueType = ChartValueType.Int64;
+            series.IsVisibleInLegend = false;
+            series.SetCustomProperty("PriceUpColor", "Orange");
+            series.SetCustomProperty("PriceDownColor", "SkyBlue");
+
+
+
+            // ----------------------------------------------------------------------
+            ChartArea area = new ChartArea();
+            area.Name = "ChartArea1";
+            area.Visible = true;
+            var minPrice = (from q in _ListDY
+                            select q.LowPrice).Min();
+
+            area.AxisY.Minimum = (double)minPrice;
+            area.InnerPlotPosition.Auto = false;
+            area.InnerPlotPosition.Width = 100;
+            area.InnerPlotPosition.Height = 80;
+            area.InnerPlotPosition.X = 15;
+            area.InnerPlotPosition.Y = 0;
+
+
+            ch.Series.Add(series);
+            ch.ChartAreas.Add(area);
+            ch.Legends.Add(legend);
+
+            var price = from q in _ListDY
+                        select q;
+
+            DataPoint dp;
+            StringBuilder sb;
+            foreach (var r in price)
+            {
+                dp = new DataPoint();
+                dp.SetValueXY(r.ExchangeDate, r.HighPrice, r.LowPrice, r.OpeningPrice, r.ClosingPrice);
+                dp.IsValueShownAsLabel = false;
+
+                sb = new StringBuilder();
+                sb.AppendLine(string.Format("日付：{0}", r.ExchangeDate.ToString("yyyy/MM/dd")));
+                sb.AppendLine(string.Format("始値：{0:N0}", r.OpeningPrice));
+                sb.AppendLine(string.Format("安値：{0:N0}", r.LowPrice));
+                sb.AppendLine(string.Format("高値：{0:N0}", r.HighPrice));
+                sb.AppendLine(string.Format("終値：{0:N0}", r.ClosingPrice));
+
+                dp.LabelToolTip = sb.ToString();
+                dp.ToolTip = sb.ToString();
+
+                ch.Series[0].Points.Add(dp);
+            }
+
+            ch.Titles.Add("ドル／円");
         }
 
         private void btnNext_Click(object sender, EventArgs e)

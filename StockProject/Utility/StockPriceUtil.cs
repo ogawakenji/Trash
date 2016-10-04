@@ -47,6 +47,59 @@ namespace Utility
         }
 
 
+        // 日経平均チャート用データ
+        public List<NikkeiAverageEntity> GetListNikkeiAverage(DateTime beginDate, DateTime endDate)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(" SELECT  ");
+            sb.AppendLine("       n.StockDate ");
+            sb.AppendLine("     , n.OpeningPrice ");
+            sb.AppendLine("     , n.LowPrice ");
+            sb.AppendLine("     , n.HighPrice ");
+            sb.AppendLine("     , n.ClosingPrice ");
+            sb.AppendLine("  FROM  ");
+            sb.AppendLine("       nikkeiaverage n ");
+            sb.AppendLine(" WHERE n.StockDate BETWEEN :BeginDate AND :EndDate ");
+            sb.AppendLine(" ORDER BY  ");
+            sb.AppendLine("       n.StockDate ");
+
+            List<NikkeiAverageEntity> ListNikkeiAverage = new List<NikkeiAverageEntity>();
+
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                // データを取得してインスタンス変数に保持
+                ListNikkeiAverage = db.DBSelect<NikkeiAverageEntity>(sb.ToString(), new { BeginDate = beginDate, EndDate = endDate });
+            }
+
+            return ListNikkeiAverage;
+        }
+
+        // 日経平均チャート用データ
+        public List<DollarYenEntity> GetListDollarYenEntity(DateTime beginDate, DateTime endDate)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(" SELECT  ");
+            sb.AppendLine("       d.ExchangeDate ");
+            sb.AppendLine("     , d.OpeningPrice ");
+            sb.AppendLine("     , d.LowPrice ");
+            sb.AppendLine("     , d.HighPrice ");
+            sb.AppendLine("     , d.ClosingPrice ");
+            sb.AppendLine("  FROM  ");
+            sb.AppendLine("       dollaryen d ");
+            sb.AppendLine(" WHERE d.ExchangeDate BETWEEN :BeginDate AND :EndDate ");
+            sb.AppendLine(" ORDER BY  ");
+            sb.AppendLine("       d.ExchangeDate ");
+
+            List<DollarYenEntity> ListDollarYen = new List<DollarYenEntity>();
+
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                // データを取得してインスタンス変数に保持
+                ListDollarYen = db.DBSelect<DollarYenEntity>(sb.ToString(), new { BeginDate = beginDate, EndDate = endDate });
+            }
+
+            return ListDollarYen;
+        }
 
     }
 }
