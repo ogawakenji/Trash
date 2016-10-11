@@ -315,7 +315,7 @@
             this.tabControl1.Location = new System.Drawing.Point(3, 35);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1181, 466);
+            this.tabControl1.Size = new System.Drawing.Size(1313, 466);
             this.tabControl1.TabIndex = 1;
             // 
             // tabPage1
@@ -325,7 +325,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1173, 437);
+            this.tabPage1.Size = new System.Drawing.Size(1305, 437);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "株価チャート";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -336,7 +336,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1173, 437);
+            this.panel1.Size = new System.Drawing.Size(1305, 437);
             this.panel1.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -396,7 +396,7 @@
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(300, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1173, 437);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1305, 437);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // chart1
@@ -427,7 +427,7 @@
             this.chart2.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(280, 0);
+            this.chart2.Location = new System.Drawing.Point(250, 0);
             this.chart2.Margin = new System.Windows.Forms.Padding(0);
             this.chart2.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart2.Name = "chart2";
@@ -447,7 +447,7 @@
             this.chart3.ChartAreas.Add(chartArea3);
             legend3.Name = "Legend1";
             this.chart3.Legends.Add(legend3);
-            this.chart3.Location = new System.Drawing.Point(560, 0);
+            this.chart3.Location = new System.Drawing.Point(500, 0);
             this.chart3.Margin = new System.Windows.Forms.Padding(0);
             this.chart3.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart3.Name = "chart3";
@@ -467,7 +467,7 @@
             this.chart4.ChartAreas.Add(chartArea4);
             legend4.Name = "Legend1";
             this.chart4.Legends.Add(legend4);
-            this.chart4.Location = new System.Drawing.Point(840, 0);
+            this.chart4.Location = new System.Drawing.Point(750, 0);
             this.chart4.Margin = new System.Windows.Forms.Padding(0);
             this.chart4.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart4.Name = "chart4";
@@ -487,7 +487,7 @@
             this.chart5.ChartAreas.Add(chartArea5);
             legend5.Name = "Legend1";
             this.chart5.Legends.Add(legend5);
-            this.chart5.Location = new System.Drawing.Point(0, 200);
+            this.chart5.Location = new System.Drawing.Point(1000, 0);
             this.chart5.Margin = new System.Windows.Forms.Padding(0);
             this.chart5.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart5.Name = "chart5";
@@ -507,7 +507,7 @@
             this.chart6.ChartAreas.Add(chartArea6);
             legend6.Name = "Legend1";
             this.chart6.Legends.Add(legend6);
-            this.chart6.Location = new System.Drawing.Point(280, 200);
+            this.chart6.Location = new System.Drawing.Point(0, 190);
             this.chart6.Margin = new System.Windows.Forms.Padding(0);
             this.chart6.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart6.Name = "chart6";
@@ -527,7 +527,7 @@
             this.chart7.ChartAreas.Add(chartArea7);
             legend7.Name = "Legend1";
             this.chart7.Legends.Add(legend7);
-            this.chart7.Location = new System.Drawing.Point(560, 200);
+            this.chart7.Location = new System.Drawing.Point(250, 190);
             this.chart7.Margin = new System.Windows.Forms.Padding(0);
             this.chart7.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart7.Name = "chart7";
@@ -547,7 +547,7 @@
             this.chart8.ChartAreas.Add(chartArea8);
             legend8.Name = "Legend1";
             this.chart8.Legends.Add(legend8);
-            this.chart8.Location = new System.Drawing.Point(840, 200);
+            this.chart8.Location = new System.Drawing.Point(500, 190);
             this.chart8.Margin = new System.Windows.Forms.Padding(0);
             this.chart8.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart8.Name = "chart8";
@@ -567,7 +567,7 @@
             this.chart9.ChartAreas.Add(chartArea9);
             legend9.Name = "Legend1";
             this.chart9.Legends.Add(legend9);
-            this.chart9.Location = new System.Drawing.Point(0, 400);
+            this.chart9.Location = new System.Drawing.Point(750, 190);
             this.chart9.Margin = new System.Windows.Forms.Padding(0);
             this.chart9.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart9.Name = "chart9";
@@ -587,7 +587,7 @@
             this.chart10.ChartAreas.Add(chartArea10);
             legend10.Name = "Legend1";
             this.chart10.Legends.Add(legend10);
-            this.chart10.Location = new System.Drawing.Point(280, 400);
+            this.chart10.Location = new System.Drawing.Point(1000, 190);
             this.chart10.Margin = new System.Windows.Forms.Padding(0);
             this.chart10.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart10.Name = "chart10";
@@ -607,7 +607,7 @@
             this.chart11.ChartAreas.Add(chartArea11);
             legend11.Name = "Legend1";
             this.chart11.Legends.Add(legend11);
-            this.chart11.Location = new System.Drawing.Point(560, 400);
+            this.chart11.Location = new System.Drawing.Point(0, 380);
             this.chart11.Margin = new System.Windows.Forms.Padding(0);
             this.chart11.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart11.Name = "chart11";
@@ -627,7 +627,7 @@
             this.chart12.ChartAreas.Add(chartArea12);
             legend12.Name = "Legend1";
             this.chart12.Legends.Add(legend12);
-            this.chart12.Location = new System.Drawing.Point(840, 400);
+            this.chart12.Location = new System.Drawing.Point(250, 380);
             this.chart12.Margin = new System.Windows.Forms.Padding(0);
             this.chart12.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart12.Name = "chart12";
@@ -647,7 +647,7 @@
             this.chart13.ChartAreas.Add(chartArea13);
             legend13.Name = "Legend1";
             this.chart13.Legends.Add(legend13);
-            this.chart13.Location = new System.Drawing.Point(0, 600);
+            this.chart13.Location = new System.Drawing.Point(500, 380);
             this.chart13.Margin = new System.Windows.Forms.Padding(0);
             this.chart13.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart13.Name = "chart13";
@@ -667,7 +667,7 @@
             this.chart14.ChartAreas.Add(chartArea14);
             legend14.Name = "Legend1";
             this.chart14.Legends.Add(legend14);
-            this.chart14.Location = new System.Drawing.Point(280, 600);
+            this.chart14.Location = new System.Drawing.Point(750, 380);
             this.chart14.Margin = new System.Windows.Forms.Padding(0);
             this.chart14.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart14.Name = "chart14";
@@ -687,7 +687,7 @@
             this.chart15.ChartAreas.Add(chartArea15);
             legend15.Name = "Legend1";
             this.chart15.Legends.Add(legend15);
-            this.chart15.Location = new System.Drawing.Point(560, 600);
+            this.chart15.Location = new System.Drawing.Point(1000, 380);
             this.chart15.Margin = new System.Windows.Forms.Padding(0);
             this.chart15.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart15.Name = "chart15";
@@ -707,7 +707,7 @@
             this.chart16.ChartAreas.Add(chartArea16);
             legend16.Name = "Legend1";
             this.chart16.Legends.Add(legend16);
-            this.chart16.Location = new System.Drawing.Point(840, 600);
+            this.chart16.Location = new System.Drawing.Point(0, 570);
             this.chart16.Margin = new System.Windows.Forms.Padding(0);
             this.chart16.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart16.Name = "chart16";
@@ -727,7 +727,7 @@
             this.chart17.ChartAreas.Add(chartArea17);
             legend17.Name = "Legend1";
             this.chart17.Legends.Add(legend17);
-            this.chart17.Location = new System.Drawing.Point(0, 800);
+            this.chart17.Location = new System.Drawing.Point(250, 570);
             this.chart17.Margin = new System.Windows.Forms.Padding(0);
             this.chart17.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart17.Name = "chart17";
@@ -747,7 +747,7 @@
             this.chart18.ChartAreas.Add(chartArea18);
             legend18.Name = "Legend1";
             this.chart18.Legends.Add(legend18);
-            this.chart18.Location = new System.Drawing.Point(280, 800);
+            this.chart18.Location = new System.Drawing.Point(500, 570);
             this.chart18.Margin = new System.Windows.Forms.Padding(0);
             this.chart18.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart18.Name = "chart18";
@@ -767,7 +767,7 @@
             this.chart19.ChartAreas.Add(chartArea19);
             legend19.Name = "Legend1";
             this.chart19.Legends.Add(legend19);
-            this.chart19.Location = new System.Drawing.Point(560, 800);
+            this.chart19.Location = new System.Drawing.Point(750, 570);
             this.chart19.Margin = new System.Windows.Forms.Padding(0);
             this.chart19.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart19.Name = "chart19";
@@ -787,7 +787,7 @@
             this.chart20.ChartAreas.Add(chartArea20);
             legend20.Name = "Legend1";
             this.chart20.Legends.Add(legend20);
-            this.chart20.Location = new System.Drawing.Point(840, 800);
+            this.chart20.Location = new System.Drawing.Point(1000, 570);
             this.chart20.Margin = new System.Windows.Forms.Padding(0);
             this.chart20.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart20.Name = "chart20";
@@ -807,7 +807,7 @@
             this.chart21.ChartAreas.Add(chartArea21);
             legend21.Name = "Legend1";
             this.chart21.Legends.Add(legend21);
-            this.chart21.Location = new System.Drawing.Point(0, 1000);
+            this.chart21.Location = new System.Drawing.Point(0, 760);
             this.chart21.Margin = new System.Windows.Forms.Padding(0);
             this.chart21.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart21.Name = "chart21";
@@ -827,7 +827,7 @@
             this.chart22.ChartAreas.Add(chartArea22);
             legend22.Name = "Legend1";
             this.chart22.Legends.Add(legend22);
-            this.chart22.Location = new System.Drawing.Point(280, 1000);
+            this.chart22.Location = new System.Drawing.Point(250, 760);
             this.chart22.Margin = new System.Windows.Forms.Padding(0);
             this.chart22.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart22.Name = "chart22";
@@ -847,7 +847,7 @@
             this.chart23.ChartAreas.Add(chartArea23);
             legend23.Name = "Legend1";
             this.chart23.Legends.Add(legend23);
-            this.chart23.Location = new System.Drawing.Point(560, 1000);
+            this.chart23.Location = new System.Drawing.Point(500, 760);
             this.chart23.Margin = new System.Windows.Forms.Padding(0);
             this.chart23.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart23.Name = "chart23";
@@ -867,7 +867,7 @@
             this.chart24.ChartAreas.Add(chartArea24);
             legend24.Name = "Legend1";
             this.chart24.Legends.Add(legend24);
-            this.chart24.Location = new System.Drawing.Point(840, 1000);
+            this.chart24.Location = new System.Drawing.Point(750, 760);
             this.chart24.Margin = new System.Windows.Forms.Padding(0);
             this.chart24.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart24.Name = "chart24";
@@ -887,7 +887,7 @@
             this.chart25.ChartAreas.Add(chartArea25);
             legend25.Name = "Legend1";
             this.chart25.Legends.Add(legend25);
-            this.chart25.Location = new System.Drawing.Point(0, 1200);
+            this.chart25.Location = new System.Drawing.Point(1000, 760);
             this.chart25.Margin = new System.Windows.Forms.Padding(0);
             this.chart25.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart25.Name = "chart25";
@@ -907,7 +907,7 @@
             this.chart26.ChartAreas.Add(chartArea26);
             legend26.Name = "Legend1";
             this.chart26.Legends.Add(legend26);
-            this.chart26.Location = new System.Drawing.Point(280, 1200);
+            this.chart26.Location = new System.Drawing.Point(0, 950);
             this.chart26.Margin = new System.Windows.Forms.Padding(0);
             this.chart26.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart26.Name = "chart26";
@@ -927,7 +927,7 @@
             this.chart27.ChartAreas.Add(chartArea27);
             legend27.Name = "Legend1";
             this.chart27.Legends.Add(legend27);
-            this.chart27.Location = new System.Drawing.Point(560, 1200);
+            this.chart27.Location = new System.Drawing.Point(250, 950);
             this.chart27.Margin = new System.Windows.Forms.Padding(0);
             this.chart27.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart27.Name = "chart27";
@@ -947,7 +947,7 @@
             this.chart28.ChartAreas.Add(chartArea28);
             legend28.Name = "Legend1";
             this.chart28.Legends.Add(legend28);
-            this.chart28.Location = new System.Drawing.Point(840, 1200);
+            this.chart28.Location = new System.Drawing.Point(500, 950);
             this.chart28.Margin = new System.Windows.Forms.Padding(0);
             this.chart28.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart28.Name = "chart28";
@@ -967,7 +967,7 @@
             this.chart29.ChartAreas.Add(chartArea29);
             legend29.Name = "Legend1";
             this.chart29.Legends.Add(legend29);
-            this.chart29.Location = new System.Drawing.Point(0, 1400);
+            this.chart29.Location = new System.Drawing.Point(750, 950);
             this.chart29.Margin = new System.Windows.Forms.Padding(0);
             this.chart29.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart29.Name = "chart29";
@@ -987,7 +987,7 @@
             this.chart30.ChartAreas.Add(chartArea30);
             legend30.Name = "Legend1";
             this.chart30.Legends.Add(legend30);
-            this.chart30.Location = new System.Drawing.Point(280, 1400);
+            this.chart30.Location = new System.Drawing.Point(1000, 950);
             this.chart30.Margin = new System.Windows.Forms.Padding(0);
             this.chart30.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart30.Name = "chart30";
@@ -1007,7 +1007,7 @@
             this.chart31.ChartAreas.Add(chartArea31);
             legend31.Name = "Legend1";
             this.chart31.Legends.Add(legend31);
-            this.chart31.Location = new System.Drawing.Point(560, 1400);
+            this.chart31.Location = new System.Drawing.Point(0, 1140);
             this.chart31.Margin = new System.Windows.Forms.Padding(0);
             this.chart31.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart31.Name = "chart31";
@@ -1027,7 +1027,7 @@
             this.chart32.ChartAreas.Add(chartArea32);
             legend32.Name = "Legend1";
             this.chart32.Legends.Add(legend32);
-            this.chart32.Location = new System.Drawing.Point(840, 1400);
+            this.chart32.Location = new System.Drawing.Point(250, 1140);
             this.chart32.Margin = new System.Windows.Forms.Padding(0);
             this.chart32.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart32.Name = "chart32";
@@ -1047,7 +1047,7 @@
             this.chart33.ChartAreas.Add(chartArea33);
             legend33.Name = "Legend1";
             this.chart33.Legends.Add(legend33);
-            this.chart33.Location = new System.Drawing.Point(0, 1600);
+            this.chart33.Location = new System.Drawing.Point(500, 1140);
             this.chart33.Margin = new System.Windows.Forms.Padding(0);
             this.chart33.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart33.Name = "chart33";
@@ -1067,7 +1067,7 @@
             this.chart34.ChartAreas.Add(chartArea34);
             legend34.Name = "Legend1";
             this.chart34.Legends.Add(legend34);
-            this.chart34.Location = new System.Drawing.Point(280, 1600);
+            this.chart34.Location = new System.Drawing.Point(750, 1140);
             this.chart34.Margin = new System.Windows.Forms.Padding(0);
             this.chart34.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart34.Name = "chart34";
@@ -1087,7 +1087,7 @@
             this.chart35.ChartAreas.Add(chartArea35);
             legend35.Name = "Legend1";
             this.chart35.Legends.Add(legend35);
-            this.chart35.Location = new System.Drawing.Point(560, 1600);
+            this.chart35.Location = new System.Drawing.Point(1000, 1140);
             this.chart35.Margin = new System.Windows.Forms.Padding(0);
             this.chart35.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart35.Name = "chart35";
@@ -1107,7 +1107,7 @@
             this.chart36.ChartAreas.Add(chartArea36);
             legend36.Name = "Legend1";
             this.chart36.Legends.Add(legend36);
-            this.chart36.Location = new System.Drawing.Point(840, 1600);
+            this.chart36.Location = new System.Drawing.Point(0, 1330);
             this.chart36.Margin = new System.Windows.Forms.Padding(0);
             this.chart36.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart36.Name = "chart36";
@@ -1127,7 +1127,7 @@
             this.chart37.ChartAreas.Add(chartArea37);
             legend37.Name = "Legend1";
             this.chart37.Legends.Add(legend37);
-            this.chart37.Location = new System.Drawing.Point(0, 1800);
+            this.chart37.Location = new System.Drawing.Point(250, 1330);
             this.chart37.Margin = new System.Windows.Forms.Padding(0);
             this.chart37.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart37.Name = "chart37";
@@ -1147,7 +1147,7 @@
             this.chart38.ChartAreas.Add(chartArea38);
             legend38.Name = "Legend1";
             this.chart38.Legends.Add(legend38);
-            this.chart38.Location = new System.Drawing.Point(280, 1800);
+            this.chart38.Location = new System.Drawing.Point(500, 1330);
             this.chart38.Margin = new System.Windows.Forms.Padding(0);
             this.chart38.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart38.Name = "chart38";
@@ -1167,7 +1167,7 @@
             this.chart39.ChartAreas.Add(chartArea39);
             legend39.Name = "Legend1";
             this.chart39.Legends.Add(legend39);
-            this.chart39.Location = new System.Drawing.Point(560, 1800);
+            this.chart39.Location = new System.Drawing.Point(750, 1330);
             this.chart39.Margin = new System.Windows.Forms.Padding(0);
             this.chart39.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart39.Name = "chart39";
@@ -1187,7 +1187,7 @@
             this.chart40.ChartAreas.Add(chartArea40);
             legend40.Name = "Legend1";
             this.chart40.Legends.Add(legend40);
-            this.chart40.Location = new System.Drawing.Point(840, 1800);
+            this.chart40.Location = new System.Drawing.Point(1000, 1330);
             this.chart40.Margin = new System.Windows.Forms.Padding(0);
             this.chart40.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart40.Name = "chart40";
@@ -1207,7 +1207,7 @@
             this.chart41.ChartAreas.Add(chartArea41);
             legend41.Name = "Legend1";
             this.chart41.Legends.Add(legend41);
-            this.chart41.Location = new System.Drawing.Point(0, 2000);
+            this.chart41.Location = new System.Drawing.Point(0, 1520);
             this.chart41.Margin = new System.Windows.Forms.Padding(0);
             this.chart41.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart41.Name = "chart41";
@@ -1227,7 +1227,7 @@
             this.chart42.ChartAreas.Add(chartArea42);
             legend42.Name = "Legend1";
             this.chart42.Legends.Add(legend42);
-            this.chart42.Location = new System.Drawing.Point(280, 2000);
+            this.chart42.Location = new System.Drawing.Point(250, 1520);
             this.chart42.Margin = new System.Windows.Forms.Padding(0);
             this.chart42.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart42.Name = "chart42";
@@ -1247,7 +1247,7 @@
             this.chart43.ChartAreas.Add(chartArea43);
             legend43.Name = "Legend1";
             this.chart43.Legends.Add(legend43);
-            this.chart43.Location = new System.Drawing.Point(560, 2000);
+            this.chart43.Location = new System.Drawing.Point(500, 1520);
             this.chart43.Margin = new System.Windows.Forms.Padding(0);
             this.chart43.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart43.Name = "chart43";
@@ -1267,7 +1267,7 @@
             this.chart44.ChartAreas.Add(chartArea44);
             legend44.Name = "Legend1";
             this.chart44.Legends.Add(legend44);
-            this.chart44.Location = new System.Drawing.Point(840, 2000);
+            this.chart44.Location = new System.Drawing.Point(750, 1520);
             this.chart44.Margin = new System.Windows.Forms.Padding(0);
             this.chart44.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart44.Name = "chart44";
@@ -1287,7 +1287,7 @@
             this.chart45.ChartAreas.Add(chartArea45);
             legend45.Name = "Legend1";
             this.chart45.Legends.Add(legend45);
-            this.chart45.Location = new System.Drawing.Point(0, 2200);
+            this.chart45.Location = new System.Drawing.Point(1000, 1520);
             this.chart45.Margin = new System.Windows.Forms.Padding(0);
             this.chart45.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart45.Name = "chart45";
@@ -1307,7 +1307,7 @@
             this.chart46.ChartAreas.Add(chartArea46);
             legend46.Name = "Legend1";
             this.chart46.Legends.Add(legend46);
-            this.chart46.Location = new System.Drawing.Point(280, 2200);
+            this.chart46.Location = new System.Drawing.Point(0, 1710);
             this.chart46.Margin = new System.Windows.Forms.Padding(0);
             this.chart46.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart46.Name = "chart46";
@@ -1327,7 +1327,7 @@
             this.chart47.ChartAreas.Add(chartArea47);
             legend47.Name = "Legend1";
             this.chart47.Legends.Add(legend47);
-            this.chart47.Location = new System.Drawing.Point(560, 2200);
+            this.chart47.Location = new System.Drawing.Point(250, 1710);
             this.chart47.Margin = new System.Windows.Forms.Padding(0);
             this.chart47.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart47.Name = "chart47";
@@ -1347,7 +1347,7 @@
             this.chart48.ChartAreas.Add(chartArea48);
             legend48.Name = "Legend1";
             this.chart48.Legends.Add(legend48);
-            this.chart48.Location = new System.Drawing.Point(840, 2200);
+            this.chart48.Location = new System.Drawing.Point(500, 1710);
             this.chart48.Margin = new System.Windows.Forms.Padding(0);
             this.chart48.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart48.Name = "chart48";
@@ -1367,7 +1367,7 @@
             this.chart49.ChartAreas.Add(chartArea49);
             legend49.Name = "Legend1";
             this.chart49.Legends.Add(legend49);
-            this.chart49.Location = new System.Drawing.Point(0, 2400);
+            this.chart49.Location = new System.Drawing.Point(750, 1710);
             this.chart49.Margin = new System.Windows.Forms.Padding(0);
             this.chart49.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart49.Name = "chart49";
@@ -1387,7 +1387,7 @@
             this.chart50.ChartAreas.Add(chartArea50);
             legend50.Name = "Legend1";
             this.chart50.Legends.Add(legend50);
-            this.chart50.Location = new System.Drawing.Point(280, 2400);
+            this.chart50.Location = new System.Drawing.Point(1000, 1710);
             this.chart50.Margin = new System.Windows.Forms.Padding(0);
             this.chart50.MinimumSize = new System.Drawing.Size(250, 190);
             this.chart50.Name = "chart50";
@@ -1495,7 +1495,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 513);
+            this.ClientSize = new System.Drawing.Size(1317, 513);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnDisplay);

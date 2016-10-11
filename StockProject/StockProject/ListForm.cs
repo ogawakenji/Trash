@@ -80,6 +80,24 @@ namespace StockProject
             this.listEntityBindingSource.DataSource = _ListDetail;
 
 
+            var query = (from q in _ListDetail
+                         orderby q.IndustriesCategory 
+                        select q.IndustriesCategory).Distinct();
+
+            foreach ( string s in query)
+            {
+                this.cboCategory.Items.Add(s);
+            }
+
+            var q2 = (from q in _ListDetail
+                         orderby q.MarketName 
+                         select q.MarketName).Distinct();
+
+            foreach (string s in q2)
+            {
+                this.cboMarketName.Items.Add(s);
+            }
+
 
 
         }
@@ -140,6 +158,9 @@ namespace StockProject
             }
 
             this.listEntityBindingSource.DataSource = _ListDetail;
+
+            filterData();
+
         }
 
         private void btnUpDown_Click(object sender, EventArgs e)
@@ -372,5 +393,52 @@ namespace StockProject
             }
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void filterData()
+        {
+            //証券コード
+            string stockCode = "";
+
+            //業種分類
+            string industriesCategory = "";
+
+            //市場名
+            string marketName = "";
+
+            //決算月
+            string closingMonth = "";
+
+            stockCode = this.txtStockCode.Text;
+            industriesCategory = this.cboCategory.Text;
+            marketName = this.cboMarketName.Text;
+            closingMonth = this.txtClosingMonth.Text;
+
+            var q = _ListDetail.AsQueryable();
+            if (!string.IsNullOrEmpty(stockCode))
+            {
+                q = q.Where(c => c.StockCode.ToString().Contains(stockCode));
+            }
+
+            if (!string.IsNullOrEmpty(industriesCategory))
+            {
+                q = q.Where(c => c.IndustriesCategory.ToString().Contains(industriesCategory));
+            }
+
+            if (!string.IsNullOrEmpty(closingMonth))
+            {
+                q = q.Where(c => c.ClosingMonth.ToString() == closingMonth);
+            }
+
+            this.listEntityBindingSource.DataSource = q;
+
+
+        }
+
     }
 }

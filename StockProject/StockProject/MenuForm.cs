@@ -20,6 +20,9 @@ namespace StockProject
         private void MenuForm_Load(object sender, EventArgs e)
         {
             // sqliteのデータベースを確認し、存在しなければテーブルを作成する
+            this.CreateTables();
+
+            //
 
 
         }
@@ -133,8 +136,55 @@ namespace StockProject
                         ) ";
                     db.DBExecuteSQL(sql);
                 }
+
+                // テーブルを検索
+                tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'temptable'");
+                if (tblLst[0] == 0)
+                {
+                    sql = @"CREATE TABLE temptable
+                        (
+                           StockCode                   NUMERIC
+                          ,CompanyName                 TEXT
+                          ,primary key(StockCode)
+                        ) ";
+                    db.DBExecuteSQL(sql);
+                }
+
             }
 
+        }
+
+        // 画面を表示する
+        private void ShowForm<T>() where T : new()
+        {
+            // ジェネリックメソッド where T :new() new制約をつける
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is T)
+                {
+                    f.TopMost = true;
+                    f.TopMost = false;
+                    return;
+                }
+            }
+            T t = new T();
+            Form frm = t as Form;
+            frm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowForm<ListForm>();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ShowForm<DisplayChartForm>();
+        }
+
+        private void MenuForm_Shown(object sender, EventArgs e)
+        {
+            ShowForm<DefaultUpdateForm>();
         }
     }
 }
