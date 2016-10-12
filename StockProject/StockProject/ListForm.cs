@@ -104,60 +104,60 @@ namespace StockProject
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            using (Utility.DbUtil db = new Utility.DbUtil())
-            {
+            //using (Utility.DbUtil db = new Utility.DbUtil())
+            //{
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine(" WITH PRICE AS ( ");
-                sb.AppendLine(" SELECT stockprice.*  ");
-                sb.AppendLine(" FROM  ");
-                sb.AppendLine("     stockprice  ");
-                sb.AppendLine(" INNER JOIN  ( ");
-                sb.AppendLine("       SELECT ");
-                sb.AppendLine("           StockCode ");
-                sb.AppendLine("          ,MAX(StockDate) StockDate ");
-                sb.AppendLine("       FROM ");
-                sb.AppendLine("            stockprice ");
-                sb.AppendLine("       GROUP BY  ");
-                sb.AppendLine("                StockCode ");
-                sb.AppendLine("       ) stockmax  ");
-                sb.AppendLine("    ON stockmax.StockCode = stockprice.StockCode ");
-                sb.AppendLine("   AND stockmax.StockDate = stockprice.StockDate ");
-                sb.AppendLine(" ) ");
-                sb.AppendLine(" SELECT ");
-                sb.AppendLine("      profile.StockCode ");
-                sb.AppendLine("     ,profile.CompanyName ");
-                sb.AppendLine("     ,profile.Feature ");
-                sb.AppendLine("     ,profile.ConcatenationBusiness ");
-                sb.AppendLine("     ,profile.HeadquartersLocation ");
-                sb.AppendLine("     ,profile.IndustriesCategory ");
-                sb.AppendLine("     ,profile.FoundationDate ");
-                sb.AppendLine("     ,profile.MarketName ");
-                sb.AppendLine("     ,profile.ListedDate ");
-                sb.AppendLine("     ,profile.ClosingMonth ");
-                sb.AppendLine("     ,profile.UnitShares ");
-                sb.AppendLine("     ,profile.EmployeeNumberSingle ");
-                sb.AppendLine("     ,profile.EmployeeNumberConcatenation ");
-                sb.AppendLine("     ,profile.AvarageAnnualIncome ");
-                sb.AppendLine("     ,dividend.Dividend ");
-                sb.AppendLine("     ,round(cast(dividend.Dividend as real) / PRICE.ClosingPrice * 100,2) DividendYield ");
-                sb.AppendLine("     ,PRICE.ClosingPrice ");
-                sb.AppendLine("     ,PRICE.TradeVolume ");
-                sb.AppendLine(" FROM  ");
-                sb.AppendLine("       profile ");
-                sb.AppendLine(" LEFT JOIN PRICE  ");
-                sb.AppendLine("   ON PRICE.StockCode = profile.StockCode ");
-                sb.AppendLine(" LEFT JOIN dividend ");
-                sb.AppendLine("   ON dividend.StockCode = profile.StockCode ");
-
-
-                _ListDetail = db.DBSelect<ListEntity>(sb.ToString());
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.AppendLine(" WITH PRICE AS ( ");
+            //    sb.AppendLine(" SELECT stockprice.*  ");
+            //    sb.AppendLine(" FROM  ");
+            //    sb.AppendLine("     stockprice  ");
+            //    sb.AppendLine(" INNER JOIN  ( ");
+            //    sb.AppendLine("       SELECT ");
+            //    sb.AppendLine("           StockCode ");
+            //    sb.AppendLine("          ,MAX(StockDate) StockDate ");
+            //    sb.AppendLine("       FROM ");
+            //    sb.AppendLine("            stockprice ");
+            //    sb.AppendLine("       GROUP BY  ");
+            //    sb.AppendLine("                StockCode ");
+            //    sb.AppendLine("       ) stockmax  ");
+            //    sb.AppendLine("    ON stockmax.StockCode = stockprice.StockCode ");
+            //    sb.AppendLine("   AND stockmax.StockDate = stockprice.StockDate ");
+            //    sb.AppendLine(" ) ");
+            //    sb.AppendLine(" SELECT ");
+            //    sb.AppendLine("      profile.StockCode ");
+            //    sb.AppendLine("     ,profile.CompanyName ");
+            //    sb.AppendLine("     ,profile.Feature ");
+            //    sb.AppendLine("     ,profile.ConcatenationBusiness ");
+            //    sb.AppendLine("     ,profile.HeadquartersLocation ");
+            //    sb.AppendLine("     ,profile.IndustriesCategory ");
+            //    sb.AppendLine("     ,profile.FoundationDate ");
+            //    sb.AppendLine("     ,profile.MarketName ");
+            //    sb.AppendLine("     ,profile.ListedDate ");
+            //    sb.AppendLine("     ,profile.ClosingMonth ");
+            //    sb.AppendLine("     ,profile.UnitShares ");
+            //    sb.AppendLine("     ,profile.EmployeeNumberSingle ");
+            //    sb.AppendLine("     ,profile.EmployeeNumberConcatenation ");
+            //    sb.AppendLine("     ,profile.AvarageAnnualIncome ");
+            //    sb.AppendLine("     ,dividend.Dividend ");
+            //    sb.AppendLine("     ,round(cast(dividend.Dividend as real) / PRICE.ClosingPrice * 100,2) DividendYield ");
+            //    sb.AppendLine("     ,PRICE.ClosingPrice ");
+            //    sb.AppendLine("     ,PRICE.TradeVolume ");
+            //    sb.AppendLine(" FROM  ");
+            //    sb.AppendLine("       profile ");
+            //    sb.AppendLine(" LEFT JOIN PRICE  ");
+            //    sb.AppendLine("   ON PRICE.StockCode = profile.StockCode ");
+            //    sb.AppendLine(" LEFT JOIN dividend ");
+            //    sb.AppendLine("   ON dividend.StockCode = profile.StockCode ");
 
 
+            //    _ListDetail = db.DBSelect<ListEntity>(sb.ToString());
 
-            }
 
-            this.listEntityBindingSource.DataSource = _ListDetail;
+
+            //}
+
+            //this.listEntityBindingSource.DataSource = _ListDetail;
 
             filterData();
 
@@ -405,6 +405,9 @@ namespace StockProject
             //証券コード
             string stockCode = "";
 
+            //企業名
+            string companyName = "";
+
             //業種分類
             string industriesCategory = "";
 
@@ -414,10 +417,15 @@ namespace StockProject
             //決算月
             string closingMonth = "";
 
+            //特色
+            string feature = "";
+
             stockCode = this.txtStockCode.Text;
+            companyName = this.txtCompanyName.Text;
             industriesCategory = this.cboCategory.Text;
             marketName = this.cboMarketName.Text;
             closingMonth = this.txtClosingMonth.Text;
+            feature = this.txtFeature.Text;
 
             var q = _ListDetail.AsQueryable();
             if (!string.IsNullOrEmpty(stockCode))
@@ -425,9 +433,19 @@ namespace StockProject
                 q = q.Where(c => c.StockCode.ToString().Contains(stockCode));
             }
 
+            if(!string.IsNullOrEmpty(companyName))
+            {
+                q = q.Where(c => c.CompanyName.Contains(companyName));
+            }
+
             if (!string.IsNullOrEmpty(industriesCategory))
             {
                 q = q.Where(c => c.IndustriesCategory.ToString().Contains(industriesCategory));
+            }
+
+            if (!string.IsNullOrEmpty(marketName))
+            {
+                q = q.Where(c => c.MarketName.ToString().Contains(marketName));
             }
 
             if (!string.IsNullOrEmpty(closingMonth))
@@ -435,10 +453,29 @@ namespace StockProject
                 q = q.Where(c => c.ClosingMonth.ToString() == closingMonth);
             }
 
+            if (!string.IsNullOrEmpty(feature))
+            {
+                q = q.Where(c => c.Feature.Contains(feature));
+            }
+
+            if (q.Count() == 0)
+            {
+                this.listEntityBindingSource.DataSource = new List<ListEntity>();
+                return;
+            }
             this.listEntityBindingSource.DataSource = q;
 
 
         }
 
+        private void txtStockCode_Validated(object sender, EventArgs e)
+        {
+            this.filterData();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

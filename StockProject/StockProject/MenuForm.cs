@@ -184,7 +184,17 @@ namespace StockProject
 
         private void MenuForm_Shown(object sender, EventArgs e)
         {
+            //ShowForm<DefaultUpdateForm>();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
             ShowForm<DefaultUpdateForm>();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

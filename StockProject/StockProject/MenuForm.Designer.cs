@@ -28,43 +28,69 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnList = new System.Windows.Forms.Button();
+            this.btnChart = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnList
             // 
-            this.button1.Location = new System.Drawing.Point(28, 7);
-            this.button1.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(206, 67);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "一覧";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnList.Location = new System.Drawing.Point(16, 97);
+            this.btnList.Margin = new System.Windows.Forms.Padding(7);
+            this.btnList.Name = "btnList";
+            this.btnList.Size = new System.Drawing.Size(206, 67);
+            this.btnList.TabIndex = 0;
+            this.btnList.Text = "一覧";
+            this.btnList.UseVisualStyleBackColor = true;
+            this.btnList.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // btnChart
             // 
-            this.button2.Location = new System.Drawing.Point(28, 88);
-            this.button2.Margin = new System.Windows.Forms.Padding(7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(206, 67);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "チャート";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnChart.Location = new System.Drawing.Point(16, 178);
+            this.btnChart.Margin = new System.Windows.Forms.Padding(7);
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(206, 67);
+            this.btnChart.TabIndex = 1;
+            this.btnChart.Text = "チャート";
+            this.btnChart.UseVisualStyleBackColor = true;
+            this.btnChart.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(16, 16);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(7);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(206, 67);
+            this.btnUpdate.TabIndex = 0;
+            this.btnUpdate.Text = "更新";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(16, 417);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(7);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(206, 67);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "終了";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(19F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(265, 364);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(240, 500);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnChart);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnList);
             this.Font = new System.Drawing.Font("ＭＳ ゴシック", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Margin = new System.Windows.Forms.Padding(7, 7, 7, 7);
+            this.Margin = new System.Windows.Forms.Padding(7);
             this.Name = "MenuForm";
-            this.Text = "MenuForm";
+            this.Text = "メニュー";
             this.Load += new System.EventHandler(this.MenuForm_Load);
             this.Shown += new System.EventHandler(this.MenuForm_Shown);
             this.ResumeLayout(false);
@@ -73,7 +99,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnList;
+        private System.Windows.Forms.Button btnChart;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnClose;
     }
 }

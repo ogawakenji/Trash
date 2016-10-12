@@ -34,13 +34,13 @@ namespace StockProject
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            this.btnDefaultUpdate.Enabled = false;
+            //this.btnDefaultUpdate.Enabled = false;
 
             await UpdateDividend();
 
             await UpdateStockPriceAndProfile();
 
-            this.btnDefaultUpdate.Enabled = true;
+            //this.btnDefaultUpdate.Enabled = true;
 
             this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() +  Environment.NewLine;
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
@@ -453,6 +453,28 @@ namespace StockProject
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
             this.txtUpdateStatus.ScrollToCaret();
 
+
+        }
+
+        private async void btnDividend_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("配当データ更新を実行しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnDividend.Enabled = false;
+
+            await UpdateDividend();
+
+            this.btnDividend.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
 
         }
     }
