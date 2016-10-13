@@ -477,5 +477,69 @@ namespace StockProject
         {
             this.Close();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            Utility.StockPriceUtil util = new Utility.StockPriceUtil();
+            List<StockPriceProfile> stockData = util.GetListStockPriceProfile(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+
+
+            List<int> lstStock = (from q in _ListDetail
+                         orderby q.StockCode
+                         select q.StockCode).Distinct().ToList();
+
+
+            List<ListEntity> lstDisplay = new List<ListEntity>();
+
+            foreach (int code in lstStock)
+            {
+                var query = (from q in stockData
+                            where q.StockCode == code
+                            orderby q.StockDate descending
+                            select q).Take(11);
+
+                // ルールに合致するか？
+                // 出来高が3日間連続増加？
+                decimal tradevolume = -1;
+                if (query.Count() > 0)
+                {
+                    tradevolume = query.FirstOrDefault().TradeVolume;
+                }
+
+                int volumeCount = 0;
+
+                foreach (StockPriceProfile sp in query.Skip(1) )
+                {
+                    if (tradevolume > sp.TradeVolume )
+                    {
+                        volumeCount++;
+                    }
+                    else
+                    {
+                        break ;
+                    }
+                    tradevolume = sp.TradeVolume;
+
+                    if (volumeCount==5)
+                    {
+                        // 3日連続で出来高増加
+                        lstDisplay.Add((from q in _ListDetail
+                                        where q.StockCode == code
+                                        select q).FirstOrDefault());
+                    }
+                }
+
+
+
+            }
+
+
+            dataGridView2.DataSource = lstDisplay;
+
+
+
+
+        }
     }
 }
