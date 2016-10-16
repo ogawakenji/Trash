@@ -481,7 +481,15 @@ namespace StockProject
         private void button1_Click(object sender, EventArgs e)
         {
 
+            FinanceUtil finance = new FinanceUtil();
+            finance.GetStockCodeList();
+
+
+
             Utility.StockPriceUtil util = new Utility.StockPriceUtil();
+
+            
+
             List<StockPriceProfile> stockData = util.GetListStockPriceProfile(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
 
 

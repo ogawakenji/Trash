@@ -31,6 +31,8 @@
             this.txtUpdateStatus = new System.Windows.Forms.TextBox();
             this.btnStockPriceUpdate = new System.Windows.Forms.Button();
             this.btnDividend = new System.Windows.Forms.Button();
+            this.btnStockCode = new System.Windows.Forms.Button();
+            this.btnProfile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUpdateStatus
@@ -67,11 +69,33 @@
             this.btnDividend.UseVisualStyleBackColor = true;
             this.btnDividend.Click += new System.EventHandler(this.btnDividend_Click);
             // 
+            // btnStockCode
+            // 
+            this.btnStockCode.Location = new System.Drawing.Point(524, 12);
+            this.btnStockCode.Name = "btnStockCode";
+            this.btnStockCode.Size = new System.Drawing.Size(178, 41);
+            this.btnStockCode.TabIndex = 4;
+            this.btnStockCode.Text = "証券コード更新";
+            this.btnStockCode.UseVisualStyleBackColor = true;
+            this.btnStockCode.Click += new System.EventHandler(this.btnStockCode_Click);
+            // 
+            // btnProfile
+            // 
+            this.btnProfile.Location = new System.Drawing.Point(358, 12);
+            this.btnProfile.Name = "btnProfile";
+            this.btnProfile.Size = new System.Drawing.Size(160, 41);
+            this.btnProfile.TabIndex = 5;
+            this.btnProfile.Text = "企業情報更新";
+            this.btnProfile.UseVisualStyleBackColor = true;
+            this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
+            // 
             // DefaultUpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 347);
+            this.Controls.Add(this.btnProfile);
+            this.Controls.Add(this.btnStockCode);
             this.Controls.Add(this.btnDividend);
             this.Controls.Add(this.btnStockPriceUpdate);
             this.Controls.Add(this.txtUpdateStatus);
@@ -88,5 +112,7 @@
         private System.Windows.Forms.TextBox txtUpdateStatus;
         private System.Windows.Forms.Button btnStockPriceUpdate;
         private System.Windows.Forms.Button btnDividend;
+        private System.Windows.Forms.Button btnStockCode;
+        private System.Windows.Forms.Button btnProfile;
     }
 }

@@ -309,6 +309,12 @@ namespace Utility
 
             ProfileEntity profile = new ProfileEntity();
 
+            int stockcode;
+            if (Int32.TryParse(code.First().Value, out stockcode) == false)
+            {
+                return new List<ProfileEntity>();
+            }
+
             profile.StockCode = Convert.ToInt32(code.First().Value);
             profile.CompanyName = company.First().Value;
 
@@ -680,6 +686,140 @@ namespace Utility
         }
 
         #endregion
+
+
+        #region 証券コード一覧
+        private string YAHOO_STOCKCODE1 = "http://info.finance.yahoo.co.jp/ranking/?kd=40&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE2 = "http://info.finance.yahoo.co.jp/ranking/?kd=41&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE3 = "http://info.finance.yahoo.co.jp/ranking/?kd=42&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE4 = "http://info.finance.yahoo.co.jp/ranking/?kd=43&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE5 = "http://info.finance.yahoo.co.jp/ranking/?kd=44&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE6 = "http://info.finance.yahoo.co.jp/ranking/?kd=45&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE7 = "http://info.finance.yahoo.co.jp/ranking/?kd=46&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE8 = "http://info.finance.yahoo.co.jp/ranking/?kd=47&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE9 = "http://info.finance.yahoo.co.jp/ranking/?kd=48&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE10 = "http://info.finance.yahoo.co.jp/ranking/?kd=49&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE11 = "http://info.finance.yahoo.co.jp/ranking/?kd=50&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE12 = "http://info.finance.yahoo.co.jp/ranking/?kd=51&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE13 = "http://info.finance.yahoo.co.jp/ranking/?kd=52&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE14 = "http://info.finance.yahoo.co.jp/ranking/?kd=53&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE15 = "http://info.finance.yahoo.co.jp/ranking/?kd=54&mk=1&tm=d&vl=a";
+        private string YAHOO_STOCKCODE16 = "http://info.finance.yahoo.co.jp/ranking/?kd=55&mk=1&tm=d&vl=a";
+
+        public List<StockPriceEntity> GetStockCodeList()
+        {
+            List<StockPriceEntity> list = new List<StockPriceEntity>();
+
+            // Yahooファイナンスの企業ランキングから証券コードの一覧を取得する
+            SetStockCodeList(YAHOO_STOCKCODE1, list);
+            //SetStockCodeList(YAHOO_STOCKCODE2, list);
+            //SetStockCodeList(YAHOO_STOCKCODE3, list);
+            //SetStockCodeList(YAHOO_STOCKCODE4, list);
+            //SetStockCodeList(YAHOO_STOCKCODE5, list);
+            //SetStockCodeList(YAHOO_STOCKCODE6, list);
+            //SetStockCodeList(YAHOO_STOCKCODE7, list);
+            //SetStockCodeList(YAHOO_STOCKCODE8, list);
+            //SetStockCodeList(YAHOO_STOCKCODE9, list);
+            //SetStockCodeList(YAHOO_STOCKCODE10, list);
+            //SetStockCodeList(YAHOO_STOCKCODE11, list);
+            //SetStockCodeList(YAHOO_STOCKCODE12, list);
+            //SetStockCodeList(YAHOO_STOCKCODE13, list);
+            //SetStockCodeList(YAHOO_STOCKCODE14, list);
+            //SetStockCodeList(YAHOO_STOCKCODE15, list);
+            //SetStockCodeList(YAHOO_STOCKCODE16, list);
+
+            return list.Distinct().ToList();
+
+        }
+
+        private void SetStockCodeList(string url, List<StockPriceEntity> list)
+        {
+            HtmlUtil htmlUtil = new HtmlUtil();
+
+            // urlからWebサイトに接続し情報を取得する
+            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            var ns = xdoc.Root.Name.Namespace;
+
+            // 次へのページが存在するか確認する
+            string nextUrl = "";
+            var query1 =
+                from q1 in xdoc.Descendants(ns + "ul")
+                where (string)q1.Attribute("class") == "ymuiPagingBottom clearFix"
+                select q1;
+
+            foreach (var q in query1.Descendants("a"))
+            {
+                if (q.Value == "次へ")
+                {
+                    nextUrl = q.Attribute("href").Value;
+                }
+            }
+
+            var query2 =
+               from q2 in xdoc.Descendants(ns + "tr")
+               select q2;
+
+            bool first = true;
+
+            foreach (var q1 in query2)
+            {
+                if (first)
+                {
+                    first = false;
+                    continue;
+                }
+
+                StockPriceEntity stock = new StockPriceEntity();
+                int i = 1;
+                bool exitFor = false;
+
+                foreach (var q2 in q1.Descendants())
+                {
+                    switch (i)
+                    {
+                        case 1:
+                            if (q2.Value == "順位")
+                            {
+                                exitFor = true;
+                                break;
+                            }
+                            break;
+                        case 2:
+                            if (Convert.ToDecimal(q2.Value) < 9999)
+                            {
+                                stock.StockCode = Convert.ToInt32(q2.Value);
+                                list.Add(stock);
+                            }
+                            exitFor = true;
+                            break;
+                    }
+
+                    i++;
+
+                    if (exitFor)
+                    {
+                        break;
+                    }
+
+                }
+
+            }
+
+            if (nextUrl == "")
+            {
+                // 次のURLがなければ処理終了
+                return;
+            }
+            else
+            {
+                // 次のURLがあれば再帰呼び出し
+                SetStockCodeList(nextUrl, list);
+            }
+        }
+
+
+        #endregion
+
 
     }
 

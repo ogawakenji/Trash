@@ -225,6 +225,132 @@ namespace StockProject
 
         }
 
+        private async Task UpdateStockCode()
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            this.txtUpdateStatus.Text = "";
+            this.txtUpdateStatus.Text += "証券コード取得開始" + Environment.NewLine;
+            // 情報の取得
+            List<StockPriceEntity> list = new List<StockPriceEntity>();
+            await Task.Run(() =>
+            {
+                Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                list = finance.GetStockCodeList();
+            });
+            sw.Stop();
+            this.txtUpdateStatus.Text += "証券コード取得終了 " + sw.Elapsed.ToString() + Environment.NewLine;
+
+            sw.Restart();
+            this.txtUpdateStatus.Text += "証券コード更新開始" + Environment.NewLine;
+            await Task.Run(() =>
+            {
+                using (Utility.DbUtil db = new Utility.DbUtil())
+                {
+                    // 削除
+                    db.DBExecuteSQL("DELETE FROM stockcode");
+                    // 登録
+                    string insertSql = @"INSERT INTO stockcode
+                                    ( 
+                                      StockCode           
+                                    ) VALUES (            
+                                      :StockCode           
+                                    )";
+
+                    db.DBInsert(insertSql, list);
+                }
+            });
+            sw.Stop();
+            this.txtUpdateStatus.Text += "証券コード更新終了 " + sw.Elapsed.ToString() + Environment.NewLine;
+
+        }
+
+        private async Task UpdateProfile()
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            this.txtUpdateStatus.Text += "企業情報取得・更新開始" + Environment.NewLine;
+            // 情報の取得
+            List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
+            List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
+
+            List<Utility.StockPriceEntity> stock;
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                stock = db.DBSelect<Utility.StockPriceEntity>("SELECT * FROM stockcode ORDER BY StockCode ");
+            }
+
+
+            foreach (StockPriceEntity r in stock)
+            {
+
+                sw.Restart();
+
+                await Task.Run(() =>
+                {
+                    Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                    listProfile = finance.GetProfileEntityList(r.StockCode);
+                });
+
+                await Task.Run(() =>
+                {
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        db.DBUpdate("DELETE FROM profile WHERE StockCode = :StockCode ", new { StockCode = r.StockCode });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO profile
+                                    ( 
+                                      StockCode
+                                     ,CompanyName
+                                     ,Feature
+                                     ,ConcatenationBusiness
+                                     ,HeadquartersLocation
+                                     ,IndustriesCategory
+                                     ,FoundationDate
+                                     ,MarketName
+                                     ,ListedDate
+                                     ,ClosingMonth
+                                     ,UnitShares 
+                                     ,EmployeeNumberSingle
+                                     ,EmployeeNumberConcatenation
+                                     ,AvarageAnnualIncome
+                                    ) VALUES (
+                                      :StockCode
+                                     ,:CompanyName
+                                     ,:Feature
+                                     ,:ConcatenationBusiness
+                                     ,:HeadquartersLocation
+                                     ,:IndustriesCategory
+                                     ,:FoundationDate
+                                     ,:MarketName
+                                     ,:ListedDate
+                                     ,:ClosingMonth
+                                     ,:UnitShares 
+                                     ,:EmployeeNumberSingle
+                                     ,:EmployeeNumberConcatenation
+                                     ,:AvarageAnnualIncome
+                                    )";
+
+                        db.DBInsert(insertSql, listProfile);
+
+                    }
+                });
+
+                sw.Stop();
+                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+                this.txtUpdateStatus.ScrollToCaret();
+
+            }
+
+            this.txtUpdateStatus.Text += "企業情報取得・更新終了" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
+
+
         // 株価更新ボタンクリック
         private async void btnStockPriceUpdate_Click(object sender, EventArgs e)
         {
@@ -269,12 +395,11 @@ namespace StockProject
                 listProfile = db.DBSelect<Utility.ProfileEntity>("SELECT * FROM profile ");
 
                 listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
-                                                                  StockCode
-                                                                 ,MAX(CompanyName) CompanyName 
-                                                                 ,datetime(MAX(StockDate),'+1 days') StockDate
-                                                            FROM StockPrice
-                                                            GROUP BY StockCode 
-                                                            ORDER BY StockCode ");
+                                                                  stockcode.StockCode
+                                                                 ,ifnull(profile.CompanyName,'') CompanyName 
+                                                            FROM stockcode 
+                                                            LEFT JOIN profile ON stockcode.StockCode = profile.StockCode
+                                                            ORDER BY stockcode.StockCode ");
 
 
             }
@@ -476,6 +601,49 @@ namespace StockProject
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
             this.txtUpdateStatus.ScrollToCaret();
 
+        }
+
+        private async void btnStockCode_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("証券コード更新を実行しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnStockCode.Enabled = false;
+
+            await UpdateStockCode();
+
+            this.btnStockCode.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
+
+        private async void btnProfile_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("企業情報更新を実行しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnProfile.Enabled = false;
+
+            await UpdateProfile();
+
+            this.btnProfile.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
         }
     }
 }

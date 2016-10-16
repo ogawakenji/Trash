@@ -150,6 +150,19 @@ namespace StockProject
                     db.DBExecuteSQL(sql);
                 }
 
+                // テーブルを検索
+                tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'stockcode'");
+                if (tblLst[0] == 0)
+                {
+                    sql = @"CREATE TABLE stockcode
+                        (
+                           StockCode                   NUMERIC
+                          ,primary key(StockCode)
+                        ) ";
+                    db.DBExecuteSQL(sql);
+                }
+
+
             }
 
         }
