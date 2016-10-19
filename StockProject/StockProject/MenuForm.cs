@@ -162,6 +162,27 @@ namespace StockProject
                     db.DBExecuteSQL(sql);
                 }
 
+                // テーブルを検索
+                tblLst = db.DBSelect<decimal>("SELECT COUNT(*) CNT FROM sqlite_master WHERE type = 'table' AND name = 'pricenumbering'");
+                if (tblLst[0] == 0)
+                {
+                    // なければ作成
+                    sql = @"CREATE TABLE pricenumbering
+                                  (
+                                    StockCode                NUMERIC
+                                    ,CompanyName             TEXT
+                                    ,StockDate               TEXT
+                                    ,RowNum                  NUMERIC
+                                    ,OpeningPrice            NUMERIC
+                                    ,HighPrice               NUMERIC
+                                    ,LowPrice                NUMERIC
+                                    ,ClosingPrice            NUMERIC
+                                    ,TradeVolume             NUMERIC
+                                    ,AdjustmentClosingPrice  NUMERIC
+                                    ,primary key(StockCode,StockDate)
+                                  ) ";
+                    db.DBExecuteSQL(sql);
+                }
 
             }
 

@@ -25,6 +25,7 @@ namespace Utility
             sb.AppendLine("     , s.HighPrice ");
             sb.AppendLine("     , s.ClosingPrice ");
             sb.AppendLine("     , s.TradeVolume ");
+            sb.AppendLine("     , s.AdjustmentClosingPrice ");
             sb.AppendLine("  FROM  ");
             sb.AppendLine("       stockprice s ");
             sb.AppendLine(" INNER JOIN profile p ");

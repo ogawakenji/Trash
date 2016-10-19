@@ -854,6 +854,11 @@ namespace Utility
 
     }
 
+    public class NumberingPriceEntity :StockPriceEntity 
+    {
+        public decimal RowNum { get; set; }
+    }
+
     /// <summary>
     /// 企業情報
     /// </summary>

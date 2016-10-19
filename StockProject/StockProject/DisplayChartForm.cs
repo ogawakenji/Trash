@@ -16,6 +16,7 @@ namespace StockProject
         private List<Utility.StockPriceProfile> _ListData;
         private List<Utility.NikkeiAverageEntity> _ListNikkei;
         private List<Utility.DollarYenEntity> _ListDY;
+        private List<Utility.StockPriceProfile> _List1Year;
 
         private int _currentPageNum;
 
@@ -29,6 +30,11 @@ namespace StockProject
             _ListData = new List<Utility.StockPriceProfile>();
             _ListNikkei = new List<Utility.NikkeiAverageEntity>();
             _ListDY = new List<Utility.DollarYenEntity>();
+
+            _List1Year = new List<Utility.StockPriceProfile>();
+            Utility.StockPriceUtil util = new Utility.StockPriceUtil();
+            _List1Year = util.GetListStockPriceProfile(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+
 
         }
 
@@ -395,6 +401,50 @@ namespace StockProject
             }
             // 1ページ目を表示
             this.Paging(_currentPageNum);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            List<Utility.StockPriceProfile> lstDetail = new List<Utility.StockPriceProfile>();
+
+            List<int> lstCode = (from q in _List1Year
+                                 orderby q.StockCode 
+                                     select q.StockCode).Distinct().ToList();
+
+
+
+            foreach (int code in lstCode )
+            {
+
+                var query = from q in _List1Year
+                            where q.StockCode == code
+                            select q;
+
+                foreach (Utility.StockPriceProfile r in query)
+                {
+                    // 前日データを検索
+                    Utility.StockPriceProfile prev = (from p in _List1Year
+                               where p.StockCode == code
+                               && p.StockDate < r.StockDate
+                               orderby p.StockDate descending 
+                               select p).FirstOrDefault() ;
+
+                    if (prev != null)
+                    {
+                        if (prev.AdjustmentClosingPrice * 1.05m < r.AdjustmentClosingPrice)
+                        {
+                            lstDetail.Add(r);
+                        }
+                    }
+                }
+
+            }
+
+            dgvTest.DataSource = lstDetail;
+
+
+
         }
     }
 }

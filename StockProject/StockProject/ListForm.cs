@@ -69,6 +69,8 @@ namespace StockProject
                 sb.AppendLine("   ON PRICE.StockCode = profile.StockCode ");
                 sb.AppendLine(" LEFT JOIN dividend ");
                 sb.AppendLine("   ON dividend.StockCode = profile.StockCode ");
+                sb.AppendLine(" ORDER BY profile.StockCode ");
+
 
 
                 _ListDetail = db.DBSelect<ListEntity>(sb.ToString());
@@ -198,6 +200,8 @@ namespace StockProject
                 sb.AppendLine(" LEFT JOIN dividend ");
                 sb.AppendLine("   ON dividend.StockCode = profile.StockCode ");
                 sb.AppendLine(" WHERE PRICE.StockDate BETWEEN :BeginDate AND :EndDate ORDER BY profile.StockCode,PRICE.StockDate ");
+                sb.AppendLine(" ORDER BY profile.StockCode ");
+
 
                 listDetail = db.DBSelect<ListEntity>(sb.ToString(),new { BeginDate = DateTime.Now.AddMonths(-3), EndDate = DateTime.Now.Date });
 
@@ -420,12 +424,21 @@ namespace StockProject
             //特色
             string feature = "";
 
+            //
+            decimal dividendYield = 0;
+
             stockCode = this.txtStockCode.Text;
             companyName = this.txtCompanyName.Text;
             industriesCategory = this.cboCategory.Text;
             marketName = this.cboMarketName.Text;
             closingMonth = this.txtClosingMonth.Text;
             feature = this.txtFeature.Text;
+            if (decimal.TryParse(this.txtDividendYield .Text ,out dividendYield ) == false)
+            {
+                dividendYield = 0;
+            }
+
+
 
             var q = _ListDetail.AsQueryable();
             if (!string.IsNullOrEmpty(stockCode))
@@ -457,6 +470,12 @@ namespace StockProject
             {
                 q = q.Where(c => c.Feature.Contains(feature));
             }
+
+            if (!string.IsNullOrEmpty(this.txtDividendYield .Text  ))
+            {
+                q = q.Where(c => c.DividendYield >= dividendYield);
+            }
+
 
             if (q.Count() == 0)
             {
@@ -548,6 +567,99 @@ namespace StockProject
 
 
 
+        }
+
+        private void txtDividendYield_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDividendYield_Validated(object sender, EventArgs e)
+        {
+            this.filterData();
+        }
+
+        private void btnNumbering_Click(object sender, EventArgs e)
+        {
+
+            // 情報の取得
+            List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
+            List<Utility.NumberingPriceEntity > listNum = new List<Utility.NumberingPriceEntity>();
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
+                                                                  stockcode.StockCode
+                                                                 ,ifnull(profile.CompanyName,'') CompanyName 
+                                                            FROM stockcode 
+                                                            LEFT JOIN profile ON stockcode.StockCode = profile.StockCode
+                                                            ORDER BY stockcode.StockCode ");
+
+                db.DBExecuteSQL("DELETE FROM pricenumbering");
+
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Length = 0;
+            sb.AppendLine(" SELECT ");
+            sb.AppendLine("     StockCode ");
+            sb.AppendLine("    ,CompanyName ");
+            sb.AppendLine("    ,StockDate ");
+            sb.AppendLine("    ,OpeningPrice ");
+            sb.AppendLine("    ,HighPrice ");
+            sb.AppendLine("    ,LowPrice ");
+            sb.AppendLine("    ,ClosingPrice ");
+            sb.AppendLine("    ,TradeVolume ");
+            sb.AppendLine("    ,AdjustmentClosingPrice ");
+            sb.AppendLine("    ,(SELECT COUNT(*) + 1 ");
+            sb.AppendLine("        FROM stockprice ");
+            sb.AppendLine("       WHERE StockCode = :StockCode ");
+            sb.AppendLine("         AND StockDate >= :StockDate ");
+            sb.AppendLine("         AND (StockDate < t.StockDate OR (StockDate = t.StockDate AND StockCode < t.StockCode )) ");
+            sb.AppendLine("     ) AS RowNum ");
+            sb.AppendLine(" FROM stockprice t ");
+            sb.AppendLine("WHERE t.StockCode = :StockCode ");
+            sb.AppendLine("  AND t.StockDate >= :StockDate ");
+
+            foreach (StockPriceEntity r in listStock)
+            {
+                using (Utility.DbUtil db = new Utility.DbUtil())
+                {
+
+                    listNum = db.DBSelect<NumberingPriceEntity>(sb.ToString(), new { StockCode = r.StockCode, StockDate = DateTime.Now.AddMonths(-3).Date });
+
+                    string insertSql = @"INSERT INTO pricenumbering
+                                    ( 
+                                        StockCode             
+                                        ,CompanyName           
+                                        ,StockDate
+                                        ,RowNum             
+                                        ,OpeningPrice          
+                                        ,HighPrice             
+                                        ,LowPrice              
+                                        ,ClosingPrice          
+                                        ,TradeVolume           
+                                        ,AdjustmentClosingPrice
+                                    ) VALUES (
+                                        :StockCode             
+                                        ,:CompanyName           
+                                        ,:StockDate
+                                        ,:RowNum             
+                                        ,:OpeningPrice          
+                                        ,:HighPrice             
+                                        ,:LowPrice              
+                                        ,:ClosingPrice          
+                                        ,:TradeVolume           
+                                        ,:AdjustmentClosingPrice
+                                    )";
+
+                    if (listNum.Count() > 0 )
+                    {
+                        db.DBInsert(insertSql, listNum);
+                    }
+
+                }
+
+            }
         }
     }
 }
