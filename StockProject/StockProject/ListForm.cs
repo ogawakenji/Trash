@@ -661,5 +661,56 @@ namespace StockProject
 
             }
         }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+            StockPriceUtil util = new StockPriceUtil();
+            // 20日前から今日までの株価情報を取得
+            List<StockPriceProfile> lst = util.GetListStockPriceProfile(DateTime.Now.AddDays(-20), DateTime.Now);
+
+            // 証券コードのDISTINCTを取得
+            var stockCodes = (from q in lst
+                             select q.StockCode).Distinct();
+
+            
+            foreach (decimal code in stockCodes )
+            {
+                // 証券コードでループ処理
+                // 11件以上データが無い場合は飛ばす
+                var cnt = (from t in lst
+                           where t.StockCode == code
+                           select t).Count();
+
+                if (cnt < 11)
+                {
+                    continue ;
+                }
+
+                // 1) 日付の降順に並べ1件スキップした10件分のデータの出来高の平均値を取得
+                var average = (from t in lst
+                             where t.StockCode == code
+                             orderby t.StockDate descending
+                             select t.TradeVolume).Skip(1).Take(10).Average();
+
+                // 2) 日付の降順に並べ3件分のデータを取得 
+                var query2 = (from t in lst
+                              where t.StockCode == code 
+                              orderby t.StockDate descending
+                              select t).Take(3);
+
+                var query3 = from t in query2
+                             where t.TradeVolume >= (average * 2m)
+                             select t;
+
+                if (query3.Count() == 3)
+                {
+                    Console.WriteLine(String.Format("{0} {1}",query2.FirstOrDefault().StockCode,query2.FirstOrDefault().CompanyName ));
+                }
+
+
+
+            }
+
+        }
     }
 }

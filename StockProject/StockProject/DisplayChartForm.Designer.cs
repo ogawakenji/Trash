@@ -245,12 +245,13 @@
             this.chartDollarYen = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartNikkei = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.dgvTest = new System.Windows.Forms.DataGridView();
+            this.chart51 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnDisplay = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
-            this.chart51 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dgvTest = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDisplay12 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -309,8 +310,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartDollarYen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNikkei)).BeginInit();
             this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart51)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart51)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1473,6 +1474,41 @@
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(5, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dgvTest
+            // 
+            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTest.Location = new System.Drawing.Point(5, 54);
+            this.dgvTest.Name = "dgvTest";
+            this.dgvTest.RowTemplate.Height = 24;
+            this.dgvTest.Size = new System.Drawing.Size(393, 380);
+            this.dgvTest.TabIndex = 1;
+            // 
+            // chart51
+            // 
+            chartArea53.Name = "ChartArea1";
+            this.chart51.ChartAreas.Add(chartArea53);
+            legend53.Name = "Legend1";
+            this.chart51.Legends.Add(legend53);
+            this.chart51.Location = new System.Drawing.Point(404, 3);
+            this.chart51.Name = "chart51";
+            series53.ChartArea = "ChartArea1";
+            series53.Legend = "Legend1";
+            series53.Name = "Series1";
+            this.chart51.Series.Add(series53);
+            this.chart51.Size = new System.Drawing.Size(894, 438);
+            this.chart51.TabIndex = 0;
+            this.chart51.Text = "chart51";
+            // 
             // btnDisplay
             // 
             this.btnDisplay.Location = new System.Drawing.Point(7, 6);
@@ -1503,46 +1539,22 @@
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
-            // chart51
+            // btnDisplay12
             // 
-            chartArea53.Name = "ChartArea1";
-            this.chart51.ChartAreas.Add(chartArea53);
-            legend53.Name = "Legend1";
-            this.chart51.Legends.Add(legend53);
-            this.chart51.Location = new System.Drawing.Point(404, 3);
-            this.chart51.Name = "chart51";
-            series53.ChartArea = "ChartArea1";
-            series53.Legend = "Legend1";
-            series53.Name = "Series1";
-            this.chart51.Series.Add(series53);
-            this.chart51.Size = new System.Drawing.Size(894, 438);
-            this.chart51.TabIndex = 0;
-            this.chart51.Text = "chart51";
-            // 
-            // dgvTest
-            // 
-            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTest.Location = new System.Drawing.Point(5, 54);
-            this.dgvTest.Name = "dgvTest";
-            this.dgvTest.RowTemplate.Height = 24;
-            this.dgvTest.Size = new System.Drawing.Size(393, 380);
-            this.dgvTest.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(5, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnDisplay12.Location = new System.Drawing.Point(257, 6);
+            this.btnDisplay12.Name = "btnDisplay12";
+            this.btnDisplay12.Size = new System.Drawing.Size(75, 23);
+            this.btnDisplay12.TabIndex = 3;
+            this.btnDisplay12.Text = "12表示";
+            this.btnDisplay12.UseVisualStyleBackColor = true;
+            this.btnDisplay12.Click += new System.EventHandler(this.btnDisplay12_Click);
             // 
             // DisplayChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1317, 513);
+            this.Controls.Add(this.btnDisplay12);
             this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnDisplay);
@@ -1608,8 +1620,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartDollarYen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNikkei)).EndInit();
             this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.chart51)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart51)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1680,5 +1692,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridView dgvTest;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart51;
+        private System.Windows.Forms.Button btnDisplay12;
     }
 }

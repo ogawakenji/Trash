@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtDividendYield = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.txtFeature = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -69,6 +71,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnNumbering = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btn5UpDown = new System.Windows.Forms.Button();
             this.btnUpDown = new System.Windows.Forms.Button();
@@ -80,9 +83,9 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.txtDividendYield = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnNumbering = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnTest = new System.Windows.Forms.Button();
+            this.dgvTest = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -93,6 +96,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -122,6 +127,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "検索条件";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // txtDividendYield
+            // 
+            this.txtDividendYield.Location = new System.Drawing.Point(778, 56);
+            this.txtDividendYield.MaxLength = 0;
+            this.txtDividendYield.Name = "txtDividendYield";
+            this.txtDividendYield.Size = new System.Drawing.Size(48, 27);
+            this.txtDividendYield.TabIndex = 14;
+            this.txtDividendYield.TextChanged += new System.EventHandler(this.txtDividendYield_TextChanged);
+            this.txtDividendYield.Validated += new System.EventHandler(this.txtDividendYield_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(603, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(169, 20);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "配当利回り(以上)";
             // 
             // txtFeature
             // 
@@ -426,6 +450,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(12, 114);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -458,6 +483,17 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnNumbering
+            // 
+            this.btnNumbering.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNumbering.Location = new System.Drawing.Point(400, 6);
+            this.btnNumbering.Name = "btnNumbering";
+            this.btnNumbering.Size = new System.Drawing.Size(176, 36);
+            this.btnNumbering.TabIndex = 4;
+            this.btnNumbering.Text = "ナンバリング";
+            this.btnNumbering.UseVisualStyleBackColor = true;
+            this.btnNumbering.Click += new System.EventHandler(this.btnNumbering_Click);
             // 
             // button1
             // 
@@ -577,35 +613,36 @@
             this.textBox1.Size = new System.Drawing.Size(65, 27);
             this.textBox1.TabIndex = 3;
             // 
-            // txtDividendYield
+            // tabPage3
             // 
-            this.txtDividendYield.Location = new System.Drawing.Point(778, 56);
-            this.txtDividendYield.MaxLength = 0;
-            this.txtDividendYield.Name = "txtDividendYield";
-            this.txtDividendYield.Size = new System.Drawing.Size(48, 27);
-            this.txtDividendYield.TabIndex = 14;
-            this.txtDividendYield.TextChanged += new System.EventHandler(this.txtDividendYield_TextChanged);
-            this.txtDividendYield.Validated += new System.EventHandler(this.txtDividendYield_Validated);
+            this.tabPage3.Controls.Add(this.dgvTest);
+            this.tabPage3.Controls.Add(this.btnTest);
+            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1284, 374);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "動き";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // btnTest
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(603, 59);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(169, 20);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "配当利回り(以上)";
+            this.btnTest.Location = new System.Drawing.Point(9, 6);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 40);
+            this.btnTest.TabIndex = 0;
+            this.btnTest.Text = "ﾃｽﾄ";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
-            // btnNumbering
+            // dgvTest
             // 
-            this.btnNumbering.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNumbering.Location = new System.Drawing.Point(400, 6);
-            this.btnNumbering.Name = "btnNumbering";
-            this.btnNumbering.Size = new System.Drawing.Size(176, 36);
-            this.btnNumbering.TabIndex = 4;
-            this.btnNumbering.Text = "ナンバリング";
-            this.btnNumbering.UseVisualStyleBackColor = true;
-            this.btnNumbering.Click += new System.EventHandler(this.btnNumbering_Click);
+            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTest.Location = new System.Drawing.Point(90, 6);
+            this.dgvTest.Name = "dgvTest";
+            this.dgvTest.RowTemplate.Height = 24;
+            this.dgvTest.Size = new System.Drawing.Size(336, 362);
+            this.dgvTest.TabIndex = 1;
             // 
             // ListForm
             // 
@@ -632,6 +669,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -691,5 +730,8 @@
         private System.Windows.Forms.TextBox txtDividendYield;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnNumbering;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dgvTest;
+        private System.Windows.Forms.Button btnTest;
     }
 }
