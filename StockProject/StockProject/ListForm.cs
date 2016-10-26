@@ -686,11 +686,11 @@ namespace StockProject
                     continue ;
                 }
 
-                // 1) 日付の降順に並べ1件スキップした10件分のデータの出来高の平均値を取得
+                // 1) 日付の降順に並べ3件スキップした10件分のデータの出来高の平均値を取得
                 var average = (from t in lst
                              where t.StockCode == code
                              orderby t.StockDate descending
-                             select t.TradeVolume).Skip(1).Take(10).Average();
+                             select t.TradeVolume).Skip(3).Take(10).Average();
 
                 // 2) 日付の降順に並べ3件分のデータを取得 
                 var query2 = (from t in lst
@@ -698,13 +698,53 @@ namespace StockProject
                               orderby t.StockDate descending
                               select t).Take(3);
 
+                // 3) 3日間の出来高が平均の1.5倍以上であるものを抽出
                 var query3 = from t in query2
-                             where t.TradeVolume >= (average * 2m)
+                             where t.TradeVolume >= (average * 1.5m)
+                             orderby t.StockDate ascending 
                              select t;
+
 
                 if (query3.Count() == 3)
                 {
-                    Console.WriteLine(String.Format("{0} {1}",query2.FirstOrDefault().StockCode,query2.FirstOrDefault().CompanyName ));
+                    int up = 0;
+                    int down = 0;
+                    decimal price = query3.FirstOrDefault().AdjustmentClosingPrice;
+                    decimal volume = query3.FirstOrDefault().TradeVolume;
+                    // 4) 3日間の株価の終値が連続して上昇
+                    foreach (StockPriceProfile q in query3 )
+                    {
+                       if (q.AdjustmentClosingPrice > price && q.TradeVolume > volume )
+                       {
+                            // 上昇
+                            up++;
+                       } 
+
+                       if (q.AdjustmentClosingPrice < price && q.TradeVolume < volume)
+                       {
+                            // 下落
+                            down++;
+                       }
+
+                        price = q.AdjustmentClosingPrice;
+                        volume = q.TradeVolume;
+                    }
+
+                    if (up==2)
+                    {
+                        Console.WriteLine(String.Format("【上昇】{0} {1}", query2.FirstOrDefault().StockCode, query2.FirstOrDefault().CompanyName));
+                    }
+
+                    if (down==2)
+                    {
+                        Console.WriteLine(String.Format("【下落】{0} {1}", query2.FirstOrDefault().StockCode, query2.FirstOrDefault().CompanyName));
+                    }
+
+                    //if (up != 2 && down != 2)
+                    //{
+                    //    Console.WriteLine(String.Format("【どっちでもない】{0} {1}", query2.FirstOrDefault().StockCode, query2.FirstOrDefault().CompanyName));
+                    //}
+
                 }
 
 
