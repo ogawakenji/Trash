@@ -77,15 +77,17 @@
             this.btnUpDown = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dgvTest = new System.Windows.Forms.DataGridView();
+            this.btnTest = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnTest = new System.Windows.Forms.Button();
-            this.dgvTest = new System.Windows.Forms.DataGridView();
+            this.btnTest2 = new System.Windows.Forms.Button();
+            this.txtTrade = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -95,9 +97,9 @@
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -546,6 +548,39 @@
             this.dataGridView2.Size = new System.Drawing.Size(556, 282);
             this.dataGridView2.TabIndex = 0;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.txtTrade);
+            this.tabPage3.Controls.Add(this.btnTest2);
+            this.tabPage3.Controls.Add(this.dgvTest);
+            this.tabPage3.Controls.Add(this.btnTest);
+            this.tabPage3.Location = new System.Drawing.Point(4, 30);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(1284, 374);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "動き";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dgvTest
+            // 
+            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTest.Location = new System.Drawing.Point(90, 6);
+            this.dgvTest.Name = "dgvTest";
+            this.dgvTest.RowTemplate.Height = 24;
+            this.dgvTest.Size = new System.Drawing.Size(336, 362);
+            this.dgvTest.TabIndex = 1;
+            // 
+            // btnTest
+            // 
+            this.btnTest.Location = new System.Drawing.Point(9, 6);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(75, 40);
+            this.btnTest.TabIndex = 0;
+            this.btnTest.Text = "ﾃｽﾄ";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -613,36 +648,24 @@
             this.textBox1.Size = new System.Drawing.Size(65, 27);
             this.textBox1.TabIndex = 3;
             // 
-            // tabPage3
+            // btnTest2
             // 
-            this.tabPage3.Controls.Add(this.dgvTest);
-            this.tabPage3.Controls.Add(this.btnTest);
-            this.tabPage3.Location = new System.Drawing.Point(4, 30);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1284, 374);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "動き";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.btnTest2.Location = new System.Drawing.Point(432, 6);
+            this.btnTest2.Name = "btnTest2";
+            this.btnTest2.Size = new System.Drawing.Size(75, 40);
+            this.btnTest2.TabIndex = 2;
+            this.btnTest2.Text = "ﾃｽﾄ";
+            this.btnTest2.UseVisualStyleBackColor = true;
+            this.btnTest2.Click += new System.EventHandler(this.btnTest2_Click);
             // 
-            // btnTest
+            // txtTrade
             // 
-            this.btnTest.Location = new System.Drawing.Point(9, 6);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 40);
-            this.btnTest.TabIndex = 0;
-            this.btnTest.Text = "ﾃｽﾄ";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
-            // 
-            // dgvTest
-            // 
-            this.dgvTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTest.Location = new System.Drawing.Point(90, 6);
-            this.dgvTest.Name = "dgvTest";
-            this.dgvTest.RowTemplate.Height = 24;
-            this.dgvTest.Size = new System.Drawing.Size(336, 362);
-            this.dgvTest.TabIndex = 1;
+            this.txtTrade.Location = new System.Drawing.Point(513, 6);
+            this.txtTrade.Multiline = true;
+            this.txtTrade.Name = "txtTrade";
+            this.txtTrade.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtTrade.Size = new System.Drawing.Size(710, 264);
+            this.txtTrade.TabIndex = 3;
             // 
             // ListForm
             // 
@@ -667,10 +690,11 @@
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvTest)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -733,5 +757,7 @@
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dgvTest;
         private System.Windows.Forms.Button btnTest;
+        private System.Windows.Forms.TextBox txtTrade;
+        private System.Windows.Forms.Button btnTest2;
     }
 }
