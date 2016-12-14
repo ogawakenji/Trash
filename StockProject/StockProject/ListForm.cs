@@ -757,194 +757,48 @@ namespace StockProject
         {
 
             List<decimal> buyRates = new List<decimal>();
-            buyRates.Add(0.801m);
-            buyRates.Add(0.806m);
-            buyRates.Add(0.811m);
-            buyRates.Add(0.816m);
-            buyRates.Add(0.821m);
-            buyRates.Add(0.826m);
-            buyRates.Add(0.831m);
-            buyRates.Add(0.836m);
-            buyRates.Add(0.841m);
-            buyRates.Add(0.846m);
-            buyRates.Add(0.851m);
-            buyRates.Add(0.856m);
-            buyRates.Add(0.861m);
-            buyRates.Add(0.866m);
-            buyRates.Add(0.871m);
-            buyRates.Add(0.876m);
-            buyRates.Add(0.881m);
-            buyRates.Add(0.886m);
-            buyRates.Add(0.891m);
-            buyRates.Add(0.896m);
-            buyRates.Add(0.901m);
-            buyRates.Add(0.906m);
-            buyRates.Add(0.911m);
-            buyRates.Add(0.916m);
-            buyRates.Add(0.921m);
-            buyRates.Add(0.926m);
-            buyRates.Add(0.931m);
-            buyRates.Add(0.936m);
-            buyRates.Add(0.941m);
-            buyRates.Add(0.946m);
-            buyRates.Add(0.951m);
-            buyRates.Add(0.956m);
-            buyRates.Add(0.961m);
-            buyRates.Add(0.966m);
-            buyRates.Add(0.971m);
-            buyRates.Add(0.976m);
-            buyRates.Add(0.981m);
-            buyRates.Add(0.986m);
-            buyRates.Add(0.991m);
-            buyRates.Add(0.996m);
-            buyRates.Add(1.001m);
-            buyRates.Add(1.006m);
-            buyRates.Add(1.011m);
-            buyRates.Add(1.016m);
-            buyRates.Add(1.021m);
-            buyRates.Add(1.026m);
-            buyRates.Add(1.031m);
-            buyRates.Add(1.036m);
-            buyRates.Add(1.041m);
-            buyRates.Add(1.046m);
-            buyRates.Add(1.051m);
-            buyRates.Add(1.056m);
-            buyRates.Add(1.061m);
-            buyRates.Add(1.066m);
-            buyRates.Add(1.071m);
-            buyRates.Add(1.076m);
-            buyRates.Add(1.081m);
-            buyRates.Add(1.086m);
-            buyRates.Add(1.091m);
-            buyRates.Add(1.096m);
-            buyRates.Add(1.101m);
-            buyRates.Add(1.106m);
-            buyRates.Add(1.111m);
-            buyRates.Add(1.116m);
-            buyRates.Add(1.121m);
-            buyRates.Add(1.126m);
-            buyRates.Add(1.131m);
-            buyRates.Add(1.136m);
-            buyRates.Add(1.141m);
-            buyRates.Add(1.146m);
-            buyRates.Add(1.151m);
-            buyRates.Add(1.156m);
-            buyRates.Add(1.161m);
-            buyRates.Add(1.166m);
-            buyRates.Add(1.171m);
-            buyRates.Add(1.176m);
-            buyRates.Add(1.181m);
-            buyRates.Add(1.186m);
-            buyRates.Add(1.191m);
-            buyRates.Add(1.196m);
-            buyRates.Add(1.201m);
+            //buyRates.Add(0.80m);
+            //buyRates.Add(0.91m);
+            //buyRates.Add(0.92m);
+            //buyRates.Add(0.93m);
+            //buyRates.Add(0.94m);
+            //buyRates.Add(0.95m);
+            //buyRates.Add(0.96m);
+            //buyRates.Add(0.97m);
+            //buyRates.Add(0.98m);
+            //buyRates.Add(0.99m);
+            buyRates.Add(1.00m);
+            //buyRates.Add(1.01m);
+            //buyRates.Add(1.02m);
+            //buyRates.Add(1.03m);
+            //buyRates.Add(1.04m);
+            //buyRates.Add(1.05m);
+            //buyRates.Add(1.10m);
 
             List<decimal> sellRates = new List<decimal>();
-            sellRates.Add(1.001m);
-            sellRates.Add(1.006m);
-            sellRates.Add(1.011m);
-            sellRates.Add(1.016m);
-            sellRates.Add(1.021m);
-            sellRates.Add(1.026m);
-            sellRates.Add(1.031m);
-            sellRates.Add(1.036m);
-            sellRates.Add(1.041m);
-            sellRates.Add(1.046m);
-            sellRates.Add(1.051m);
-            sellRates.Add(1.056m);
-            sellRates.Add(1.061m);
-            sellRates.Add(1.066m);
-            sellRates.Add(1.071m);
-            sellRates.Add(1.076m);
-            sellRates.Add(1.081m);
-            sellRates.Add(1.086m);
-            sellRates.Add(1.091m);
-            sellRates.Add(1.096m);
-            sellRates.Add(1.101m);
-            sellRates.Add(1.106m);
-            sellRates.Add(1.111m);
-            sellRates.Add(1.116m);
-            sellRates.Add(1.121m);
-            sellRates.Add(1.126m);
-            sellRates.Add(1.131m);
-            sellRates.Add(1.136m);
-            sellRates.Add(1.141m);
-            sellRates.Add(1.146m);
-            sellRates.Add(1.151m);
-            sellRates.Add(1.156m);
-            sellRates.Add(1.161m);
-            sellRates.Add(1.166m);
-            sellRates.Add(1.171m);
-            sellRates.Add(1.176m);
-            sellRates.Add(1.181m);
-            sellRates.Add(1.186m);
-            sellRates.Add(1.191m);
-            sellRates.Add(1.196m);
-            sellRates.Add(1.201m);
-            sellRates.Add(1.206m);
-            sellRates.Add(1.211m);
-            sellRates.Add(1.216m);
-            sellRates.Add(1.221m);
-            sellRates.Add(1.226m);
-            sellRates.Add(1.231m);
-            sellRates.Add(1.236m);
-            sellRates.Add(1.241m);
-            sellRates.Add(1.246m);
-            sellRates.Add(1.251m);
-            sellRates.Add(1.256m);
-            sellRates.Add(1.261m);
-            sellRates.Add(1.266m);
-            sellRates.Add(1.271m);
-            sellRates.Add(1.276m);
-            sellRates.Add(1.281m);
-            sellRates.Add(1.286m);
-            sellRates.Add(1.291m);
-            sellRates.Add(1.296m);
-            sellRates.Add(1.301m);
-            sellRates.Add(1.306m);
-            sellRates.Add(1.311m);
-            sellRates.Add(1.316m);
-            sellRates.Add(1.321m);
-            sellRates.Add(1.326m);
-            sellRates.Add(1.331m);
-            sellRates.Add(1.336m);
-            sellRates.Add(1.341m);
-            sellRates.Add(1.346m);
-            sellRates.Add(1.351m);
-            sellRates.Add(1.356m);
-            sellRates.Add(1.361m);
-            sellRates.Add(1.366m);
-            sellRates.Add(1.371m);
-            sellRates.Add(1.376m);
-            sellRates.Add(1.381m);
-            sellRates.Add(1.386m);
-            sellRates.Add(1.391m);
-            sellRates.Add(1.396m);
-            sellRates.Add(1.401m);
-            sellRates.Add(1.406m);
-            sellRates.Add(1.411m);
-            sellRates.Add(1.416m);
-            sellRates.Add(1.421m);
-            sellRates.Add(1.426m);
-            sellRates.Add(1.431m);
-            sellRates.Add(1.436m);
-            sellRates.Add(1.441m);
-            sellRates.Add(1.446m);
-            sellRates.Add(1.451m);
-            sellRates.Add(1.456m);
-            sellRates.Add(1.461m);
-            sellRates.Add(1.466m);
-            sellRates.Add(1.471m);
-            sellRates.Add(1.476m);
-            sellRates.Add(1.481m);
-            sellRates.Add(1.486m);
-            sellRates.Add(1.491m);
-            sellRates.Add(1.496m);
-            sellRates.Add(1.501m);
 
-            var rates = sellRates.SelectMany(
-            sellrate => buyRates,
-            (sellrate, buyrate) => new { Sellrate = sellrate, Buyrate = buyrate });
+            //sellRates.Add(0.90m);
+            //sellRates.Add(1.00m);
+            //sellRates.Add(1.01m);
+            //sellRates.Add(1.02m);
+            //sellRates.Add(1.03m);
+            //sellRates.Add(1.04m);
+            //sellRates.Add(1.05m);
+            //sellRates.Add(1.06m);
+            //sellRates.Add(1.07m);
+            //sellRates.Add(1.08m);
+            //sellRates.Add(1.09m);
+            sellRates.Add(1.10m);
+            //sellRates.Add(1.11m);
+            //sellRates.Add(1.12m);
+            //sellRates.Add(1.13m);
+            //sellRates.Add(1.14m);
+            //sellRates.Add(1.15m);
+            //sellRates.Add(1.30m);
+
+            var rates = buyRates.SelectMany(
+            buyrate => sellRates ,
+            ( buyrate,sellrate) => new { Sellrate = sellrate, Buyrate = buyrate });
 
             foreach (var rate in rates)
             {
@@ -1090,10 +944,11 @@ namespace StockProject
             // 
             StockPriceUtil util = new StockPriceUtil();
             // 30日前から今日までの株価情報を取得
-            List<StockPriceProfile> lst = util.GetListStockPriceProfile(DateTime.Now.AddDays(-30), DateTime.Now);
+            List<StockPriceProfile> lst = util.GetListStockPriceProfile(DateTime.Now.AddDays(-90), DateTime.Now);
 
-            // 証券コードのDISTINCTを取得
+            // 証券コードのDISTINCTを取得  200円以上
             var stockCodes = (from q in lst
+                              where q.AdjustmentClosingPrice >= 100 & q.StockDate >= DateTime.Now.AddDays(-14)
                               select q.StockCode).Distinct();
 
             Boolean isBuy = false;
@@ -1107,6 +962,9 @@ namespace StockProject
             decimal upCnt = 0;
             decimal downCnt = 0;
             decimal nochangeCnt = 0;
+            StringBuilder sb = new StringBuilder();
+            StringBuilder sb2 = new StringBuilder();
+
 
 
             foreach (decimal code in stockCodes)
@@ -1114,6 +972,7 @@ namespace StockProject
                 var price = from p in lst
                             where p.StockCode == code
                             select p;
+
 
                 // まずは買い
                 isBuy = true;
@@ -1138,18 +997,17 @@ namespace StockProject
                             basePrice = sp.AdjustmentClosingPrice;
                             isBuy = false;
                             isSell = true;
-                            //this.txtTrade.Text += sp.StockCode + sp.CompanyName + sp.StockDate .ToString("yyyy/MM/dd") + " 買い " + sp.AdjustmentClosingPrice + ' ' + shares + Environment.NewLine;
+                            sb.AppendLine(sp.StockCode + "@@" + sp.CompanyName + "@@" + sp.StockDate.ToString("yyyy/MM/dd") + "@@" + "買い" + "\t" + sp.AdjustmentClosingPrice + "@@" + shares);
                         }
 
                     }
-
-                    if (isSell)
+                    else if (isSell)
                     {
                         // 売り
                         if (sp.AdjustmentClosingPrice >= basePrice * sellRate)
                         {
                             startYen -= 500;        // 手数料
-                            //this.txtTrade.Text += sp.StockCode + sp.CompanyName + sp.StockDate.ToString("yyyy/MM/dd") + " 売り " + sp.AdjustmentClosingPrice + ' ' + shares + Environment.NewLine;
+                            sb.AppendLine(sp.StockCode + "@@" + sp.CompanyName + "@@" + sp.StockDate.ToString("yyyy/MM/dd") + "@@" + "売り" + "@@" + sp.AdjustmentClosingPrice + "\t" + shares);
 
                             startYen = startYen + (sp.AdjustmentClosingPrice * shares);
                             shares = 0;
@@ -1166,14 +1024,14 @@ namespace StockProject
 
                 if (isSell)
                 {
-                    //this.txtTrade.Text += prev.StockCode + prev.CompanyName + prev.StockDate.ToString("yyyy/MM/dd") + " 売り " + prev.AdjustmentClosingPrice + ' ' + shares + Environment.NewLine;
+                    sb.AppendLine(prev.StockCode + "@@" + prev.CompanyName + "@@" + prev.StockDate.ToString("yyyy/MM/dd") + "@@" + "売り" + "@@" + prev.AdjustmentClosingPrice + "\t" + shares);
                     startYen = startYen + (prevPrice * shares);
                 }
 
-                if (startYen > 1100000m)
-                {
-                    Console.WriteLine(code.ToString() + ":" + startYen.ToString());
-                }
+                //if (startYen > 1100000m)
+                //{
+                //    Console.WriteLine(code.ToString() + ":" + startYen.ToString());
+                //}
 
                 if (startYen > 1000000)
                 {
@@ -1192,23 +1050,25 @@ namespace StockProject
 
                 totalYen += startYen - 1000000;
 
+                sb2.AppendLine(prev.StockCode + "@@" + prev.CompanyName + "@@" + (startYen - 1000000));
 
             }
+            Console.WriteLine(sb2.ToString());
 
             Console.WriteLine("買利率:" + "\t" + buyRate + "\t" + " 売利率:" + "\t" + sellRate + "\t" + " 損益合計:" + "\t" + totalYen + "\t" + " 上昇:" + "\t" + upCnt + "\t" + " 減少:" + "\t" + downCnt + "\t" + " 変更無し:" + "\t" + nochangeCnt);
             this.txtTrade.Text += "買利率:" + "\t" + buyRate + "\t" + " 売利率:" + "\t" + sellRate + "\t" + " 損益合計:" + "\t" + totalYen + "\t" + " 上昇:" + "\t" + upCnt + "\t" + " 減少:" + "\t" + downCnt + "\t" + " 変更無し:" + "\t" + nochangeCnt;
 
-            var sellrates = new[] { 1, 2, 3 };
-            var buyrates = new[] { 9, 8, 7 };
+            //var sellrates = new[] { 1, 2, 3 };
+            //var buyrates = new[] { 9, 8, 7 };
 
-            var rates = sellrates.SelectMany(
-                sellrate => buyrates,
-                (sellrate, buyrate) => new { Sellrate = sellrate, Buyrate = buyrate });
+            //var rates = sellrates.SelectMany(
+            //    sellrate => buyrates,
+            //    (sellrate, buyrate) => new { Sellrate = sellrate, Buyrate = buyrate });
 
-            foreach (var rate in rates)
-            {
-                Console.WriteLine(rate.Sellrate + " " + rate.Buyrate);
-            }
+            //foreach (var rate in rates)
+            //{
+            //    Console.WriteLine(rate.Sellrate + " " + rate.Buyrate);
+            //}
 
 
 
