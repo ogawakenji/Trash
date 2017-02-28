@@ -581,6 +581,210 @@ namespace StockProject
 
         }
 
+        private async Task UpdateStockPriceTarget()
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            this.txtUpdateStatus.Text += "株価更新開始" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+
+            // 情報の取得
+            List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
+            List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
+            List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
+
+            Utility.StockPriceEntity sp;
+            int code;
+
+            for (int line = 0; line < this.txtStockCodes.Lines.Length; line++)
+            {
+                if (int.TryParse(this.txtStockCodes.Lines[line], out code))
+                {
+                    sp = new Utility.StockPriceEntity();
+                    sp.StockCode = code;
+                    listStock.Add(sp);
+                }
+            }
+
+
+
+            foreach (StockPriceEntity r in listStock)
+            {
+
+                sw.Restart();
+
+
+                await Task.Run(() =>
+                {
+                    Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode,DateTime.Now.AddYears(-10).Date,DateTime.Now.Date);
+                });
+
+
+                await Task.Run(() =>
+                {
+                    if (listStockPrice.Count == 0)
+                    {
+                        // 株価取得できない場合はスルー
+                    }
+                    else
+                    {
+
+                        using (Utility.DbUtil db = new Utility.DbUtil())
+                        {
+                            // 削除
+                            var query = from q in listStockPrice
+                                        where q.StockCode == r.StockCode
+                                        select q;
+
+                            db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
+                                        new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
+
+                            // 登録
+                            string insertSql = @"INSERT INTO stockprice
+                                        ( 
+                                          StockCode             
+                                         ,CompanyName           
+                                         ,StockDate             
+                                         ,OpeningPrice          
+                                         ,HighPrice             
+                                         ,LowPrice              
+                                         ,ClosingPrice          
+                                         ,TradeVolume           
+                                         ,AdjustmentClosingPrice
+                                        ) VALUES (
+                                          :StockCode             
+                                         ,:CompanyName           
+                                         ,:StockDate             
+                                         ,:OpeningPrice          
+                                         ,:HighPrice             
+                                         ,:LowPrice              
+                                         ,:ClosingPrice          
+                                         ,:TradeVolume           
+                                         ,:AdjustmentClosingPrice
+                                        )";
+
+                            db.DBInsert(insertSql, listStockPrice);
+
+                        }
+                    }
+
+                });
+
+                sw.Stop();
+                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0')  + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+                this.txtUpdateStatus.ScrollToCaret();
+
+            }
+
+            this.txtUpdateStatus.Text += "株価更新終了" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+
+            // 日経平均、ドル円
+            sw.Restart();
+
+            List<DollarYenEntity> listDY = new List<DollarYenEntity>();
+            List<NikkeiAverageEntity> listN = new List<NikkeiAverageEntity>();
+
+
+            await Task.Run(() =>
+            {
+                Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                listDY = finance.GetDollarYenEntityList();
+                listN = finance.GetNikkeiAverageEntityList();
+            });
+
+
+            await Task.Run(() =>
+            {
+                if (listDY.Count == 0)
+                {
+                    // ドル円が取得できない場合はスルー
+                }
+                else
+                {
+
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        var query = from q in listDY
+                                    select q;
+
+                        db.DBUpdate("DELETE FROM dollaryen WHERE ExchangeDate BETWEEN :BeginDate AND :EndDate ",
+                                    new { BeginDate = query.Min(dollerYen => dollerYen.ExchangeDate), EndDate = query.Max(dollerYen => dollerYen.ExchangeDate) });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO dollaryen
+                                        ( 
+                                          ExchangeDate             
+                                         ,OpeningPrice           
+                                         ,HighPrice             
+                                         ,LowPrice          
+                                         ,ClosingPrice             
+                                        ) VALUES (
+                                          :ExchangeDate             
+                                         ,:OpeningPrice           
+                                         ,:HighPrice             
+                                         ,:LowPrice          
+                                         ,:ClosingPrice             
+                                        )";
+
+                        db.DBInsert(insertSql, listDY);
+
+                    }
+                }
+
+                if (listN.Count == 0)
+                {
+                    // 日経平均が取得できない場合はスルー
+                }
+                else
+                {
+
+                    using (Utility.DbUtil db = new Utility.DbUtil())
+                    {
+                        // 削除
+                        var query = from q in listN
+                                    select q;
+
+                        db.DBUpdate("DELETE FROM nikkeiaverage WHERE StockDate BETWEEN :BeginDate AND :EndDate ",
+                                    new { BeginDate = query.Min(nikkei => nikkei.StockDate), EndDate = query.Max(nikkei => nikkei.StockDate) });
+
+                        // 登録
+                        string insertSql = @"INSERT INTO nikkeiaverage
+                                        ( 
+                                          StockDate             
+                                         ,OpeningPrice           
+                                         ,HighPrice             
+                                         ,LowPrice          
+                                         ,ClosingPrice             
+                                        ) VALUES (
+                                          :StockDate             
+                                         ,:OpeningPrice           
+                                         ,:HighPrice             
+                                         ,:LowPrice          
+                                         ,:ClosingPrice             
+                                        )";
+
+                        db.DBInsert(insertSql, listN);
+
+                    }
+                }
+
+            });
+
+
+            this.txtUpdateStatus.Text += "日経平均・ドル／円更新終了" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+
+        }
+
         private async void btnDividend_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("配当データ更新を実行しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
@@ -640,6 +844,28 @@ namespace StockProject
             await UpdateProfile();
 
             this.btnProfile.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+        }
+
+        private async void btnStockPriceUpdateTarget_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("株価を更新しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnStockPriceUpdateTarget.Enabled = false;
+
+            // 株価更新
+            await UpdateStockPriceTarget();
+
+            this.btnStockPriceUpdateTarget.Enabled = true;
 
             this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;

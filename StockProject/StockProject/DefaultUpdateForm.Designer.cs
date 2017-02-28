@@ -33,6 +33,8 @@
             this.btnDividend = new System.Windows.Forms.Button();
             this.btnStockCode = new System.Windows.Forms.Button();
             this.btnProfile = new System.Windows.Forms.Button();
+            this.txtStockCodes = new System.Windows.Forms.TextBox();
+            this.btnStockPriceUpdateTarget = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUpdateStatus
@@ -46,7 +48,7 @@
             this.txtUpdateStatus.Name = "txtUpdateStatus";
             this.txtUpdateStatus.ReadOnly = true;
             this.txtUpdateStatus.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtUpdateStatus.Size = new System.Drawing.Size(690, 276);
+            this.txtUpdateStatus.Size = new System.Drawing.Size(771, 276);
             this.txtUpdateStatus.TabIndex = 1;
             // 
             // btnStockPriceUpdate
@@ -89,11 +91,34 @@
             this.btnProfile.UseVisualStyleBackColor = true;
             this.btnProfile.Click += new System.EventHandler(this.btnProfile_Click);
             // 
+            // txtStockCodes
+            // 
+            this.txtStockCodes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStockCodes.Location = new System.Drawing.Point(789, 59);
+            this.txtStockCodes.Multiline = true;
+            this.txtStockCodes.Name = "txtStockCodes";
+            this.txtStockCodes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtStockCodes.Size = new System.Drawing.Size(109, 276);
+            this.txtStockCodes.TabIndex = 6;
+            // 
+            // btnStockPriceUpdateTarget
+            // 
+            this.btnStockPriceUpdateTarget.Location = new System.Drawing.Point(725, 12);
+            this.btnStockPriceUpdateTarget.Name = "btnStockPriceUpdateTarget";
+            this.btnStockPriceUpdateTarget.Size = new System.Drawing.Size(173, 41);
+            this.btnStockPriceUpdateTarget.TabIndex = 7;
+            this.btnStockPriceUpdateTarget.Text = "株価更新(個別)";
+            this.btnStockPriceUpdateTarget.UseVisualStyleBackColor = true;
+            this.btnStockPriceUpdateTarget.Click += new System.EventHandler(this.btnStockPriceUpdateTarget_Click);
+            // 
             // DefaultUpdateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 347);
+            this.ClientSize = new System.Drawing.Size(910, 347);
+            this.Controls.Add(this.btnStockPriceUpdateTarget);
+            this.Controls.Add(this.txtStockCodes);
             this.Controls.Add(this.btnProfile);
             this.Controls.Add(this.btnStockCode);
             this.Controls.Add(this.btnDividend);
@@ -114,5 +139,7 @@
         private System.Windows.Forms.Button btnDividend;
         private System.Windows.Forms.Button btnStockCode;
         private System.Windows.Forms.Button btnProfile;
+        private System.Windows.Forms.TextBox txtStockCodes;
+        private System.Windows.Forms.Button btnStockPriceUpdateTarget;
     }
 }
