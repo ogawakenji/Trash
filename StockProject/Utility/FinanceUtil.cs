@@ -31,9 +31,20 @@ namespace Utility
         private void SetDividendEntityList(string url, List<DividendEntity> list)
         {
             HtmlUtil htmlUtil = new HtmlUtil();
+            XDocument xdoc;
 
-            // urlからWebサイトに接続し情報を取得する
-            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            try
+            {
+                // urlからWebサイトに接続し情報を取得する
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
+            catch (Exception)
+            {
+
+                // urlからWebサイトに接続し情報を取得する
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
+
             var ns = xdoc.Root.Name.Namespace;
 
             // 次へのページが存在するか確認する
@@ -182,9 +193,18 @@ namespace Utility
         private void SetStockPriceEntityList(string url,List<StockPriceEntity> list)
         {
             HtmlUtil htmlUtil = new HtmlUtil();
+            XDocument xdoc;
+
+            try
+            {
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
+            catch (Exception)
+            {
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
 
             // urlからWebサイトに接続し情報を取得する
-            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
             var ns = xdoc.Root.Name.Namespace;
 
             // 次へのページが存在するか確認する
