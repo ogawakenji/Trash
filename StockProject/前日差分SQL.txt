@@ -1,0 +1,29 @@
+SELECT
+    B1.StockCode,
+    B1.CompanyName,
+    B1.StockDate,
+    B1.AdjustmentClosingPrice,
+    CASE WHEN B1.AdjustmentClosingPrice = B2.AdjustmentClosingPrice THEN 'Å®'
+        WHEN B1.AdjustmentClosingPrice > B2.AdjustmentClosingPrice THEN 'Å™'
+        WHEN B1.AdjustmentClosingPrice < B2.AdjustmentClosingPrice THEN 'Å´'
+        ELSE '-' END rating
+   ,B1.AdjustmentClosingPrice - B2.AdjustmentClosingPrice  ílâ∫ÇË
+FROM
+    stockprice B1
+    LEFT OUTER JOIN stockprice B2
+    ON
+        B1.StockCode = B2.StockCode
+        AND B2.StockDate = (
+            SELECT
+                MAX(StockDate) as StockDate
+            FROM
+                stockprice B3
+            WHERE
+                B1.StockCode = B3.StockCode
+                and B1.StockDate > B3.StockDate
+            GROUP BY
+                B3.StockCode
+        )
+WHERE B1.StockDate >= '2018-06-01'
+ORDER BY
+    B1.StockCode, B1.StockDate DESC

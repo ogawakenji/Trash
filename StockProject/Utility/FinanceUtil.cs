@@ -160,11 +160,17 @@ namespace Utility
 
         public List<StockPriceEntity> GetStockPriceEntityList(int StockCode )
         {
+            // 1ヶ月分の株価
+            return GetStockPriceEntityList(StockCode, 1);
+        }
+
+        public List<StockPriceEntity> GetStockPriceEntityList(int StockCode, int months)
+        {
             List<StockPriceEntity> list = new List<StockPriceEntity>();
 
-            // 1ヶ月分の株価
+            
             string url = "";
-            DateTime beginDate = DateTime.Now.AddMonths(-1);
+            DateTime beginDate = DateTime.Now.AddMonths(-1 * months);
             DateTime endDate = DateTime.Now;
             url = string.Format(YAHOO_HISTORY, StockCode, beginDate.Year, beginDate.Month, beginDate.Day, endDate.Year, endDate.Month, endDate.Day);
 
@@ -302,16 +308,26 @@ namespace Utility
         {
             List<ProfileEntity> list = new List<ProfileEntity>();
 
-            // 3ヶ月分の株価
+            // 企業情報取得
             string url = "";
-            DateTime beginDate = DateTime.Now.AddMonths(-3);
-            DateTime endDate = DateTime.Now;
             url = string.Format(YAHOO_PROFILE, StockCode);
 
             HtmlUtil htmlUtil = new HtmlUtil();
 
             // urlからWebサイトに接続し情報を取得する
-            XDocument xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            XDocument xdoc ;
+
+            try
+            {
+                // urlからWebサイトに接続し情報を取得する
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
+            catch (Exception)
+            {
+                // urlからWebサイトに接続し情報を取得する
+                xdoc = htmlUtil.ParseHtml(htmlUtil.GetHtml(url));
+            }
+
             var ns = xdoc.Root.Name.Namespace;
 
             var query1 =
@@ -855,6 +871,12 @@ namespace Utility
         public decimal Dividend { get; set; }
         public decimal DividendYield { get; set; }
         public string DetailUrl { get; set; }
+    }
+
+
+    public class TargetEntity
+    {
+        public int TargetStockCode { get; set; }
     }
 
     /// <summary>

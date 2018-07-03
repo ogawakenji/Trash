@@ -467,7 +467,7 @@ namespace StockProject
             Utility.StockPriceUtil util = new Utility.StockPriceUtil();
 
 
-            _ListData = util.GetListStockPriceProfileFilterTempTable(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+            _ListData = util.GetListStockPriceProfileFilterTempTable(DateTime.Now.AddMonths(-24).Date, DateTime.Now.Date);
             _ListNikkei = util.GetListNikkeiAverage(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
             _ListDY = util.GetListDollarYenEntity(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
 
@@ -478,6 +478,23 @@ namespace StockProject
             this.CreateNikkeiChart(this.chartNikkei);
             this.CreateDollarYenChart(this.chartDollarYen);
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Utility.StockPriceUtil util = new Utility.StockPriceUtil();
+
+
+            _ListData = util.GetListStockPriceProfileFilterTempTable(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+            _ListNikkei = util.GetListNikkeiAverage(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+            _ListDY = util.GetListDollarYenEntity(DateTime.Now.AddMonths(-3).Date, DateTime.Now.Date);
+
+            _currentPageNum = 1;
+            // 1ページ目を表示
+            this.Paging(_currentPageNum);
+
+            this.CreateNikkeiChart(this.chartNikkei);
+            this.CreateDollarYenChart(this.chartDollarYen);
         }
     }
 }

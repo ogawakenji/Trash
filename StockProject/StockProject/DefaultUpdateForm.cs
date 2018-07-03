@@ -93,6 +93,9 @@ namespace StockProject
                                     )";
 
                     db.DBInsert(insertSql, list);
+
+                    db.DBExecuteSQL("DELETE FROM dividend WHERE StockCode NOT IN (SELECT TargetStockCode From targetcode) ");
+
                 }
             });
             sw.Stop();
@@ -108,14 +111,16 @@ namespace StockProject
             List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
             List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
 
-            List<Utility.DividendEntity> dividend;
+            List<Utility.TargetEntity> targetCode;
             using (Utility.DbUtil db = new Utility.DbUtil())
             {
-                dividend = db.DBSelect<Utility.DividendEntity>("SELECT * FROM dividend ORDER BY StockCode ");
+                targetCode = db.DBSelect<Utility.TargetEntity>("SELECT * FROM targetcode ORDER BY TargetStockCode ");
+
+                db.DBUpdate("DELETE FROM profile ");
             }
 
 
-            foreach (DividendEntity r in dividend)
+            foreach (TargetEntity r in targetCode)
             {
 
                 sw.Restart();
@@ -123,29 +128,28 @@ namespace StockProject
                 await Task.Run(() =>
                 {
                     Utility.FinanceUtil finance = new Utility.FinanceUtil();
-                    listProfile = finance.GetProfileEntityList(r.StockCode);
+                    listProfile = finance.GetProfileEntityList(r.TargetStockCode);
                 });
 
                 await Task.Run(() =>
                 {
                     Utility.FinanceUtil finance = new Utility.FinanceUtil();
-                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode);
+                    listStockPrice = finance.GetStockPriceEntityList(r.TargetStockCode);
                 });
-
 
                 await Task.Run(() =>
                 {
                     using (Utility.DbUtil db = new Utility.DbUtil())
                     {
                         // 削除
-                        db.DBUpdate("DELETE FROM profile WHERE StockCode = :StockCode ",new { StockCode = r.StockCode });
+                        db.DBUpdate("DELETE FROM profile WHERE StockCode = :StockCode ",new { StockCode = r.TargetStockCode });
 
                         var query = from q in listStockPrice
-                                    where q.StockCode == r.StockCode 
+                                    where q.StockCode == r.TargetStockCode
                                     select q;
 
                         db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
-                                    new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate) ,EndDate = query.Max(stock =>stock.StockDate )  });
+                                    new { StockCode = r.TargetStockCode, BeginDate = query.Min(stock => stock.StockDate) ,EndDate = query.Max(stock =>stock.StockDate )  });
 
                         // 登録
                         string insertSql = @"INSERT INTO profile
@@ -213,7 +217,7 @@ namespace StockProject
                 });
 
                 sw.Stop();
-                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.Text += r.TargetStockCode.ToString().PadLeft(4, '0')  + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
                 this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
                 this.txtUpdateStatus.ScrollToCaret();
 
@@ -273,30 +277,39 @@ namespace StockProject
             List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
             List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
 
-            List<Utility.StockPriceEntity> stock;
+            List<Utility.TargetEntity> targetCode;
             using (Utility.DbUtil db = new Utility.DbUtil())
             {
-                stock = db.DBSelect<Utility.StockPriceEntity>("SELECT * FROM stockcode ORDER BY StockCode ");
+                targetCode = db.DBSelect<Utility.TargetEntity>("SELECT * FROM targetcode ORDER BY TargetStockCode ");
+
+                db.DBUpdate("DELETE FROM profile ");
             }
 
+            await Task.Run(() =>
+            {
+                using (Utility.DbUtil db = new Utility.DbUtil())
+                {
+                    // 全削除する
+                    db.DBUpdate("DELETE FROM profile ");
+                }
+            });
 
-            foreach (StockPriceEntity r in stock)
+            foreach (TargetEntity r in targetCode)
             {
 
                 sw.Restart();
+                await Task.Delay(1000);
 
                 await Task.Run(() =>
                 {
                     Utility.FinanceUtil finance = new Utility.FinanceUtil();
-                    listProfile = finance.GetProfileEntityList(r.StockCode);
+                    listProfile = finance.GetProfileEntityList(r.TargetStockCode);
                 });
 
                 await Task.Run(() =>
                 {
                     using (Utility.DbUtil db = new Utility.DbUtil())
                     {
-                        // 削除
-                        db.DBUpdate("DELETE FROM profile WHERE StockCode = :StockCode ", new { StockCode = r.StockCode });
 
                         // 登録
                         string insertSql = @"INSERT INTO profile
@@ -338,7 +351,7 @@ namespace StockProject
                 });
 
                 sw.Stop();
-                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.Text += r.TargetStockCode.ToString().PadLeft(4, '0') + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
                 this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
                 this.txtUpdateStatus.ScrollToCaret();
 
@@ -347,6 +360,15 @@ namespace StockProject
             this.txtUpdateStatus.Text += "企業情報取得・更新終了" + Environment.NewLine;
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
             this.txtUpdateStatus.ScrollToCaret();
+
+            await Task.Run(() =>
+            {
+                using (Utility.DbUtil db = new Utility.DbUtil())
+                {
+                    // 全削除する
+                    db.DBUpdate("DELETE FROM stockcode WHERE stockcode.StockCode NOT IN (SELECT StockCode FROM profile)");
+                }
+            });
 
         }
 
@@ -389,9 +411,12 @@ namespace StockProject
             List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
             List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
 
-            List<Utility.DividendEntity> dividend;
             using (Utility.DbUtil db = new Utility.DbUtil())
             {
+                db.DBUpdate("DELETE FROM stockcode ");
+                db.DBUpdate("INSERT INTO stockcode (StockCode) SELECT TargetStockCode FROM targetcode ");
+                db.DBUpdate("DELETE FROM stockprice ");
+
                 listProfile = db.DBSelect<Utility.ProfileEntity>("SELECT * FROM profile ");
 
                 listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
@@ -581,6 +606,110 @@ namespace StockProject
 
         }
 
+        private async Task UpdateStockPrice(int months)
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            this.txtUpdateStatus.Text += "株価更新開始" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+
+            // 情報の取得
+            List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
+            List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
+            List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
+
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                db.DBUpdate("DELETE FROM stockcode ");
+                db.DBUpdate("INSERT INTO stockcode (StockCode) SELECT TargetStockCode FROM targetcode ");
+
+                listProfile = db.DBSelect<Utility.ProfileEntity>("SELECT * FROM profile ");
+
+                listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
+                                                                  stockcode.StockCode
+                                                                 ,ifnull(profile.CompanyName,'') CompanyName 
+                                                            FROM stockcode 
+                                                            LEFT JOIN profile ON stockcode.StockCode = profile.StockCode
+                                                            ORDER BY stockcode.StockCode ");
+
+
+            }
+
+            foreach (StockPriceEntity r in listStock)
+            {
+
+                sw.Restart();
+
+                await Task.Run(() =>
+                {
+                    Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode, months);
+                });
+
+                await Task.Run(() =>
+                {
+                    if (listStockPrice.Count == 0)
+                    {
+                        // 株価取得できない場合はスルー
+                    }
+                    else
+                    {
+
+                        using (Utility.DbUtil db = new Utility.DbUtil())
+                        {
+                            // 削除
+                            var query = from q in listStockPrice
+                                        where q.StockCode == r.StockCode
+                                        select q;
+
+                            db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
+                                        new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
+
+                            // 登録
+                            string insertSql = @"INSERT INTO stockprice
+                                        ( 
+                                          StockCode             
+                                         ,CompanyName           
+                                         ,StockDate             
+                                         ,OpeningPrice          
+                                         ,HighPrice             
+                                         ,LowPrice              
+                                         ,ClosingPrice          
+                                         ,TradeVolume           
+                                         ,AdjustmentClosingPrice
+                                        ) VALUES (
+                                          :StockCode             
+                                         ,:CompanyName           
+                                         ,:StockDate             
+                                         ,:OpeningPrice          
+                                         ,:HighPrice             
+                                         ,:LowPrice              
+                                         ,:ClosingPrice          
+                                         ,:TradeVolume           
+                                         ,:AdjustmentClosingPrice
+                                        )";
+
+                            db.DBInsert(insertSql, listStockPrice);
+
+                        }
+                    }
+
+                });
+
+                sw.Stop();
+                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+                this.txtUpdateStatus.ScrollToCaret();
+
+            }
+
+            this.txtUpdateStatus.Text += "株価更新終了" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
+
         private async Task UpdateStockPriceTarget()
         {
             Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -618,7 +747,8 @@ namespace StockProject
                 await Task.Run(() =>
                 {
                     Utility.FinanceUtil finance = new Utility.FinanceUtil();
-                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode,DateTime.Now.AddYears(-10).Date,DateTime.Now.Date);
+                    //listStockPrice = finance.GetStockPriceEntityList(r.StockCode,DateTime.Now.AddYears(-10).Date,DateTime.Now.Date);
+                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode, DateTime.Now.AddMonths(-60).Date, DateTime.Now.Date);
                 });
 
 
@@ -871,5 +1001,160 @@ namespace StockProject
             this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
             this.txtUpdateStatus.ScrollToCaret();
         }
+
+        private async void btnPrice10_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("株価5年分を更新しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnStockPriceUpdate.Enabled = false;
+
+            // 株価更新
+            await UpdateStockPrice(60);
+
+            this.btnStockPriceUpdate.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+        }
+
+        private async void btnPriceMinDate_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("最小日付以降の株価を更新しますか？", "更新確認", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            this.btnStockPriceUpdate.Enabled = false;
+
+            // 株価更新
+            await UpdateStockPriceMinDate();
+
+            this.btnStockPriceUpdate.Enabled = true;
+
+            this.txtUpdateStatus.Text += "■■処理時間合計■■：" + sw.Elapsed.ToString() + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+        }
+
+        private async Task UpdateStockPriceMinDate()
+        {
+            Stopwatch sw = new System.Diagnostics.Stopwatch();
+            this.txtUpdateStatus.Text += "株価更新開始" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+
+            // 情報の取得
+            List<Utility.ProfileEntity> listProfile = new List<Utility.ProfileEntity>();
+            List<Utility.StockPriceEntity> listStockPrice = new List<Utility.StockPriceEntity>();
+            List<Utility.StockPriceEntity> listStock = new List<Utility.StockPriceEntity>();
+            List<Utility.StockPriceEntity> listTargetStockPrice = new List<Utility.StockPriceEntity>();
+
+            using (Utility.DbUtil db = new Utility.DbUtil())
+            {
+                db.DBUpdate("DELETE FROM stockcode ");
+                db.DBUpdate("INSERT INTO stockcode (StockCode) SELECT TargetStockCode FROM targetcode ");
+
+
+                listTargetStockPrice = db.DBSelect<StockPriceEntity>(@"SELECT MIN(StockDate) StockDate FROM (
+                                                                       SELECT StockCode,MAX(stockprice.StockDate) StockDate 
+                                                                       FROM stockprice
+                                                                       GROUP BY StockCode
+                                                                       ) ");
+
+                listStock = db.DBSelect<StockPriceEntity>(@"SELECT 
+                                                                  stockcode.StockCode
+                                                                 ,ifnull(profile.CompanyName,'') CompanyName 
+                                                            FROM stockcode 
+                                                            LEFT JOIN profile ON stockcode.StockCode = profile.StockCode
+                                                            ORDER BY stockcode.StockCode ");
+
+
+            }
+
+            foreach (StockPriceEntity r in listStock)
+            {
+
+                sw.Restart();
+
+                await Task.Run(() =>
+                {
+                    Utility.FinanceUtil finance = new Utility.FinanceUtil();
+                    listStockPrice = finance.GetStockPriceEntityList(r.StockCode, listTargetStockPrice.First().StockDate ,DateTime.Now .Date);
+                });
+
+                await Task.Run(() =>
+                {
+                    if (listStockPrice.Count == 0)
+                    {
+                        // 株価取得できない場合はスルー
+                    }
+                    else
+                    {
+
+                        using (Utility.DbUtil db = new Utility.DbUtil())
+                        {
+                            // 削除
+                            var query = from q in listStockPrice
+                                        where q.StockCode == r.StockCode
+                                        select q;
+
+                            db.DBUpdate("DELETE FROM stockprice WHERE StockCode = :StockCode AND StockDate BETWEEN :BeginDate AND :EndDate ",
+                                        new { StockCode = r.StockCode, BeginDate = query.Min(stock => stock.StockDate), EndDate = query.Max(stock => stock.StockDate) });
+
+                            // 登録
+                            string insertSql = @"INSERT INTO stockprice
+                                        ( 
+                                          StockCode             
+                                         ,CompanyName           
+                                         ,StockDate             
+                                         ,OpeningPrice          
+                                         ,HighPrice             
+                                         ,LowPrice              
+                                         ,ClosingPrice          
+                                         ,TradeVolume           
+                                         ,AdjustmentClosingPrice
+                                        ) VALUES (
+                                          :StockCode             
+                                         ,:CompanyName           
+                                         ,:StockDate             
+                                         ,:OpeningPrice          
+                                         ,:HighPrice             
+                                         ,:LowPrice              
+                                         ,:ClosingPrice          
+                                         ,:TradeVolume           
+                                         ,:AdjustmentClosingPrice
+                                        )";
+
+                            db.DBInsert(insertSql, listStockPrice);
+
+                        }
+                    }
+
+                });
+
+                sw.Stop();
+                this.txtUpdateStatus.Text += r.StockCode.ToString().PadLeft(4, '0') + r.CompanyName + " データ更新 " + sw.Elapsed.ToString() + Environment.NewLine;
+                this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+                this.txtUpdateStatus.ScrollToCaret();
+
+            }
+
+            this.txtUpdateStatus.Text += "株価更新終了" + Environment.NewLine;
+            this.txtUpdateStatus.SelectionStart = this.txtUpdateStatus.TextLength;
+            this.txtUpdateStatus.ScrollToCaret();
+
+        }
+
     }
 }
